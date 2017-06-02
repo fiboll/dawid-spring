@@ -1,5 +1,6 @@
 package dawid.spring.model;
 
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -67,4 +68,5 @@ public class Task {
     public Date getDueDate() {
         return (Date) dueDate.clone();
     }
+
 }
