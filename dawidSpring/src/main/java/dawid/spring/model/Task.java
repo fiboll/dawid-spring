@@ -14,14 +14,14 @@ public class Task {
 
     private Task() {}
 
-    private Task(TaskBuider taskBuider) {
-        id = taskBuider.id;
-        name = taskBuider.name;
-        desc = taskBuider.desc;
-        dueDate = taskBuider.dueDate;
+    private Task(TaskBuilder taskBuilder) {
+        id = taskBuilder.id;
+        name = taskBuilder.name;
+        desc = taskBuilder.desc;
+        dueDate = taskBuilder.dueDate;
     }
 
-    public static class TaskBuider {
+    public static class TaskBuilder {
         private Long id;
         private String name;
         private String desc;
@@ -31,22 +31,22 @@ public class Task {
             return new Task(this);
         }
 
-        public TaskBuider id(Long id) {
+        public TaskBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public TaskBuider name(String name) {
+        public TaskBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        public TaskBuider desc(String desc) {
+        public TaskBuilder desc(String desc) {
             this.desc = desc;
             return this;
         }
 
-        public TaskBuider dueDate(Date dueDate) {
+        public TaskBuilder dueDate(Date dueDate) {
             this.dueDate = dueDate;
             return this;
         }
