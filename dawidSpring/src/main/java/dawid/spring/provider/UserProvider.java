@@ -8,4 +8,6 @@ import dawid.spring.model.User;
 public interface UserProvider {
 
     public User getUserById(Long id);
+
+    public void addUser(User user);
 }
