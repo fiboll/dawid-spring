@@ -1,7 +1,6 @@
 package dawid.spring.model;
 
 
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -15,6 +14,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(
+                name = "User.findAll",
+                query = "SELECT p FROM User p"),
+        @NamedQuery(
+                name = "User.findAllOrderedByName",
+                query = "SELECT p FROM User p ORDER BY p.firstName")
+})
 public class User {
 
     @Id
@@ -25,9 +32,10 @@ public class User {
     @Transient
     private List<Task> tasks;
 
-    public User() {}
+    public User() {
+    }
 
-    private User (UserBuilder builder) {
+    private User(UserBuilder builder) {
         id = builder.id;
         firstName = builder.firstName;
         secondName = builder.secondName;

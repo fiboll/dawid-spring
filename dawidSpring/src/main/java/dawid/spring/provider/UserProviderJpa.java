@@ -8,13 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Created by private on 03.06.17.
  */
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 @Repository("UserProvider")
-public class UserProviderJpa implements UserProvider{
+public class UserProviderJpa implements UserProvider {
 
     @PersistenceContext
     private EntityManager em;
@@ -24,12 +25,19 @@ public class UserProviderJpa implements UserProvider{
     }
 
     public void addUser(User user) {
-       em.persist(user);
+        em.persist(user);
+    }
+
+    public User update(User user) {
+        return em.merge(user);
     }
 
     public void removeUser(User user) {
-        if (em.contains(user)) {
+        //(em.contains(user))
             em.remove(user);
-        }
+    }
+
+    public List<User> findAll() {
+        return em.createNamedQuery("User.findAll").getResultList();
     }
 }

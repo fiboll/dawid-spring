@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by dawid on 02.06.17.
@@ -55,7 +56,7 @@ public class UserProviderTest {
     }
 
     @Test
-    @Rollback
+    @Transactional
     public void testDeleteUser() {
         User user = new User.UserBuilder()
                 .firstName("Jan")
@@ -64,9 +65,7 @@ public class UserProviderTest {
         Assert.assertNotNull(user);
 
         userProvider.addUser(user);
-
         userProvider.removeUser(user);
-
     }
 
 
