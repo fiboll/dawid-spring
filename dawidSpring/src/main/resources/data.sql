@@ -1,2 +1,2 @@
 DELETE FROM USERS;
-INSERT INTO USERS(id, firstName, secondName) VALUES (1, 'Dawid', 'Strembicki');
+INSERT INTO USERS(firstName, secondName) VALUES ('Dawid', 'Strembicki');

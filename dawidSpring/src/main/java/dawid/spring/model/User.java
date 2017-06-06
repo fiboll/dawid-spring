@@ -1,9 +1,11 @@
 package dawid.spring.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String firstName;
     private String secondName;
@@ -35,6 +38,11 @@ public class User {
             tasks = new ArrayList<Task>();
         }
         tasks.add(task);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
     public static final class UserBuilder {
@@ -71,6 +79,10 @@ public class User {
         return secondName;
     }
 
+
+    public Long getId() {
+        return id;
+    }
 
     public List<Task> getUserTasks() {
         return Collections.unmodifiableList(tasks != null ? tasks : Collections.<Task>emptyList());

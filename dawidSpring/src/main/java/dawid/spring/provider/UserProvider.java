@@ -10,4 +10,6 @@ public interface UserProvider {
     public User getUserById(Long id);
 
     public void addUser(User user);
+
+    public void removeUser(User user);
 }

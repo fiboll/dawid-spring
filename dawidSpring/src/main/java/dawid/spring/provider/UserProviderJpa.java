@@ -3,6 +3,7 @@ package dawid.spring.provider;
 import dawid.spring.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,12 @@ public class UserProviderJpa implements UserProvider{
     }
 
     public void addUser(User user) {
-        em.merge(user);
+       em.persist(user);
+    }
+
+    public void removeUser(User user) {
+        if (em.contains(user)) {
+            em.remove(user);
+        }
     }
 }
