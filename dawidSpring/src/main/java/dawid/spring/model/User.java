@@ -25,10 +25,16 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE")
+    @SequenceGenerator(name = "USER_SEQUENCE", sequenceName = "USER_SEQUENCE", allocationSize = 1)
     private Long id;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name= "second_name")
     private String secondName;
+
     @Transient
     private List<Task> tasks;
 
