@@ -7,7 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 
 
 /**
@@ -51,7 +52,7 @@ public class UserTest {
                 .id(1L)
                 .desc("test desc")
                 .name("test task")
-                .dueDate(new Date())
+                .dueDate(new Date(Calendar.getInstance().getTimeInMillis()))
                 .build();
     }
 }

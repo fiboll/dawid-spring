@@ -1,6 +1,7 @@
 package dawid.spring.model;
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -35,7 +36,7 @@ public class User {
     @Column(name= "second_name")
     private String secondName;
 
-    @Transient
+    @OneToMany(mappedBy="assignedUser", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     public User() {
@@ -52,6 +53,7 @@ public class User {
             tasks = new ArrayList<Task>();
         }
         tasks.add(task);
+        task.setAssignedUser(this);
     }
 
     @Override

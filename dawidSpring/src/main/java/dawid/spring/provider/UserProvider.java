@@ -12,4 +12,6 @@ public interface UserProvider {
     public void addUser(User user);
 
     public void removeUser(User user);
+
+    public User update(User user);
 }

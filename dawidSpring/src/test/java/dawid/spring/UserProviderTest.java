@@ -1,5 +1,6 @@
 package dawid.spring;
 
+import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserProvider;
 import org.junit.Assert;
@@ -11,6 +12,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by dawid on 02.06.17.
@@ -66,6 +70,24 @@ public class UserProviderTest {
 
         userProvider.addUser(user);
         userProvider.removeUser(user);
+    }
+
+    @Test
+    @Transactional
+    public void testAddTask() {
+        User user = userProvider.getUserById(10000l);
+
+        Task task = new Task.TaskBuilder()
+                .desc("test desc")
+                .name("test task")
+                .dueDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()))
+                .build();
+
+        user.addTask(task);
+        userProvider.update(user);
+
+        User userUpdated = userProvider.getUserById(10000l);
+        System.out.println(user);
     }
 
 

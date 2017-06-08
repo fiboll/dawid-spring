@@ -1,7 +1,7 @@
 package dawid.spring.provider;
 
+import dawid.spring.model.Task;
 import dawid.spring.model.User;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

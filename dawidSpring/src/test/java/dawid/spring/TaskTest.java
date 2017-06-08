@@ -5,7 +5,7 @@ import dawid.spring.model.Task;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class TaskTest {
 
