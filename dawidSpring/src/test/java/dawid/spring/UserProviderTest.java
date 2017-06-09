@@ -3,6 +3,7 @@ package dawid.spring;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserProvider;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by dawid on 02.06.17.
@@ -39,8 +42,11 @@ public class UserProviderTest {
                 .build();
 
         userProvider.addUser(user);
-        user = userProvider.getUserById(user.getId());
+        Optional<User> findedUser = userProvider.getUserById(user.getId());
 
+        Assert.assertTrue(findedUser.isPresent());
+
+        user = findedUser.get();
 
         Assert.assertEquals("Dawid", user.getFirstName());
         Assert.assertEquals("Strembicki", user.getSecondName());
@@ -75,7 +81,8 @@ public class UserProviderTest {
     @Test
     @Transactional
     public void testAddTask() {
-        User user = userProvider.getUserById(10000l);
+        User user = userProvider.findByNameAndSurname("Dawid", "Strembicki").
+                orElseThrow(() -> new IllegalStateException("User do not exist"));
 
         Task task = new Task.TaskBuilder()
                 .desc("test desc")
@@ -86,8 +93,18 @@ public class UserProviderTest {
         user.addTask(task);
         userProvider.update(user);
 
-        User userUpdated = userProvider.getUserById(10000l);
-        System.out.println(user);
+    }
+
+    @Test
+    @Transactional
+    public void testFindAll() {
+        List<User> users =  userProvider.findAll();
+        Assert.assertNotNull(users);
+        Assert.assertEquals(8, users.size());
+
+        users.stream().forEach(
+               (User u) -> Assert.assertTrue(null != u.getId())
+        );
     }
 
 

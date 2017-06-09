@@ -3,6 +3,7 @@ package dawid.spring.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Collections;
 import java.sql.Date;
 
@@ -26,6 +27,17 @@ public class Task {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="USER_ID")
     private User assignedUser;
+
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="TASK_LABELS",
+            joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
+    )
+    private Collection<Label> labels;
 
     private Task() {}
 

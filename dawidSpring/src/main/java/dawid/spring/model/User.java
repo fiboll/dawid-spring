@@ -20,8 +20,8 @@ import java.util.List;
                 name = "User.findAll",
                 query = "SELECT p FROM User p"),
         @NamedQuery(
-                name = "User.findAllOrderedByName",
-                query = "SELECT p FROM User p ORDER BY p.firstName")
+                name = "User.findByNameAndSurname",
+                query = "SELECT p FROM User p WHERE p.firstName = :firstName AND p.secondName = :secondName ORDER BY p.secondName")
 })
 public class User {
 
@@ -36,8 +36,12 @@ public class User {
     @Column(name= "second_name")
     private String secondName;
 
-    @OneToMany(mappedBy="assignedUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="assignedUser", fetch = FetchType.EAGER)
     private List<Task> tasks;
+
+    @Version
+    @Column(name = "VERSION")
+    private Long version;
 
     public User() {
     }

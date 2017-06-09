@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.Optional;
+
 /**
  * Created by dawid on 02.06.17.
  */
@@ -23,42 +25,39 @@ public class UserProviderMockTest {
     @Mock
     private UserProvider mockUserProvider;
 
-    private User exampleUser = null;
+    private Optional<User> exampleUser = Optional.empty();
 
     @Before
     public void init() {
-        exampleUser = new User.UserBuilder()
+        User user = new User.UserBuilder()
                 .id(1L)
                 .firstName("Jan")
                 .secondName("Kowalski")
                 .build();
+        exampleUser = Optional.of(user);
     }
 
     @Test
     public void testGetUserByIdSimpleUser() {
 
-        Mockito.when(mockUserProvider.getUserById(1l)).thenReturn(new User.UserBuilder().build());
+        Mockito.when(mockUserProvider.getUserById(1L)).thenReturn(Optional.of(new User.UserBuilder().build()));
 
-        //
-        Long id = 1l;
-        User user = mockUserProvider.getUserById(id);
+        Optional<User> user = mockUserProvider.getUserById(1L);
 
-        Assert.assertNotNull(user);
+        Assert.assertTrue(user.isPresent());
 
     }
 
     @Test
     public void testGetUserByIdBuildUser() {
 
-        Mockito.when(mockUserProvider.getUserById(1l)).thenReturn(exampleUser);
+        Mockito.when(mockUserProvider.getUserById(1L)).thenReturn(exampleUser);
 
-        //
-        Long id = 1l;
-        User user = mockUserProvider.getUserById(id);
+        Optional<User> user = mockUserProvider.getUserById(1L);
 
-        Assert.assertNotNull(user);
-        Assert.assertEquals("Jan", user.getFirstName());
-        Assert.assertEquals("Kowalski", user.getSecondName());
+        Assert.assertTrue(user.isPresent());
+        Assert.assertEquals("Jan", user.get().getFirstName());
+        Assert.assertEquals("Kowalski", user.get().getSecondName());
     }
 
 }
