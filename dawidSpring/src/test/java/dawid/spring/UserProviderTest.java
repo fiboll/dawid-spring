@@ -34,6 +34,7 @@ public class UserProviderTest {
     ApplicationContext context;
 
     @Test
+    @Transactional
     @Rollback
     public void testGetUserById() {
         User user = new User.UserBuilder()
@@ -53,6 +54,7 @@ public class UserProviderTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testAddUser() {
         User user = new User.UserBuilder()
@@ -67,6 +69,7 @@ public class UserProviderTest {
 
     @Test
     @Transactional
+    @Rollback
     public void testDeleteUser() {
         User user = new User.UserBuilder()
                 .firstName("Jan")
@@ -80,6 +83,7 @@ public class UserProviderTest {
 
     @Test
     @Transactional
+    @Rollback
     public void testAddTask() {
         User user = userProvider.findByNameAndSurname("Dawid", "Strembicki").
                 orElseThrow(() -> new IllegalStateException("User do not exist"));
@@ -97,12 +101,13 @@ public class UserProviderTest {
 
     @Test
     @Transactional
+    @Rollback
     public void testFindAll() {
         List<User> users =  userProvider.findAll();
         Assert.assertNotNull(users);
         Assert.assertEquals(8, users.size());
 
-        users.stream().forEach(
+        users.forEach(
                (User u) -> Assert.assertTrue(null != u.getId())
         );
     }

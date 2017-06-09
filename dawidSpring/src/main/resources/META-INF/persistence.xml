@@ -20,4 +20,22 @@
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
+
+    <persistence-unit name="dawid-pu-server" transaction-type="RESOURCE_LOCAL">
+
+        <!-- add classes -->
+        <class>dawid.spring.model</class>
+
+        <properties>
+            <!-- Configuring JDBC properties -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test2"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+
+            <!-- Hibernate properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
 </persistence>
