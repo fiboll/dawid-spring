@@ -23,15 +23,11 @@ import java.util.Optional;
  * Created by dawid on 02.06.17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:context.xml")
+@ContextConfiguration(locations = "classpath:context_test.xml")
 public class UserProviderTest {
-
 
     @Autowired
     private UserProvider userProvider;
-
-    @Autowired
-    ApplicationContext context;
 
     @Test
     @Transactional
