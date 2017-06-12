@@ -23,7 +23,7 @@ public class Label {
 
     String description;
 
-    @ManyToMany(mappedBy = "labels")
+    @ManyToMany(mappedBy = "labels", fetch = FetchType.EAGER)
     private Collection<Task> tasks;
 
     @Version
@@ -32,7 +32,7 @@ public class Label {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
     public String getColour() {
