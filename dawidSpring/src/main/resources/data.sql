@@ -20,9 +20,9 @@ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('T
 
 --LABELS
 DELETE FROM LABELS;
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFFFF', 'A', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFF00', 'B', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFF00', 'C', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'RED', 'A', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'BLUE', 'B', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'GREEN', 'C', 0);
 
 --TASK/LABELS
 DELETE FROM TASK_LABELS;
@@ -40,6 +40,12 @@ INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM TASKS WHERE name = 'Test Task 2'),
     (SELECT ID FROM LABELS WHERE description = 'A')
 );
+
+INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
+    (SELECT ID FROM TASKS WHERE name = 'Test Task 3'),
+    (SELECT ID FROM LABELS WHERE description = 'C')
+);
+
 
 
 

@@ -19,7 +19,6 @@ public class UserController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", userProvider.findAll());
-        System.out.println(model);
         return "userList";
     }
 }

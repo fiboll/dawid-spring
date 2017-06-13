@@ -18,7 +18,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(
                 name = "User.findAll",
-                query = "SELECT p FROM User p"),
+                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels"),
         @NamedQuery(
                 name = "User.findByNameAndSurname",
                 query = "SELECT p FROM User p WHERE p.firstName = :firstName AND p.secondName = :secondName ORDER BY p.secondName")
@@ -36,7 +36,7 @@ public class User {
     @Column(name= "second_name")
     private String secondName;
 
-    @OneToMany(mappedBy="assignedUser", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="assignedUser")
     private List<Task> tasks;
 
     @Version
@@ -104,7 +104,7 @@ public class User {
         return id;
     }
 
-    public List<Task> getUserTasks() {
-        return Collections.unmodifiableList(tasks != null ? tasks : Collections.<Task>emptyList());
+    public List<Task> getTasks() {
+        return tasks != null ? tasks : Collections.emptyList();
     }
 }

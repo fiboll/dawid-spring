@@ -2,10 +2,13 @@ package dawid.spring.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.sql.Date;
 
 /**
@@ -25,7 +28,7 @@ public class Task {
     @Column(name = "DUE_DATE")
     private Date dueDate;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="USER_ID")
     private User assignedUser;
 
@@ -33,12 +36,12 @@ public class Task {
     @Column(name = "VERSION")
     private Long version;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
     )
-    private Collection<Label> labels;
+    private Set<Label> labels;
 
     private Task() {}
 
@@ -106,9 +109,19 @@ public class Task {
     }
 
     public void setAssignedUser(User assignedUser) {
-        if (!assignedUser.getUserTasks().contains(this)) {
+        if (!assignedUser.getTasks().contains(this)) {
             assignedUser.addTask(this);
         }
         this.assignedUser = assignedUser;
     }
+
+	public Collection<Label> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(Set<Label> labels) {
+		this.labels = labels;
+	}
+    
+    
 }

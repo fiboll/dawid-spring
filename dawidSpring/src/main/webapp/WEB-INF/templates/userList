@@ -6,17 +6,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-Dzień dobry
-<table th:if="${not #lists.isEmpty(users)}">
-    <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.secondName}">The first name</td>
-        <td th:text="${user.firstName}">The last name</td>
-    </tr>
-</table>
+
+
+<div th:if="${not #lists.isEmpty(users)}">
+	<div th:each="user: ${users}">
+		<span th:text="${user.firstName + ' ' + user.secondName}"></span>
+		<table th:if="${not #lists.isEmpty(user.tasks)}" border="1">
+			 <tr>
+        		<th>name</th>
+        		<th>description</th>
+    		</tr>	
+			<tr th:each="task : ${user.tasks}">
+				<td>
+					<span th:text="${task.name}" />
+					<span th:each="label: ${task.labels}" th:text="${label.description}" 
+						th:style="'color:'+${label.colour}" />
+				</td>
+				<td th:text="${task.desc}"/>
+			</tr>
+		</table>
+	</div>
+</div>
+	
 
 </body>
 </html>

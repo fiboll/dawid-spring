@@ -1,11 +1,22 @@
 package dawid.spring.model;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * Created by dawid on 09.06.17.
@@ -23,8 +34,9 @@ public class Label {
 
     String description;
 
-    @ManyToMany(mappedBy = "labels", fetch = FetchType.EAGER)
-    private Collection<Task> tasks;
+    @ManyToMany(mappedBy = "labels")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private Set<Task> tasks;
 
     @Version
     @Column(name = "VERSION")
