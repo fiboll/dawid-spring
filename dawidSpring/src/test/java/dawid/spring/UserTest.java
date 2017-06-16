@@ -34,8 +34,8 @@ public class UserTest {
         User user = buildSimpleUser();
         user.addTask(buildSimpleTask());
 
-        Assert.assertNotNull(user.getUserTasks());
-        Assert.assertEquals(1, user.getUserTasks().size());
+        Assert.assertNotNull(user.getTasks());
+        Assert.assertEquals(1, user.getTasks().size());
 
     }
 

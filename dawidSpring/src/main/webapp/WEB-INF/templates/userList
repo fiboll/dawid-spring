@@ -19,7 +19,7 @@
 			<tr th:each="task : ${user.tasks}">
 				<td>
 					<span th:text="${task.name}" />
-					<span th:each="label: ${task.labels}" th:text="${label.description}" 
+					<span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}" 
 						th:style="'color:'+${label.colour}" />
 				</td>
 				<td th:text="${task.desc}"/>

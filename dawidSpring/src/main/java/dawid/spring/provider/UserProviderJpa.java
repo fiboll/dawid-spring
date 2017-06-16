@@ -38,7 +38,7 @@ public class UserProviderJpa implements UserProvider {
     }
 
     public List<User> findAll() {
-        return em.createNamedQuery("User.findAll").getResultList();
+        return em.createNamedQuery("User.findAll", User.class).getResultList();
     }
 
     public Optional<User> findByNameAndSurname(String firstName, String secondName) {

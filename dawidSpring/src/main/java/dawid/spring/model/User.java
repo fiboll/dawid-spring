@@ -2,13 +2,15 @@ package dawid.spring.model;
 
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by dawid on 02.06.17.
@@ -18,7 +20,8 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(
                 name = "User.findAll",
-                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels"),
+                //query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
+                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
         @NamedQuery(
                 name = "User.findByNameAndSurname",
                 query = "SELECT p FROM User p WHERE p.firstName = :firstName AND p.secondName = :secondName ORDER BY p.secondName")
@@ -37,7 +40,7 @@ public class User {
     private String secondName;
 
     @OneToMany(mappedBy="assignedUser")
-    private List<Task> tasks;
+    private Set<Task> tasks;
 
     @Version
     @Column(name = "VERSION")
@@ -54,10 +57,20 @@ public class User {
 
     public void addTask(Task task) {
         if (tasks == null) {
-            tasks = new ArrayList<Task>();
+            tasks = new HashSet<Task>();
         }
         tasks.add(task);
         task.setAssignedUser(this);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(id, false);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj, false);
     }
 
     @Override
@@ -104,7 +117,7 @@ public class User {
         return id;
     }
 
-    public List<Task> getTasks() {
-        return tasks != null ? tasks : Collections.emptyList();
+    public Set<Task> getTasks() {
+        return tasks != null ? tasks : Collections.emptySet();
     }
 }

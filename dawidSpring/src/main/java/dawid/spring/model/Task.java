@@ -1,15 +1,18 @@
 package dawid.spring.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
 import java.sql.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by private on 31.05.17.
@@ -40,11 +43,23 @@ public class Task {
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
+    
     )
+    @Fetch(FetchMode.SELECT)
     private Set<Label> labels;
 
     private Task() {}
-
+    
+    @Override
+    public int hashCode() {
+    	return HashCodeBuilder.reflectionHashCode(id, false);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	return EqualsBuilder.reflectionEquals(this, obj, false);
+    }
+    
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
@@ -115,13 +130,7 @@ public class Task {
         this.assignedUser = assignedUser;
     }
 
-	public Collection<Label> getLabels() {
-		return labels;
-	}
-
-	public void setLabels(Set<Label> labels) {
-		this.labels = labels;
-	}
-    
-    
+    public Set<Label> getLabels() {
+        return labels;
+    }
 }
