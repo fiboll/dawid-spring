@@ -46,7 +46,7 @@ public class Label implements Comparable<Label>{
     
     @Override
     public int hashCode() {
-    	return HashCodeBuilder.reflectionHashCode(id, false);
+    	return HashCodeBuilder.reflectionHashCode(this, false);
     }
     
     @Override

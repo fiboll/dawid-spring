@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Created by private on 03.06.17.
  */
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 @Repository("UserProvider")
 public class UserProviderJpa implements UserProvider {
 

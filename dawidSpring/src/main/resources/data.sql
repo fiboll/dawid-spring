@@ -31,10 +31,10 @@ INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM LABELS WHERE description = 'B')
 );
 
-INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
-    (SELECT ID FROM TASKS WHERE name = 'Test Task'),
-    (SELECT ID FROM LABELS WHERE description = 'A')
-);
+--INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
+--    (SELECT ID FROM TASKS WHERE name = 'Test Task'),
+--    (SELECT ID FROM LABELS WHERE description = 'A')
+--);
 
 INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM TASKS WHERE name = 'Test Task 2'),

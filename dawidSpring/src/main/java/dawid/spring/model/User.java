@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -20,7 +21,6 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = "User.findAll",
-                //query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
                 query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
         @NamedQuery(
                 name = "User.findByNameAndSurname",
@@ -40,6 +40,7 @@ public class User {
     private String secondName;
 
     @OneToMany(mappedBy="assignedUser")
+    @SortNatural
     private Set<Task> tasks;
 
     @Version
@@ -60,12 +61,13 @@ public class User {
             tasks = new HashSet<Task>();
         }
         tasks.add(task);
+        System.out.println("add task");
         task.setAssignedUser(this);
     }
 
     @Override
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(id, false);
+        return HashCodeBuilder.reflectionHashCode(this, false);
     }
 
     @Override
@@ -118,6 +120,6 @@ public class User {
     }
 
     public Set<Task> getTasks() {
-        return tasks != null ? tasks : Collections.emptySet();
+        return tasks;
     }
 }

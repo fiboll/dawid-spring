@@ -85,14 +85,17 @@ public class UserProviderTest {
                 orElseThrow(() -> new IllegalStateException("User do not exist"));
 
         Task task = new Task.TaskBuilder()
-                .desc("test desc")
-                .name("test task")
+                .desc("test desc a")
+                .name("test task b")
                 .dueDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()))
                 .build();
 
+        System.out.println(user.getTasks().iterator());
         user.addTask(task);
-        userProvider.update(user);
+        System.out.println(user.getTasks());
 
+        //TODO fix me
+        //user = userProvider.update(user);
     }
 
     @Test
