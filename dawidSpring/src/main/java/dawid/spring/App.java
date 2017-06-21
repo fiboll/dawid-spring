@@ -1,5 +1,6 @@
 package dawid.spring;
 
+import dawid.spring.provider.UserManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,7 +15,9 @@ public class App
         ApplicationContext context = new ClassPathXmlApplicationContext(
                 "context.xml");
 
-        HelloWorld obj = (HelloWorld) context.getBean("firstBean");
-        obj.printHello();
+       // HelloWorld obj = (HelloWorld) context.getBean("firstBean");
+        UserManager userManager = (UserManager) context.getBean("userManager");
+        userManager.getAllUsers();
+       // obj.printHello();
     }
 }

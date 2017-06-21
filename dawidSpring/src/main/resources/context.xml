@@ -11,16 +11,15 @@
     >
 
     <context:annotation-config />
-    <context:component-scan base-package="dawid.spring.*" />
-    <tx:annotation-driven proxy-target-class="true" />
+    <context:component-scan base-package="dawid.spring" />
+    <tx:annotation-driven />
 
     <bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="dawid-pu-test" />
+        <property name="persistenceUnitName" value="dawid-pu-server" />
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
         <property name="entityManagerFactory" ref="emf" />
-        <property name="persistenceUnitName" value="dawid-pu-test" />
     </bean>
 
     <bean id="firstBean" class="dawid.spring.HelloWorld">

@@ -1,16 +1,10 @@
 package dawid.spring.model;
 
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -40,7 +34,6 @@ public class User {
     private String secondName;
 
     @OneToMany(mappedBy="assignedUser")
-    @SortNatural
     private Set<Task> tasks;
 
     @Version
@@ -57,23 +50,19 @@ public class User {
     }
 
     public void addTask(Task task) {
-        if (tasks == null) {
-            tasks = new HashSet<Task>();
-        }
         tasks.add(task);
-        System.out.println("add task");
         task.setAssignedUser(this);
     }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, false);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj, false);
-    }
+//    @Override
+//    public int hashCode() {
+//        return HashCodeBuilder.reflectionHashCode(this, false);
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        return EqualsBuilder.reflectionEquals(this, obj, false);
+//    }
 
     @Override
     public String toString() {

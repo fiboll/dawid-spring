@@ -2,28 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
  http://www.springframework.org/schema/mvc
  http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
  http://www.springframework.org/schema/beans
  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
  http://www.springframework.org/schema/context
  http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <context:annotation-config />
-    <mvc:annotation-driven/>
     <context:component-scan base-package="dawid.spring.*" />
-
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix">-->
-            <!--<value>/WEB-INF/views/</value>-->
-        <!--</property>-->
-        <!--<property name="suffix">-->
-            <!--<value>.jsp</value>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-
+    <mvc:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" proxy-target-class="true" />
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
     <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
     <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
         <property name="templateEngine" ref="templateEngine" />
@@ -45,15 +39,4 @@
         <property name="templateMode" value="HTML" />
     </bean>
 
-
-
-    <bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="dawid-pu-server" />
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" />
-
-    <bean id="firstBean" class="dawid.spring.HelloWorld">
-        <property name="name" value="Dawid" />
-    </bean>
 </beans>

@@ -1,17 +1,14 @@
 package dawid.spring.model;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Date;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by private on 31.05.17.
@@ -44,17 +41,13 @@ public class Task implements Comparable<Task> {
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
     
     )
-    @SortNatural
-    private SortedSet<Label> labels = new TreeSet<>();
+    private Set<Label> labels;
 
     private Task() {}
 
     @Override
     public int compareTo(Task other) {
-
-        return Comparator.nullsLast(Comparator.comparing((Task task) -> Objects.isNull(task)))
-                .thenComparing(task -> Objects.isNull(task.getLabels()))
-//                .thenComparing(task -> compareLabelsList(task))
+        return Comparator.nullsLast(Task::compareLabelsList)
                 .thenComparing(Task::getName)
                 .thenComparing(Task::getDesc)
                 .compare(this, other);
@@ -62,15 +55,9 @@ public class Task implements Comparable<Task> {
 
     }
 
-    //TODO fix me
-    private int compareLabelsList(Task other) {
-
-        if (this.getLabels() == null || other.getLabels() == null) {
-            return 0;
-        }
-
-        Iterator<Label> thisLabels = this.getLabels().iterator();
-        Iterator<Label> otherLabels = other.getLabels().iterator();
+    private static int compareLabelsList(Task task, Task otherTask) {
+        Iterator<Label> thisLabels = new TreeSet<>(task.labels).iterator();
+        Iterator<Label> otherLabels = new TreeSet<>(otherTask.labels).iterator();
 
         while (true) {
 
@@ -78,29 +65,26 @@ public class Task implements Comparable<Task> {
                 break;
             }
 
-            int result = Comparator.comparing(Iterator<Label>::hasNext)
-                    .thenComparing(Comparator.comparing(Iterator::next))
+            int result = Comparator.comparing(Iterator<Label> ::next)
+                    .thenComparing(Iterator::hasNext)
                     .compare(thisLabels, otherLabels);
 
             if (result != 0 ) {
                 return result;
             }
-
         }
-
         return 0;
     }
 
-    @Override
-    public int hashCode() {
-// TODO fix me    	return HashCodeBuilder.reflectionHashCode(this, false);
-        return super.hashCode();
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-    	return EqualsBuilder.reflectionEquals(this, obj, false);
-    }
+//    @Override
+//    public int hashCode() {
+//        return HashCodeBuilder.reflectionHashCode(this, false);
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//    	return EqualsBuilder.reflectionEquals(this, obj, false);
+//    }
     
     @Override
     public String toString() {
@@ -172,7 +156,7 @@ public class Task implements Comparable<Task> {
         this.assignedUser = assignedUser;
     }
 
-    public SortedSet<Label> getLabels() {
+    public Set<Label> getLabels() {
         return labels;
     }
 }

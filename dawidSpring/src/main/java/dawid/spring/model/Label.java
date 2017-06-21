@@ -1,16 +1,9 @@
 package dawid.spring.model;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,7 +22,7 @@ public class Label implements Comparable<Label>{
 
     String description;
 
-    @ManyToMany(mappedBy = "labels" )
+    @ManyToMany(mappedBy = "labels")
     private Set<Task> tasks;
 
     @Version
@@ -38,25 +31,24 @@ public class Label implements Comparable<Label>{
 
     @Override
 	public int compareTo(Label other) {
-
     	return Comparator.comparing((Label label) -> StringUtils.isNumeric(label.description))
     			.thenComparing(Label::getDescription)
     			.compare(this, other);
 	}
     
-    @Override
-    public int hashCode() {
-    	return HashCodeBuilder.reflectionHashCode(this, false);
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-    	return EqualsBuilder.reflectionEquals(this, obj, false);
-    }
+//    @Override
+//    public int hashCode() {
+//    	return HashCodeBuilder.reflectionHashCode(this, false);
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//    	return EqualsBuilder.reflectionEquals(this, obj, false);
+//    }
     
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+        return description;
     }
 
     public String getColour() {

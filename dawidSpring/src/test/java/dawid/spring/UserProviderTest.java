@@ -2,20 +2,18 @@ package dawid.spring;
 
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
+import dawid.spring.provider.UserManager;
 import dawid.spring.provider.UserProvider;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +22,17 @@ import java.util.Optional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:context_test.xml")
+@Transactional
+@Rollback
 public class UserProviderTest {
 
     @Autowired
     private UserProvider userProvider;
 
+    @Autowired
+    private UserManager userManager;
+
     @Test
-    @Transactional
-    @Rollback
     public void testGetUserById() {
         User user = new User.UserBuilder()
                 .firstName("Dawid")
@@ -50,8 +51,6 @@ public class UserProviderTest {
     }
 
     @Test
-    @Transactional
-    @Rollback
     public void testAddUser() {
         User user = new User.UserBuilder()
                 .firstName("Jan")
@@ -64,8 +63,6 @@ public class UserProviderTest {
     }
 
     @Test
-    @Transactional
-    @Rollback
     public void testDeleteUser() {
         User user = new User.UserBuilder()
                 .firstName("Jan")
@@ -78,8 +75,6 @@ public class UserProviderTest {
     }
 
     @Test
-    @Transactional
-    @Rollback
     public void testAddTask() {
         User user = userProvider.findByNameAndSurname("Dawid", "Strembicki").
                 orElseThrow(() -> new IllegalStateException("User do not exist"));
@@ -90,19 +85,15 @@ public class UserProviderTest {
                 .dueDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()))
                 .build();
 
-        System.out.println(user.getTasks().iterator());
         user.addTask(task);
-        System.out.println(user.getTasks());
 
         //TODO fix me
         //user = userProvider.update(user);
     }
 
     @Test
-    @Transactional
-    @Rollback
     public void testFindAll() {
-        List<User> users =  userProvider.findAll();
+        List<User> users =  userManager.getAllUsers();
         Assert.assertNotNull(users);
         Assert.assertEquals(8, users.size());
 
@@ -110,6 +101,5 @@ public class UserProviderTest {
                (User u) -> Assert.assertTrue(null != u.getId())
         );
     }
-
 
 }

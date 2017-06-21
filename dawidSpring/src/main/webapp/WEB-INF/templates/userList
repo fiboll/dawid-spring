@@ -16,7 +16,7 @@
         		<th>name</th>
         		<th>description</th>
     		</tr>	
-			<tr th:each="task : ${user.tasks}">
+			<tr th:each="task : ${#lists.sort(user.tasks)}">
 				<td>
 					<span th:text="${task.name}" />
 					<span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}" 
