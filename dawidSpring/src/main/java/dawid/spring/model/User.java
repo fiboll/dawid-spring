@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,8 +18,8 @@ import java.util.Set;
                 name = "User.findAll",
                 query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
         @NamedQuery(
-                name = "User.findByNameAndSurname",
-                query = "SELECT p FROM User p WHERE p.firstName = :firstName AND p.secondName = :secondName ORDER BY p.secondName")
+                name = "User.findByNick",
+                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l WHERE u.nickname = :nick")
 })
 public class User {
 
@@ -32,6 +33,9 @@ public class User {
 
     @Column(name= "second_name")
     private String secondName;
+
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
     @OneToMany(mappedBy="assignedUser")
     private Set<Task> tasks;
@@ -47,9 +51,13 @@ public class User {
         id = builder.id;
         firstName = builder.firstName;
         secondName = builder.secondName;
+        nickname = builder.nickname;
     }
 
     public void addTask(Task task) {
+        if (tasks == null) {
+            tasks = new HashSet<>();
+        }
         tasks.add(task);
         task.setAssignedUser(this);
     }
@@ -74,6 +82,7 @@ public class User {
         private Long id;
         private String firstName;
         private String secondName;
+        private String nickname;
 
         public UserBuilder id(long id) {
             this.id = id;
@@ -90,6 +99,11 @@ public class User {
             return this;
         }
 
+        public UserBuilder nickname(String nickname) {
+            this.nickname = nickname;
+            return this;
+        }
+
         public User build() {
             return new User(this);
         }
@@ -103,6 +117,9 @@ public class User {
         return secondName;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
 
     public Long getId() {
         return id;

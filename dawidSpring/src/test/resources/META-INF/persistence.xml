@@ -11,7 +11,7 @@
         <class>dawid.spring.model.Label</class>
         <properties>
             <!-- Configuring JDBC properties -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:create_test.sql'\;RUNSCRIPT FROM 'classpath:data_test.sql'"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:create.sql'\;RUNSCRIPT FROM 'classpath:data_test.sql'"/>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
 
              <!--Hibernate properties-->

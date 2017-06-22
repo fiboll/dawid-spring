@@ -3,7 +3,7 @@ package dawid.spring;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserManager;
-import dawid.spring.provider.UserProvider;
+import dawid.spring.provider.UserDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +24,10 @@ import java.util.Optional;
 @ContextConfiguration(locations = "classpath:context_test.xml")
 @Transactional
 @Rollback
-public class UserProviderTest {
+public class UserDAOTest {
 
     @Autowired
-    private UserProvider userProvider;
+    private UserDAO userDAO;
 
     @Autowired
     private UserManager userManager;
@@ -35,12 +35,13 @@ public class UserProviderTest {
     @Test
     public void testGetUserById() {
         User user = new User.UserBuilder()
+                .nickname("fiboll")
                 .firstName("Dawid")
                 .secondName("Strembicki")
                 .build();
 
-        userProvider.addUser(user);
-        Optional<User> findedUser = userProvider.getUserById(user.getId());
+        userDAO.addUser(user);
+        Optional<User> findedUser = userDAO.getUserById(user.getId());
 
         Assert.assertTrue(findedUser.isPresent());
 
@@ -48,6 +49,7 @@ public class UserProviderTest {
 
         Assert.assertEquals("Dawid", user.getFirstName());
         Assert.assertEquals("Strembicki", user.getSecondName());
+        Assert.assertEquals("fiboll", user.getNickname());
     }
 
     @Test
@@ -55,10 +57,9 @@ public class UserProviderTest {
         User user = new User.UserBuilder()
                 .firstName("Jan")
                 .secondName("Kowalski")
+                .nickname("ktoś")
                 .build();
         Assert.assertNotNull(user);
-
-        userProvider.addUser(user);
         System.out.println(user);
     }
 
@@ -67,16 +68,17 @@ public class UserProviderTest {
         User user = new User.UserBuilder()
                 .firstName("Jan")
                 .secondName("Kowalski")
+                .nickname("ktoś")
                 .build();
         Assert.assertNotNull(user);
 
-        userProvider.addUser(user);
-        userProvider.removeUser(user);
+        userDAO.addUser(user);
+        userDAO.removeUser(user);
     }
 
     @Test
     public void testAddTask() {
-        User user = userProvider.findByNameAndSurname("Dawid", "Strembicki").
+        User user = userDAO.findByNick("fiboll").
                 orElseThrow(() -> new IllegalStateException("User do not exist"));
 
         Task task = new Task.TaskBuilder()
@@ -86,9 +88,7 @@ public class UserProviderTest {
                 .build();
 
         user.addTask(task);
-
-        //TODO fix me
-        //user = userProvider.update(user);
+        user = userDAO.update(user);
     }
 
     @Test

@@ -1,13 +1,13 @@
 --USERS
 DELETE FROM USERS;
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Dawid', 'Strembicki', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Adam', 'Nowak', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Marian', 'Paźdioch', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Ferdynad', 'Kiepski', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Arnold', 'Boczek', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Edzio', 'Listonosz', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Wadluś', 'Kiepski', 0);
-INSERT INTO USERS(id,first_name, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Prezes', 'Kozłowski', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Dawid', 'fiboll', 'Strembicki', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Adam', 'nowy','Nowak', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Marian', 'menda', 'Paźdioch', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Ferdynad', 'kanalia', 'Kiepski', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Arnold', 'gruby', 'Boczek', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Edzio', 'pedzio', 'Listonosz', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Wadluś', 'cyc', 'Kiepski', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Prezes', 'Prezes', 'Kozłowski', 0);
 
 ----TASKS
 --DELETE FROM TASKS;

@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * Created by dawid on 02.06.17.
  */
-public interface UserProvider {
+public interface UserDAO {
 
     public Optional<User> getUserById(Long id);
 
@@ -21,6 +21,6 @@ public interface UserProvider {
 
     public List<User> findAll();
 
-    public Optional<User> findByNameAndSurname(String firstName, String secondName);
+    public Optional<User> findByNick(String nick);
 
 }
