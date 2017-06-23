@@ -35,7 +35,8 @@ public class UserController {
             model.addAttribute("users",user.get()) ;
             return "userList";
         }
-        model.addAttribute("searchName",nick) ;
+        model.addAttribute("searchNick",nick) ;
+        System.out.println(model);
         return "noUser";
 
     }

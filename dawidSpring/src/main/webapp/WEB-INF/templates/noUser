@@ -8,7 +8,9 @@
 <body>
 
 <div>
-    ${user} do not exist
+
+        	<span th:text="${searchNick + 'do not exist'}">test</span>
+
 </div>
 
 </body>
