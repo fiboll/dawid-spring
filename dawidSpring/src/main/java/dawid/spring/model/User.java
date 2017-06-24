@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by dawid on 02.06.17.
@@ -33,8 +32,8 @@ public class User {
     @Column(name= "second_name")
     private String secondName;
 
-    @OneToMany(mappedBy="assignedUser")
-    private Set<Task> tasks;
+    @OneToOne
+    private Table table;
 
     @Version
     @Column(name = "VERSION")
@@ -53,16 +52,6 @@ public class User {
         tasks.add(task);
         task.setAssignedUser(this);
     }
-
-//    @Override
-//    public int hashCode() {
-//        return HashCodeBuilder.reflectionHashCode(this, false);
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        return EqualsBuilder.reflectionEquals(this, obj, false);
-//    }
 
     @Override
     public String toString() {
@@ -108,7 +97,4 @@ public class User {
         return id;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
 }
