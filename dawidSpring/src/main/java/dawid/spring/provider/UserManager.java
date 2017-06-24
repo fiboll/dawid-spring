@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by private on 21.06.17.
@@ -15,15 +16,13 @@ import java.util.List;
 public class UserManager {
 
     @Autowired
-    private UserProvider userProvider;
+    private UserDAO userDAO;
 
     public List<User> getAllUsers() {
-        User user = new User.UserBuilder()
-                .firstName("Jan")
-                .secondName("Kowalski")
-                .build();
-//        userProvider.addUser(user);
-//        userProvider.removeUser(user);
-        return userProvider.findAll();
+        return userDAO.findAll();
+    }
+
+    public Optional<User> findUserByNick(String nick) {
+        return userDAO.findByNick(nick);
     }
 }

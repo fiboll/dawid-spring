@@ -1,7 +1,7 @@
 package dawid.spring;
 
 import dawid.spring.model.User;
-import dawid.spring.provider.UserProvider;
+import dawid.spring.provider.UserDAO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Optional;
@@ -20,10 +18,10 @@ import java.util.Optional;
  */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:context.xml")
-public class UserProviderMockTest {
+public class UserDAOMockTest {
 
     @Mock
-    private UserProvider mockUserProvider;
+    private UserDAO mockUserDAO;
 
     private Optional<User> exampleUser = Optional.empty();
 
@@ -40,9 +38,9 @@ public class UserProviderMockTest {
     @Test
     public void testGetUserByIdSimpleUser() {
 
-        Mockito.when(mockUserProvider.getUserById(1L)).thenReturn(Optional.of(new User.UserBuilder().build()));
+        Mockito.when(mockUserDAO.getUserById(1L)).thenReturn(Optional.of(new User.UserBuilder().build()));
 
-        Optional<User> user = mockUserProvider.getUserById(1L);
+        Optional<User> user = mockUserDAO.getUserById(1L);
 
         Assert.assertTrue(user.isPresent());
 
@@ -51,9 +49,9 @@ public class UserProviderMockTest {
     @Test
     public void testGetUserByIdBuildUser() {
 
-        Mockito.when(mockUserProvider.getUserById(1L)).thenReturn(exampleUser);
+        Mockito.when(mockUserDAO.getUserById(1L)).thenReturn(exampleUser);
 
-        Optional<User> user = mockUserProvider.getUserById(1L);
+        Optional<User> user = mockUserDAO.getUserById(1L);
 
         Assert.assertTrue(user.isPresent());
         Assert.assertEquals("Jan", user.get().getFirstName());

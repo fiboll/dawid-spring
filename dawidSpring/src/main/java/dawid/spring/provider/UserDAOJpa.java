@@ -4,6 +4,7 @@ import dawid.spring.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +12,8 @@ import java.util.Optional;
 /**
  * Created by private on 03.06.17.
  */
-@Repository("UserProvider")
-public class UserProviderJpa implements UserProvider {
+@Repository("UserDAO")
+public class UserDAOJpa implements UserDAO {
 
     @PersistenceContext
     private EntityManager em;
@@ -37,11 +38,14 @@ public class UserProviderJpa implements UserProvider {
         return (List<User>) em.createNamedQuery("User.findAll", User.class).getResultList();
     }
 
-    public Optional<User> findByNameAndSurname(String firstName, String secondName) {
-         User result= (User) em.createNamedQuery("User.findByNameAndSurname")
-                .setParameter("firstName", firstName)
-                .setParameter("secondName", secondName)
-                .getSingleResult();
-         return Optional.ofNullable(result);
+    public Optional<User> findByNick(String nick) {
+        try {
+            User result = (User) em.createNamedQuery("User.findByNick")
+                    .setParameter("nick", nick)
+                    .getSingleResult();
+            return Optional.ofNullable(result);
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
     }
 }

@@ -16,8 +16,8 @@ import javax.persistence.*;
                 name = "User.findAll",
                 query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
         @NamedQuery(
-                name = "User.findByNameAndSurname",
-                query = "SELECT p FROM User p WHERE p.firstName = :firstName AND p.secondName = :secondName ORDER BY p.secondName")
+                name = "User.findByNick",
+                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l WHERE u.nickname = :nick")
 })
 public class User {
 
@@ -31,6 +31,9 @@ public class User {
 
     @Column(name= "second_name")
     private String secondName;
+
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
     @OneToOne
     private Table table;

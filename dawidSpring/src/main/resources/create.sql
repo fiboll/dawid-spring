@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS USERS;
 CREATE TABLE USERS (
-  id BIGINT NOT NULL,
+  id BIGINT NOT NULL UNIQUE,
   VERSION BIGINT NOT NULL,
   first_name varchar(255) DEFAULT NULL,
   second_name varchar(255) DEFAULT NULL,
+  nickname varchar(255) NOT NULL UNIQUE,
   PRIMARY KEY (id)
 );
 
