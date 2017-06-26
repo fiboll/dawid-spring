@@ -10,13 +10,15 @@
 
 <div th:if="${not #lists.isEmpty(users)}">
 	<div th:each="user: ${users}">
-		<span th:text="${user.firstName + ' ' + user.secondName}"></span>
-		<table th:if="${not #lists.isEmpty(user.tasks)}" border="1">
+		<h3 th:text="${user.firstName + ' ' + user.secondName}"/>
+		<h4 th:text="${user.table.title}" />
+		<h5 th:text="${user.table.backlog.title}" />
+		<table th:if="${not #lists.isEmpty(user.table.backlog.tasks)}" border="1">
 			 <tr>
         		<th>name</th>
         		<th>description</th>
     		</tr>	
-			<tr th:each="task : ${#lists.sort(user.tasks)}">
+			<tr th:each="task : ${#lists.sort(user.table.backlog.tasks)}">
 				<td>
 					<span th:text="${task.name}" />
 					<span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}" 

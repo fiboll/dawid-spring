@@ -9,6 +9,8 @@
         <class>dawid.spring.model.User</class>
         <class>dawid.spring.model.Task</class>
         <class>dawid.spring.model.Label</class>
+        <class>dawid.spring.model.TaskTable</class>
+        <class>dawid.spring.model.TableColumn</class>
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:create.sql'\;RUNSCRIPT FROM 'classpath:data_test.sql'"/>

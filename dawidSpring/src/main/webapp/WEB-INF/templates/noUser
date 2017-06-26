@@ -9,7 +9,7 @@
 
 <div>
 
-        	<span th:text="${searchNick + 'do not exist'}">test</span>
+        	<span th:text="${searchNick + ' do not exist'}">test</span>
 
 </div>
 

@@ -27,15 +27,15 @@ public class Task implements Comparable<Task> {
     @Column(name = "DUE_DATE")
     private Date dueDate;
 
-    @ManyToOne
-    @JoinColumn(name="USER_ID")
-    private User assignedUser;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="table_column")
+    private TableColumn column;
 
     @Version
     @Column(name = "VERSION")
     private Long version;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
@@ -51,8 +51,6 @@ public class Task implements Comparable<Task> {
                 .thenComparing(Task::getName)
                 .thenComparing(Task::getDesc)
                 .compare(this, other);
-
-
     }
 
     private static int compareLabelsList(Task task, Task otherTask) {
@@ -75,16 +73,6 @@ public class Task implements Comparable<Task> {
         }
         return 0;
     }
-
-//    @Override
-//    public int hashCode() {
-//        return HashCodeBuilder.reflectionHashCode(this, false);
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//    	return EqualsBuilder.reflectionEquals(this, obj, false);
-//    }
     
     @Override
     public String toString() {
@@ -145,15 +133,15 @@ public class Task implements Comparable<Task> {
         return (Date) dueDate.clone();
     }
 
-    public User getAssignedUser() {
-        return assignedUser;
+    public TableColumn getTaskColumn() {
+        return column;
     }
 
-    public void setAssignedUser(User assignedUser) {
-        if (!assignedUser.getTasks().contains(this)) {
-            assignedUser.addTask(this);
+    public void setTableColumn(TableColumn tableColumn) {
+        if (!tableColumn.getTasks().contains(this)) {
+            throw new IllegalStateException("table columns don't contain assigned task!");
         }
-        this.assignedUser = assignedUser;
+        this.column = tableColumn;
     }
 
     public Set<Label> getLabels() {

@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by private on 24.06.17.
  */
 @Entity
-@Table(name = "columns")
+@Table(name = "table_columns")
 public class TableColumn {
 
     @Id
@@ -15,12 +15,24 @@ public class TableColumn {
     @SequenceGenerator(name = "COLUMNS_SEQUENCE", sequenceName = "COLUMNS_SEQUENCE", allocationSize = 1)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
-    @Version
-    private Long version;
+//    @Version
+//    private Long version;
 
-    @OneToMany(mappedBy="taskColumn")
+    @OneToMany(mappedBy="column", fetch = FetchType.EAGER)
     private Set<Task> tasks;
 
+    protected void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+	public String getTitle() {
+		return title;
+	}
 }

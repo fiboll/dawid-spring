@@ -20,7 +20,6 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
         <property name="entityManagerFactory" ref="emf" />
-        <property name="persistenceUnitName" value="dawid-pu-test" />
     </bean>
 
     <bean id="firstBean" class="dawid.spring.HelloWorld">

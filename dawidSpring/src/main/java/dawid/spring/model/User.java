@@ -10,15 +10,15 @@ import javax.persistence.*;
  * Created by dawid on 02.06.17.
  */
 @Entity
-@Table(name = "users")
 @NamedQueries({
         @NamedQuery(
                 name = "User.findAll",
-                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l"),
+                query = "SELECT DISTINCT u FROM User u"),
         @NamedQuery(
                 name = "User.findByNick",
-                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks t LEFT JOIN FETCH t.labels l WHERE u.nickname = :nick")
+                query = "SELECT DISTINCT u FROM User u WHERE u.nickname = :nick")
 })
+@Table(name = "users")
 public class User {
 
     @Id
@@ -35,8 +35,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @OneToOne
-    private Table table;
+    @OneToOne()
+    private TaskTable table;
 
     @Version
     @Column(name = "VERSION")
@@ -49,11 +49,11 @@ public class User {
         id = builder.id;
         firstName = builder.firstName;
         secondName = builder.secondName;
+        nickname = builder.nickname;
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
-        task.setAssignedUser(this);
+        table.addTaskToBacklog(task);
     }
 
     @Override
@@ -66,6 +66,7 @@ public class User {
         private Long id;
         private String firstName;
         private String secondName;
+        private String nickname;
 
         public UserBuilder id(long id) {
             this.id = id;
@@ -82,6 +83,11 @@ public class User {
             return this;
         }
 
+        public UserBuilder nickname(String nickname) {
+            this.nickname = nickname;
+            return this;
+        }
+
         public User build() {
             return new User(this);
         }
@@ -95,9 +101,16 @@ public class User {
         return secondName;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public TaskTable getTable() {
+        return table;
     }
 
 }

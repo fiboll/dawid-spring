@@ -2,8 +2,8 @@ package dawid.spring;
 
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
-import dawid.spring.provider.UserManager;
 import dawid.spring.provider.UserDAO;
+import dawid.spring.provider.UserManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,7 +95,7 @@ public class UserDAOTest {
     public void testFindAll() {
         List<User> users =  userManager.getAllUsers();
         Assert.assertNotNull(users);
-        Assert.assertEquals(8, users.size());
+        Assert.assertEquals(1, users.size());
 
         users.forEach(
                (User u) -> Assert.assertTrue(null != u.getId())

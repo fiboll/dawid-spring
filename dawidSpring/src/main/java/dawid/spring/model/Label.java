@@ -22,7 +22,7 @@ public class Label implements Comparable<Label>{
 
     String description;
 
-    @ManyToMany(mappedBy = "labels")
+    @ManyToMany(mappedBy = "labels", fetch = FetchType.EAGER)
     private Set<Task> tasks;
 
     @Version
