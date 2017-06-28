@@ -16,12 +16,12 @@ INSERT INTO user_table(id, title, backlog, next_do_do, doing, done, version) VAL
 --TASKS
 DELETE FROM TASKS;
 INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
-    '', 'Test Task Description', '2008-11-11', 0);
+    'Test Task', 'Test Task Description', '2008-11-11', 0);
 INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
     'Test Task 2', 'Test Task Description 2', '2008-11-11', 0);
 INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'nextToDo'),
     'Test Task 3', 'Test Task Description 3', '2008-11-11', 0);
-INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
+INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'nextToDo'),
     'Test Task 4', 'Test Task Description 4', '2008-11-11', 0);
 --
 --USERS

@@ -12,40 +12,15 @@
 	<div th:each="user: ${users}">
 		<h3 th:text="${user.firstName + ' ' + user.secondName}"/>
 		<h4 th:text="${user.table.title}" />
-		<h5 th:text="${user.table.backlog.title}" />
-		<table th:if="${not #lists.isEmpty(user.table.backlog.tasks)}" border="1">
-			 <tr>
-        		<th>name</th>
-        		<th>description</th>
-    		</tr>	
-			<tr th:each="task : ${#lists.sort(user.table.backlog.tasks)}">
-				<td>
-					<span th:text="${task.name}" />
-					<span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}" 
-						th:style="'color:'+${label.colour}" />
-				</td>
-				<td th:text="${task.desc}"/>
-			</tr>
-		</table>
-
-		<h5 th:text="${user.table.nextTodo.title}" />
-        		<table th:if="${not #lists.isEmpty(user.table.nextTodo.tasks)}" border="1">
-        			 <tr>
-                		<th>name</th>
-                		<th>description</th>
-            		</tr>
-        			<tr th:each="task : ${#lists.sort(user.table.nextTodo.tasks)}">
-        				<td>
-        					<span th:text="${task.name}" />
-        					<span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}"
-        						th:style="'color:'+${label.colour}" />
-        				</td>
-        				<td th:text="${task.desc}"/>
-        			</tr>
-        		</table>
+				
+        <div th:include="column :: column(${user.table.backlog})"></div>
+        <div th:include="column :: column(${user.table.nextTodo})"></div>
 	</div>
 </div>
 	
+	
+<div th:insert="~{column :: copy}"></div>
+
 
 </body>
 </html>

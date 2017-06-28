@@ -91,3 +91,5 @@ fabric.properties
 .idea/*
 target/*
 
+/.classpath
+/.project
