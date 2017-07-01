@@ -1,7 +1,7 @@
 package dawid.spring.controller;
 
+import dawid.spring.manager.UserManager;
 import dawid.spring.model.User;
-import dawid.spring.provider.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

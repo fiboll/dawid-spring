@@ -1,6 +1,7 @@
-package dawid.spring.provider;
+package dawid.spring.manager;
 
 import dawid.spring.model.User;
+import dawid.spring.provider.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,15 +14,17 @@ import java.util.Optional;
  */
 @Component("userManager")
 @Transactional
-public class UserManager {
+public class UserManagerImpl implements UserManager {
 
     @Autowired
     private UserDAO userDAO;
 
+    @Override
     public List<User> getAllUsers() {
         return userDAO.findAll();
     }
 
+    @Override
     public Optional<User> findUserByNick(String nick) {
         return userDAO.findByNick(nick);
     }

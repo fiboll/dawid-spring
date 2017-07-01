@@ -35,4 +35,8 @@ public class TableColumn {
 	public String getTitle() {
 		return title;
 	}
+
+    public Long getId() {
+        return id;
+    }
 }

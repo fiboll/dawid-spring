@@ -1,6 +1,6 @@
 package dawid.spring;
 
-import dawid.spring.provider.UserManager;
+import dawid.spring.manager.UserManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

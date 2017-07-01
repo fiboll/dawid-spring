@@ -1,9 +1,9 @@
 package dawid.spring;
 
+import dawid.spring.manager.UserManager;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
-import dawid.spring.provider.UserManager;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

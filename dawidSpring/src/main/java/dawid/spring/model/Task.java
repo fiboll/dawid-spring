@@ -5,10 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by private on 31.05.17.
@@ -47,36 +45,19 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task other) {
-        return Comparator.nullsLast(Task::compareLabelsList)
-                .thenComparing(Task::getName)
-                .thenComparing(Task::getDesc)
-                .compare(this, other);
-    }
-
-    private static int compareLabelsList(Task task, Task otherTask) {
-        Iterator<Label> thisLabels = new TreeSet<>(task.labels).iterator();
-        Iterator<Label> otherLabels = new TreeSet<>(otherTask.labels).iterator();
-
-        while (true) {
-
-            if (!thisLabels.hasNext() && !otherLabels.hasNext()) {
-                break;
-            }
-
-            int result = Comparator.comparing(Iterator<Label> ::next)
-                    .thenComparing(Iterator::hasNext)
-                    .compare(thisLabels, otherLabels);
-
-            if (result != 0 ) {
-                return result;
-            }
-        }
         return 0;
     }
-    
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+    }
+
+    private void addLabel(Label label) {
+        if (labels == null) {
+            labels = new HashSet<>();
+        }
+        labels.add(label);
     }
 
     private Task(TaskBuilder taskBuilder) {
@@ -137,9 +118,9 @@ public class Task implements Comparable<Task> {
         return column;
     }
 
-    public void setTableColumn(TableColumn tableColumn) {
+    public void setTableColumn(TableColumn tableColumn) {//throws DomainException {
         if (!tableColumn.getTasks().contains(this)) {
-            throw new IllegalStateException("table columns don't contain assigned task!");
+           // throw new DomainException("Table columns don't contain assigned task!");
         }
         this.column = tableColumn;
     }
@@ -147,4 +128,5 @@ public class Task implements Comparable<Task> {
     public Set<Label> getLabels() {
         return labels;
     }
+
 }
