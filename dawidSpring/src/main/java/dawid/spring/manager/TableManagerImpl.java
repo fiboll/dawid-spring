@@ -23,7 +23,7 @@ public class TableManagerImpl implements TableManager{
     }
 
     private void reorderTable(TaskTable taskTable) {
-        for (int i = ColumnKind.values().length; i > 1; i--) {
+        for (int i = ColumnKind.values().length -1; i > 1; i--) {
             reoderColumns(taskTable, ColumnKind.values()[i], ColumnKind.values()[i-1]);
         }
     }
