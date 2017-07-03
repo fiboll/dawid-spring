@@ -5,6 +5,9 @@ import dawid.spring.model.*;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by private on 01.07.17.
@@ -26,8 +29,28 @@ public class TableManagerImpl implements TableManager{
     }
 
     private void reoderColumns(TaskTable taskTable, ColumnKind leftColumnKind, ColumnKind rightColumnKind) {
-        TableColumn leftColumn = getTableColumnByKind(taskTable, leftColumnKind);
+
+        if (rightColumnKind.getMaxTaskInColumn() == Integer.MIN_VALUE) {
+            return;
+        }
+
         TableColumn rightColumn = getTableColumnByKind(taskTable, rightColumnKind);
+
+        if (rightColumn.getTasks().size() == rightColumnKind.getMaxTaskInColumn()) {
+            return;
+        }
+
+        int taskToMoveCount = rightColumnKind.getMaxTaskInColumn() - rightColumn.getTasks().size();
+
+        TableColumn leftColumn = getTableColumnByKind(taskTable, leftColumnKind);
+
+        Set<Task> taskToMove = leftColumn.getTasks().stream()
+                .sorted()
+                .limit(taskToMoveCount)
+                .collect(Collectors.toSet());
+
+        leftColumn.getTasks().removeAll(taskToMove);
+        rightColumn.getTasks().addAll(taskToMove);
     }
 
     @Override
