@@ -25,7 +25,7 @@ public class Task implements Comparable<Task> {
     @Column(name = "DUE_DATE")
     private Date dueDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="table_column")
     private TableColumn column;
 
@@ -33,7 +33,7 @@ public class Task implements Comparable<Task> {
     @Column(name = "VERSION")
     private Long version;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")

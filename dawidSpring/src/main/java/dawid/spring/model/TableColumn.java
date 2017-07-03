@@ -21,7 +21,7 @@ public class TableColumn {
 //    @Version
 //    private Long version;
 
-    @OneToMany(mappedBy="column", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="column")
     private Set<Task> tasks;
 
     protected void addTask(Task task) {

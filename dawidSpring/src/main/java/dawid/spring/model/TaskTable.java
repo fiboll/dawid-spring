@@ -20,7 +20,7 @@ public class TaskTable {
     @Version
     private Long version;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "backlog")
     private TableColumn backlog;
 
