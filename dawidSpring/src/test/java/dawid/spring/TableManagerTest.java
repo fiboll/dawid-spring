@@ -38,6 +38,11 @@ public class TableManagerTest {
         Task task = user.getTable().getDoing().getTasks().iterator().next();
         tableManager.doneTask(user.getTable(), task);
         Assert.assertTrue(user.getTable().getDone().getTasks().contains(task));
+        Assert.assertEquals(1, user.getTable().getDone().getTasks().size());
         Assert.assertTrue(!user.getTable().getDoing().getTasks().contains(task));
+        Assert.assertEquals(1, user.getTable().getDoing().getTasks().size());
+        Assert.assertEquals(2, user.getTable().getNextTodo().getTasks().size());
+        Assert.assertEquals(0, user.getTable().getBacklog().getTasks().size());
+
     }
 }
