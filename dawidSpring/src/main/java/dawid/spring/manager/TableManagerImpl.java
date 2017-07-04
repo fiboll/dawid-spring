@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by private on 01.07.17.
@@ -57,7 +56,12 @@ public class TableManagerImpl implements TableManager{
                 .limit(taskToMoveCount)
                 .collect(Collectors.toSet());
 
-        //logger.info(String.format("Moved task %s"), taskToMove.stream().map((Task t) -> String.valueOf(t.getId())).collect(Collectors.joining()));
+        logger.info(String.format("Moved task %s",
+                taskToMove.stream()
+                        .map(Task::getName)
+                        .collect(Collectors.joining(", "))
+
+            ));
         leftColumn.getTasks().removeAll(taskToMove);
         rightColumn.getTasks().addAll(taskToMove);
     }

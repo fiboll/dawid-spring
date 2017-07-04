@@ -29,7 +29,21 @@ import javax.persistence.*;
         ),
         @NamedQuery(
                 name = "User.findByNick",
-                query = "SELECT DISTINCT u FROM User u WHERE u.nickname = :nick")
+                query  = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.table table"
+                        + " LEFT JOIN FETCH table.backlog backlog"
+                            +  " LEFT JOIN FETCH backlog.tasks backlogTasks"
+                            +  " LEFT JOIN FETCH backlogTasks.labels backlogTasksLabels"
+                        + " LEFT JOIN FETCH table.nextTodo nextTodo"
+                            +  " LEFT JOIN FETCH nextTodo.tasks nextTodoTasks"
+                            +  " LEFT JOIN FETCH nextTodoTasks.labels nextTodoTasksLabels"
+                        + " LEFT JOIN FETCH table.doing doing"
+                            +  " LEFT JOIN FETCH doing.tasks doingTasks"
+                            +  " LEFT JOIN FETCH doingTasks.labels doingTasksLabels"
+                        + " LEFT JOIN FETCH table.done done"
+                            +  " LEFT JOIN FETCH done.tasks doneTasks"
+                            +  " LEFT JOIN FETCH doneTasks.labels doneTasksLabels"
+                        + " WHERE u.nickname = :nick"
+        )
 })
 @Table(name = "users")
 public class User {
