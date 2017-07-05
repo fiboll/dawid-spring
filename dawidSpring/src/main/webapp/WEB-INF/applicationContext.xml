@@ -17,6 +17,9 @@
     <context:component-scan base-package="dawid.spring.*" />
     <mvc:annotation-driven/>
     <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" proxy-target-class="true" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
     <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
     <bean id="viewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">

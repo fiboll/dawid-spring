@@ -1,11 +1,13 @@
 
 
 <div th:fragment="copy">
-	&copy; 2017 The Tasks
+	<footer>
+        <p>© The Tasks 2017</p>
+    </footer>
 </div>
 
 <div th:fragment="column(col)">
-	<h5 th:text="${col.title}" />
+	<h4 th:text="${col.title}" />
 	<table th:if="${not #lists.isEmpty(col.tasks)}" border="1">
 	     <tr>
 	        <th>name</th>

@@ -10,10 +10,10 @@ import dawid.spring.model.TaskTable;
  */
 public interface TableManager {
 
-    public void doneTask(TaskTable taskTable, Task task) throws DomainException;
+    public void doneTask(TaskTable taskTable, Task task);
 
-    public void addLabel(TaskTable taskTable, Task task, Label label) throws DomainException;
+    public void addLabel(TaskTable taskTable, Task task, Label label);
 
-    public void removeLabel(TaskTable taskTable, Task task, Label label) throws DomainException;
+    public void removeLabel(TaskTable taskTable, Task task, Label label);
     
 }

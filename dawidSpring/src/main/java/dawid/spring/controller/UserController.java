@@ -23,7 +23,7 @@ public class UserController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", userManager.getAllUsers());
-        return "userList";
+        return "test";
     }
 
     @RequestMapping(value = "/user",method = RequestMethod.GET)
@@ -32,8 +32,8 @@ public class UserController {
         Optional<User> user= userManager.findUserByNick(nick);
 
         if (user.isPresent()) {
-            model.addAttribute("users",user.get()) ;
-            return "userList";
+            model.addAttribute("user",user.get()) ;
+            return "user";
         }
         model.addAttribute("searchNick",nick) ;
         return "noUser";

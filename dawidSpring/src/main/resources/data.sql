@@ -19,10 +19,16 @@ INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextv
     'Test Task', 'Test Task Description', '2008-11-11', 0);
 INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
     'Test Task 2', 'Test Task Description 2', '2008-11-11', 0);
-INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'nextToDo'),
+INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
     'Test Task 3', 'Test Task Description 3', '2008-11-11', 0);
-INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'doing'),
+INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'backlog'),
     'Test Task 4', 'Test Task Description 4', '2008-11-11', 0);
+INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'nextToDo'),
+    'Test Task 5', 'Test Task Description 5', '2008-11-11', 0);
+ INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'doing'),
+    'Test Task 6', 'Test Task Description 6', '2008-11-11', 0);
+    INSERT INTO TASKS(id, TABLE_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from TABLE_COLUMNS where title = 'done'),
+    'Test Task 7', 'Test Task Description 7', '2008-11-11', 0);
 --
 --USERS
 DELETE FROM USERS;

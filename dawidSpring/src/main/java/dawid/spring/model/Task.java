@@ -1,5 +1,6 @@
 package dawid.spring.model;
 
+import dawid.spring.comparator.TaskComparator;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -41,11 +42,14 @@ public class Task implements Comparable<Task> {
     )
     private Set<Label> labels;
 
+    @Transient
+    private TaskComparator defaultComparator = new TaskComparator();
+
     private Task() {}
 
     @Override
     public int compareTo(Task other) {
-        return 0;
+        return defaultComparator.compare(this, other);
     }
 
     @Override
