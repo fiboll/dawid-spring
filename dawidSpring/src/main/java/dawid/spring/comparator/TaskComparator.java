@@ -30,8 +30,8 @@ public class TaskComparator implements Comparator<Task> {
                 break;
             }
 
-            int result = Comparator.comparing(Iterator<Label>::next)
-                    .thenComparing(Iterator::hasNext)
+            int result = Comparator.comparing(Iterator<Label>::hasNext).reversed()
+                    .thenComparing(Iterator::next)
                     .compare(thisLabels, otherLabels);
 
             if (result != 0 ) {

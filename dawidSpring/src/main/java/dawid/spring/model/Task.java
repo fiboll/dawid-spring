@@ -1,6 +1,7 @@
 package dawid.spring.model;
 
 import dawid.spring.comparator.TaskComparator;
+import dawid.spring.exceptions.DomainException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -40,12 +41,10 @@ public class Task implements Comparable<Task> {
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
     
     )
-    private Set<Label> labels;
+    private Set<Label> labels = new HashSet<>();
 
     @Transient
     private TaskComparator defaultComparator = new TaskComparator();
-
-    private Task() {}
 
     @Override
     public int compareTo(Task other) {
@@ -63,6 +62,8 @@ public class Task implements Comparable<Task> {
         }
         labels.add(label);
     }
+
+    public Task() {}
 
     private Task(TaskBuilder taskBuilder) {
         id = taskBuilder.id;
@@ -122,9 +123,9 @@ public class Task implements Comparable<Task> {
         return column;
     }
 
-    public void setTableColumn(TableColumn tableColumn) {//throws DomainException {
+    public void setTableColumn(TableColumn tableColumn) {
         if (!tableColumn.getTasks().contains(this)) {
-           // throw new DomainException("Table columns don't contain assigned task!");
+           throw new DomainException("Table columns don't contain assigned task!");
         }
         this.column = tableColumn;
     }
@@ -133,4 +134,27 @@ public class Task implements Comparable<Task> {
         return labels;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public TableColumn getColumn() {
+        return column;
+    }
+
+    public void setColumn(TableColumn column) {
+        this.column = column;
+    }
+
+    public void setLabels(Set<Label> labels) {
+        this.labels = labels;
+    }
 }

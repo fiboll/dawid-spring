@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public class Label implements Comparable<Label>{
     String description;
 
     @ManyToMany(mappedBy = "labels")
-    private Set<Task> tasks;
+    private Set<Task> tasks = new HashSet<>();
 
     @Version
     @Column(name = "VERSION")

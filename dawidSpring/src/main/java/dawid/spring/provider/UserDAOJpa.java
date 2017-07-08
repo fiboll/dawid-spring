@@ -1,11 +1,13 @@
 package dawid.spring.provider;
 
+import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,7 @@ import java.util.Optional;
  * Created by private on 03.06.17.
  */
 @Repository("UserDAO")
+@Transactional
 public class UserDAOJpa implements UserDAO {
 
     @PersistenceContext
@@ -25,6 +28,11 @@ public class UserDAOJpa implements UserDAO {
     public void addUser(User user) {
         em.persist(user);
     }
+
+    public void addTask(Task task) {
+        em.persist(task);
+    }
+
 
     public User update(User user) {
         return em.merge(user);

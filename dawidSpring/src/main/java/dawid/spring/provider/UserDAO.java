@@ -1,5 +1,6 @@
 package dawid.spring.provider;
 
+import dawid.spring.model.Task;
 import dawid.spring.model.User;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface UserDAO {
     public Optional<User> getUserById(Long id);
 
     public void addUser(User user);
+
+    public void addTask(Task user);
 
     public void removeUser(User user);
 

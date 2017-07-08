@@ -11,7 +11,7 @@
     >
 
     <context:annotation-config />
-    <context:component-scan base-package="dawid.spring" />
+    <context:component-scan base-package="dawid.spring.*" />
     <tx:annotation-driven />
 
     <bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">

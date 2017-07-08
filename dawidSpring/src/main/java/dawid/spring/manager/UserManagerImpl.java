@@ -1,5 +1,6 @@
 package dawid.spring.manager;
 
+import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class UserManagerImpl implements UserManager {
     @Override
     public Optional<User> findUserByNick(String nick) {
         return userDAO.findByNick(nick);
+    }
+
+    @Override
+    public void addTaskToUSer(User user, Task task) {
+        user.addTask(task);
+        userDAO.addTask(task);
     }
 }
