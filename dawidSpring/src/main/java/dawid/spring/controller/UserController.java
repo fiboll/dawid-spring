@@ -40,7 +40,7 @@ public class UserController {
         if (user.isPresent()) {
             System.out.println(user.get().getTable().getBacklog().getTasks());
             model.addAttribute("user", user.get()) ;
-            model.addAttribute("task", new Task());
+            model.addAttribute("newTask", new Task());
             return "user";
         }
         model.addAttribute("searchNick",nick) ;
@@ -65,11 +65,36 @@ public class UserController {
             userManager.addTaskToUSer(user.get(), task);
 
             model.addAttribute("nick", user.get().getNickname()) ;
-            model.addAttribute("task", new Task());
+            model.addAttribute("newTask", new Task());
             return "redirect:user";
         }
 
 
         return "redirect:noUser";
+    }
+
+    @RequestMapping(value = "/editTask",method = RequestMethod.POST)
+    public String editTask(@ModelAttribute(value="task") Task task,
+                                @RequestParam String userNick,
+                                Model model) {
+
+          logger.info(String.format("Edit task %s for user %s", task, userNick));
+//
+//        if (StringUtils.isEmpty(userNick)) {
+//            return "redirect:noUser";
+//        }
+//
+//        Optional<User> user= userManager.findUserByNick(userNick);
+//
+//        if (user.isPresent()) {
+//            userManager.addTaskToUSer(user.get(), task);
+//
+              model.addAttribute("nick", userNick) ;
+              model.addAttribute("newTask", new Task());
+//            return "redirect:user";
+//        }
+
+
+        return "redirect:user";
     }
 }
