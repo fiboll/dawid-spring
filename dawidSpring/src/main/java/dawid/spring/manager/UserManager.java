@@ -17,3 +17,4 @@ public interface UserManager {
 
     public void addTaskToUSer(User user, Task task);
 }
+

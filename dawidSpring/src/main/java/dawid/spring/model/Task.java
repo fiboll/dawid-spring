@@ -14,6 +14,11 @@ import java.util.Set;
  * Created by private on 31.05.17.
  */
 @Entity
+@NamedQuery(
+        name = "Task.findById",
+        query  = "SELECT DISTINCT t FROM Task t LEFT JOIN FETCH t.labels l"
+                + " WHERE t.id = :id"
+)
 @Table(name = "tasks")
 public class Task implements Comparable<Task> {
 

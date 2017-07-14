@@ -3,6 +3,7 @@ package dawid.spring.controller;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
+import dawid.spring.provider.TaskDao;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
     @Autowired
     private UserManager userManager;
 
+    @Autowired
+    private TaskDao taskDao;
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", userManager.getAllUsers());
@@ -38,7 +42,6 @@ public class UserController {
         Optional<User> user= userManager.findUserByNick(nick);
 
         if (user.isPresent()) {
-            System.out.println(user.get().getTable().getBacklog().getTasks());
             model.addAttribute("user", user.get()) ;
             model.addAttribute("newTask", new Task());
             return "user";
@@ -71,6 +74,20 @@ public class UserController {
 
 
         return "redirect:noUser";
+    }
+
+
+    @RequestMapping(value = "/editTask", method = RequestMethod.GET)
+    public Task updateTask(@ModelAttribute(value="taskId") Long taskId,
+                             @RequestParam String userNick,
+                             Model model) {
+        System.out.println("edit tastk");
+        Task task = taskDao.getTaskById(taskId).get();
+        model.addAttribute("nick", userNick) ;
+        model.addAttribute("newTask", new Task());
+//        mav.addObject("updateJob", updateJob);
+//        return mav;
+        return task;
     }
 
     @RequestMapping(value = "/editTask",method = RequestMethod.POST)

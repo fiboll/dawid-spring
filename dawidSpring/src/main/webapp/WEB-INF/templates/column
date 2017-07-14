@@ -30,10 +30,6 @@
                     <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" th:attr="data-target='#login-modal-'+${task.id }">edit</a>
                 </p>
 
-
-
-
-
                 <div class="modal fade" th:id="'login-modal-' + ${task.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                    <div class="modal-dialog">
                    			<div class="modal-content">
