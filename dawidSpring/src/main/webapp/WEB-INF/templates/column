@@ -11,17 +11,13 @@
 	<table th:if="${not #lists.isEmpty(col.tasks)}" border="1">
 	     <tr>
 	        <th>name</th>
-	        <th>description</th>
-	        <th>labels</th>
 	        <th>edit</th>
 	    </tr>
 	    <tr th:each="task : ${#lists.sort(col.tasks)}">
 	        <td>
-	            <span th:text="${task.name}" />
-
-	        </td>
-	         <td th:text="${task.desc}"/>
-	        <td>
+	           <div data-toggle="tooltip" data-placement="left" th:attr="title=${task.desc}">
+	                <span th:text="${task.name}" />
+                </div>
 	            <span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}"
                 	                th:style="'color:'+${label.colour}" />
 	        </td>
