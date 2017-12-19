@@ -15,8 +15,6 @@ public interface UserDAO {
 
     public void addUser(User user);
 
-    public void addTask(Task user);
-
     public void removeUser(User user);
 
     public User update(User user);

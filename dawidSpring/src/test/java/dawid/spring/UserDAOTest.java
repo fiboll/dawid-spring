@@ -29,9 +29,6 @@ public class UserDAOTest {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
-    private UserManager userManager;
-
     @Test
     public void testGetUserById() {
         User user = new User.UserBuilder()
@@ -89,17 +86,6 @@ public class UserDAOTest {
 
         user.addTask(task);
         user = userDAO.update(user);
-    }
-
-    @Test
-    public void testFindAll() {
-        List<User> users =  userManager.getAllUsers();
-        Assert.assertNotNull(users);
-        Assert.assertEquals(1, users.size());
-
-        users.forEach(
-               (User u) -> Assert.assertTrue(null != u.getId())
-        );
     }
 
 }

@@ -29,11 +29,6 @@ public class UserDAOJpa implements UserDAO {
         em.persist(user);
     }
 
-    public void addTask(Task task) {
-        em.persist(task);
-    }
-
-
     public User update(User user) {
         return em.merge(user);
     }

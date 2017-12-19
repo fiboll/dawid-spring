@@ -31,4 +31,9 @@ public class TaskDaoImpl implements TaskDao{
             return Optional.empty();
         }
     }
+
+    public void addTask(Task task) {
+        em.persist(task);
+    }
+
 }

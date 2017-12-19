@@ -2,6 +2,7 @@ package dawid.spring.manager;
 
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
+import dawid.spring.provider.TaskDao;
 import dawid.spring.provider.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,9 @@ public class UserManagerImpl implements UserManager {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private TaskDao taskDao;
+
     @Override
     public List<User> getAllUsers() {
         return userDAO.findAll();
@@ -33,7 +37,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public void addTaskToUSer(User user, Task task) {
         user.addTask(task);
-        userDAO.addTask(task);
+        taskDao.addTask(task);
     }
 
 }
