@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,6 +30,7 @@ public class Task implements Comparable<Task> {
     private String desc;
 
     @Column(name = "DUE_DATE")
+    @Temporal(TemporalType.DATE)
     private Date dueDate;
 
     @ManyToOne
