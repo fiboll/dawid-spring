@@ -1,14 +1,14 @@
 package dawid.spring.manager;
 
 import dawid.spring.exceptions.DomainException;
-import dawid.spring.model.*;
+import dawid.spring.model.Label;
+import dawid.spring.model.Task;
+import dawid.spring.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by private on 01.07.17.
@@ -26,26 +26,24 @@ public class TableManagerImpl implements TableManager{
     private TableOrderProcessor tableOrderProcessor;
 
     @Override
-    public void doneTask(TaskTable taskTable, Task task) {
-        logger.info(String.format("Task %s isDone", task.getName()));
-        tableToolbox.moveTask(taskTable, task, ColumnKind.DOING, ColumnKind.DONE);
-        tableOrderProcessor.reorderTable(taskTable);
+    public void doneTask(User user, Task task) {
+        //TODO
     }
 
     @Override
-    public void addLabel(TaskTable taskTable, Task task, Label label) {
+    public void addLabel(Task task, Label label) {
         task.getLabels().add(label);
-        tableOrderProcessor.reorderTable(taskTable);
+        //tableOrderProcessor.reorderTable(taskTable);
     }
 
     @Override
-    public void removeLabel(TaskTable taskTable, Task task, Label label) {
+    public void removeLabel(Task task, Label label) {
         if (!task.getLabels().contains(label)) {
-            throw new DomainException(String.format("In table %s, task %s doesn't contain label %s",
-                    taskTable.getId(), task.getId(), label.getId()));
+            throw new DomainException(String.format("Task %s doesn't contain label %s",
+                    task.getId(), label.getId()));
         }
         task.getLabels().remove(label);
-        tableOrderProcessor.reorderTable(taskTable);
+        //tableOrderProcessor.reorderTable(taskTable);
     }
 
 
