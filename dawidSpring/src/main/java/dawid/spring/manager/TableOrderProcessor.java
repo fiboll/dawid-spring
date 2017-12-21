@@ -1,9 +1,6 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.ColumnKind;
-import dawid.spring.model.TableColumn;
 import dawid.spring.model.Task;
-import dawid.spring.model.TaskTable;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.exceptions.DomainException;
 import dawid.spring.model.Label;
 import dawid.spring.model.Task;
-import dawid.spring.model.TaskTable;
 
 /**
  * Created by private on 01.07.17.

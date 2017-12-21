@@ -1,10 +1,7 @@
 package dawid.spring.manager;
 
 import dawid.spring.exceptions.DomainException;
-import dawid.spring.model.ColumnKind;
-import dawid.spring.model.TableColumn;
 import dawid.spring.model.Task;
-import dawid.spring.model.TaskTable;
 import org.springframework.stereotype.Component;
 
 /**

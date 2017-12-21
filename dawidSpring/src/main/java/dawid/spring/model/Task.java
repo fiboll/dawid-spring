@@ -33,8 +33,7 @@ public class Task implements Comparable<Task> {
     private Date dueDate;
 
     @ManyToOne
-    @JoinColumn(name="table_column")
-    private TableColumn column;
+    private User user;
 
     @Version
     @Column(name = "VERSION")
@@ -124,15 +123,11 @@ public class Task implements Comparable<Task> {
         return (Date) dueDate.clone();
     }
 
-    public TableColumn getTaskColumn() {
-        return column;
-    }
-
-    public void setTableColumn(TableColumn tableColumn) {
-        if (!tableColumn.getTasks().contains(this)) {
+    public void setUser(User user) {
+        if (!user.getTasks().contains(this)) {
            throw new DomainException("Table columns don't contain assigned task!");
         }
-        this.column = tableColumn;
+        this.user = user;
     }
 
     public Set<Label> getLabels() {
@@ -151,15 +146,11 @@ public class Task implements Comparable<Task> {
         this.dueDate = dueDate;
     }
 
-    public TableColumn getColumn() {
-        return column;
-    }
-
-    public void setColumn(TableColumn column) {
-        this.column = column;
-    }
-
     public void setLabels(Set<Label> labels) {
         this.labels = labels;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
