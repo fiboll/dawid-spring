@@ -4,19 +4,19 @@ INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval
 
 --TASKS
 DELETE FROM TASKS;
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task', 'Test Task Description', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 2', 'Test Task Description 2', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 3', 'Test Task Description 3', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 4', 'Test Task Description 4', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 5', 'Test Task Description 5', '2008-11-11', 0);
- INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 6', 'Test Task Description 6', '2008-11-11', 0);
-    INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+    INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 7', 'Test Task Description 7', '2008-11-11', 0);
 
 --LABELS

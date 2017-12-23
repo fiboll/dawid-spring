@@ -3,11 +3,11 @@ DELETE FROM USERS;
 INSERT INTO USERS(id,first_name, nickname, second_name, table_id, version) VALUES (nextval('USER_SEQUENCE'),'Dawid', 'fiboll', 'Strembicki', 0);
 
 DELETE FROM TASKS;
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
     'Test Task', 'Test Task Description', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
     'Test Task 2', 'Test Task Description 2', '2008-11-11', 0);
-INSERT INTO TASKS(id, USER_COLUMN, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
+INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where title = 'fiboll'),
     'Test Task 3', 'Test Task Description 3', '2008-11-11', 0);
 
 
