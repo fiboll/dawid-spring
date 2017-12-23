@@ -62,7 +62,7 @@ public class Task implements Comparable<Task> {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 
     private void addLabel(Label label) {
@@ -79,6 +79,7 @@ public class Task implements Comparable<Task> {
         name = taskBuilder.name;
         desc = taskBuilder.desc;
         dueDate = taskBuilder.dueDate;
+        isDone = taskBuilder.isDone;
     }
 
     public static class TaskBuilder {
@@ -86,6 +87,7 @@ public class Task implements Comparable<Task> {
         private String name;
         private String desc;
         private Date dueDate;
+        private boolean isDone;
 
         public Task build() {
             return new Task(this);
@@ -108,6 +110,11 @@ public class Task implements Comparable<Task> {
 
         public TaskBuilder dueDate(Date dueDate) {
             this.dueDate = dueDate;
+            return this;
+        }
+
+        public TaskBuilder isDone(boolean isDone) {
+            this.isDone = isDone;
             return this;
         }
     }

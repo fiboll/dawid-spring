@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -56,6 +57,7 @@ public class User {
         firstName = builder.firstName;
         secondName = builder.secondName;
         nickname = builder.nickname;
+        tasks = new HashSet<>();
     }
 
     public void addTask(Task task) {

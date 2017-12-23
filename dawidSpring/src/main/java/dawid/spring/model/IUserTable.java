@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface IUserTable {
 
-    public List<Task> getDoneTasks();
+    public List<Task> getDoneTasks(User user);
 
 }
