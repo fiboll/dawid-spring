@@ -16,6 +16,7 @@ CREATE TABLE TASKS (
   name varchar(255) DEFAULT NULL,
   desc varchar(255) DEFAULT NULL,
   DUE_DATE DATE,
+  is_done INTEGER default 0 not null,
   PRIMARY KEY (id)
 );
 

@@ -4,6 +4,7 @@ import dawid.spring.comparator.TaskComparator;
 import dawid.spring.exceptions.DomainException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -38,6 +39,10 @@ public class Task implements Comparable<Task> {
     @Version
     @Column(name = "VERSION")
     private Long version;
+
+    @Column(name = "is_done")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean isDone;
 
     @ManyToMany
     @JoinTable(name="TASK_LABELS",
@@ -152,5 +157,9 @@ public class Task implements Comparable<Task> {
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }
