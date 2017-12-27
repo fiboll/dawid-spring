@@ -2,6 +2,7 @@ package dawid.spring.model;
 
 import dawid.spring.comparator.TaskComparator;
 import dawid.spring.exceptions.DomainException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
@@ -66,9 +67,6 @@ public class Task implements Comparable<Task> {
     }
 
     private void addLabel(Label label) {
-        if (labels == null) {
-            labels = new HashSet<>();
-        }
         labels.add(label);
     }
 
@@ -80,6 +78,10 @@ public class Task implements Comparable<Task> {
         desc = taskBuilder.desc;
         dueDate = taskBuilder.dueDate;
         isDone = taskBuilder.isDone;
+
+        if (CollectionUtils.isNotEmpty(labels)) {
+            labels.addAll(taskBuilder.labels);
+        }
     }
 
     public static class TaskBuilder {
@@ -88,6 +90,7 @@ public class Task implements Comparable<Task> {
         private String desc;
         private Date dueDate;
         private boolean isDone;
+        private HashSet<Label> labels;
 
         public Task build() {
             return new Task(this);
@@ -115,6 +118,11 @@ public class Task implements Comparable<Task> {
 
         public TaskBuilder isDone(boolean isDone) {
             this.isDone = isDone;
+            return this;
+        }
+
+        public TaskBuilder addLabel(Label label) {
+            this.labels.add(label);
             return this;
         }
     }

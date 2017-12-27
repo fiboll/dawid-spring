@@ -9,4 +9,6 @@ public interface IUserTable {
 
     public List<Task> getDoneTasks(User user);
 
+    public List<Task> getDoing(User user);
+
 }
