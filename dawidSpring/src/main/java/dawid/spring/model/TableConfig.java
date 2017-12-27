@@ -11,11 +11,11 @@ public class TableConfig {
     private int maxDoing = 1;
     private int maxNextDo = 3;
 
-    public void setMaxDoing(int maxDoing) {
-        this.maxDoing = maxDoing;
+    public int getMaxDoing() {
+        return maxDoing;
     }
 
-    public void setMaxNextDo(int maxNextDo) {
-        this.maxNextDo = maxNextDo;
+    public int getMaxNextDo() {
+        return maxNextDo;
     }
 }

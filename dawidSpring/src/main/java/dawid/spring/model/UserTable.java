@@ -30,7 +30,8 @@ public class UserTable implements IUserTable {
     public List<Task> getDoing(User user) {
         return user.getTasks().stream()
             .sorted()
-            .limit(1)
+            .filter(t -> !t.isDone())
+            .limit(tableConfig.getMaxDoing())
             .collect(Collectors.toList());
     }
 

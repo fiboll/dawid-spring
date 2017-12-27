@@ -66,7 +66,7 @@ public class Task implements Comparable<Task> {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 
-    private void addLabel(Label label) {
+    public void addLabel(Label label) {
         labels.add(label);
     }
 
