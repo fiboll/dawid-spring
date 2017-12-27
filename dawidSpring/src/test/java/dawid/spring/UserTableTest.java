@@ -42,6 +42,7 @@ public class UserTableTest {
         user.addTask(new Task.TaskBuilder().name("test2").isDone(false).build());
         user.addTask(new Task.TaskBuilder().name("test3").isDone(true).build());
         user.addTask(new Task.TaskBuilder().name("test4").isDone(true).build());
+
         Mockito.when(userDAO.findByNick(Mockito.anyString())).thenReturn(Optional.of(user));
     }
 
