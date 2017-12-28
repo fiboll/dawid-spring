@@ -35,5 +35,15 @@ public class UserTable implements IUserTable {
             .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Task> getNextToDo(User user) {
+        return user.getTasks().stream()
+                   .sorted()
+                   .filter(t -> !t.isDone())
+                   .skip(tableConfig.getMaxDoing())
+                   .limit(tableConfig.getMaxNextDo())
+                   .collect(Collectors.toList());
+    }
+
 
 }
