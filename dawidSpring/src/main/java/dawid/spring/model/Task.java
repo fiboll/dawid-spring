@@ -177,4 +177,8 @@ public class Task implements Comparable<Task> {
     public boolean isDone() {
         return isDone;
     }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 }

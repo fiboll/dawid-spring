@@ -3,7 +3,6 @@ package dawid.spring.manager;
 import dawid.spring.exceptions.DomainException;
 import dawid.spring.model.Label;
 import dawid.spring.model.Task;
-import dawid.spring.model.User;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import javax.transaction.Transactional;
  */
 @Component("tableManager")
 @Transactional
-public class TableManagerImpl implements TableManager{
+public class TableManagerImpl implements TableManager {
 
     private static final Logger logger = Logger.getLogger(TableManagerImpl.class);
 
@@ -26,8 +25,8 @@ public class TableManagerImpl implements TableManager{
     private TableOrderProcessor tableOrderProcessor;
 
     @Override
-    public void doneTask(User user, Task task) {
-        //TODO
+    public void doneTask(Task task) {
+        task.setDone(true);
     }
 
     @Override
