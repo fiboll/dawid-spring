@@ -1,4 +1,4 @@
-package dawid.spring.model;
+package dawid.spring.config;
 
 import org.springframework.stereotype.Component;
 

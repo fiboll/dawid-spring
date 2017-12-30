@@ -1,4 +1,7 @@
-package dawid.spring.model;
+package dawid.spring.manager;
+
+import dawid.spring.model.Task;
+import dawid.spring.model.User;
 
 import java.util.List;
 

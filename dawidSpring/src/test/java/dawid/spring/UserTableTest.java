@@ -1,8 +1,13 @@
 package dawid.spring;
 
+import dawid.spring.config.TableConfig;
+import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.manager.UserManagerImpl;
-import dawid.spring.model.*;
+import dawid.spring.manager.UserTable;
+import dawid.spring.model.Label;
+import dawid.spring.model.Task;
+import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
 import org.junit.Assert;
 import org.junit.Before;
