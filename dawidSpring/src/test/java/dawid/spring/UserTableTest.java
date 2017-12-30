@@ -92,4 +92,16 @@ public class UserTableTest {
         Assert.assertEquals(1, userTable.getDoing(user.get()).size());
         Assert.assertEquals("test1", userTable.getDoing(user.get()).get(0).getName());
     }
+
+    @Test
+    public void testGetNextToDo() {
+        Optional<User> user = userManager.findUserByNick("Dawid");
+        Assert.assertTrue(user.isPresent());
+
+        Assert.assertEquals(1, userTable.getNextToDo(user.get()).size());
+
+        Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
+
+
+    }
 }
