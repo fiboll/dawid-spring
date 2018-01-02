@@ -85,6 +85,22 @@ public class UserTableTest {
     }
 
     @Test
+    public void testIsDoneAfterDone() {
+        Optional<User> user = userManager.findUserByNick("Dawid");
+        Assert.assertTrue(user.isPresent());
+
+        Assert.assertEquals(2, userTable.getDoneTasks(user.get()).size());
+
+        user.get().getTasks().stream()
+            .filter(task -> !task.isDone())
+            .findFirst()
+            .ifPresent(Task::doneTask);
+
+        Assert.assertEquals(3, userTable.getDoneTasks(user.get()).size());
+
+    }
+
+    @Test
     public void testIsDoing() {
         Optional<User> user = userManager.findUserByNick("Dawid");
         Assert.assertTrue(user.isPresent());

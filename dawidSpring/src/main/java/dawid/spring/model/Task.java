@@ -127,6 +127,10 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    public void doneTask() {
+        setDone(true);
+    }
+
     public Long getId() {
         return id;
     }
