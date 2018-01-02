@@ -103,6 +103,24 @@ public class UserTableTest {
     }
 
     @Test
+    public void testIsDoingAfterAddTask() {
+        Optional<User> user = userManager.findUserByNick("Dawid");
+        Assert.assertTrue(user.isPresent());
+
+        Task task = new Task.TaskBuilder().name("addedTask").isDone(false).build();
+        Label b = new Label();
+        b.setDescription("a");
+        task.addLabel(b);
+
+        user.get().addTask(task);
+        user.get().addTask(task);
+
+        Assert.assertEquals(1, userTable.getDoing(user.get()).size());
+        Assert.assertEquals("addedTask", userTable.getDoing(user.get()).get(0).getName());
+
+    }
+
+    @Test
     public void testGetNextToDoAfterAddTask() {
         Optional<User> user = userManager.findUserByNick("Dawid");
         Assert.assertTrue(user.isPresent());
@@ -117,6 +135,5 @@ public class UserTableTest {
         Assert.assertEquals(2, userTable.getNextToDo(user.get()).size());
         Assert.assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
         Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(1).getName());
-
     }
 }

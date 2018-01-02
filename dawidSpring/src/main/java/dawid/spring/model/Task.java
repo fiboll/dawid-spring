@@ -140,6 +140,10 @@ public class Task implements Comparable<Task> {
     }
 
     public Date getDueDate() {
+        if (dueDate == null) {
+            return null;
+        }
+
         return (Date) dueDate.clone();
     }
 
