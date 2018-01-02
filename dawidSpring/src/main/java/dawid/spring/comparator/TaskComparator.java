@@ -15,6 +15,7 @@ public class TaskComparator implements Comparator<Task> {
     @Override
     public int compare(Task task, Task task2) {
         return Comparator.nullsLast(TaskComparator::compareLabelsList)
+                .thenComparing(Task::getDueDate)
                 .thenComparing(Task::getName)
                 .thenComparing(Task::getDesc)
                 .compare(task, task2);
