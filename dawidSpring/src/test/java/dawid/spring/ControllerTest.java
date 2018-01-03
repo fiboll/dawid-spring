@@ -1,6 +1,7 @@
 package dawid.spring;
 
 import dawid.spring.manager.UserManager;
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +52,7 @@ public class ControllerTest {
         mockMvc.perform(builder)
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.view().name("test"))
-               .andExpect(MockMvcResultMatchers.model().attributeExists("users"));
+               .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
+               .andExpect(MockMvcResultMatchers.model().attribute("users", IsCollectionWithSize.hasSize(2)) );
     }
 }

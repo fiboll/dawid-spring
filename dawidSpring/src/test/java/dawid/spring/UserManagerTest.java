@@ -26,7 +26,7 @@ public class UserManagerTest {
     public void testFindAll() {
         List<User> users =  userManager.getAllUsers();
         Assert.assertNotNull(users);
-        Assert.assertEquals(1, users.size());
+        Assert.assertEquals(2, users.size());
 
         users.forEach(
                 (User u) -> Assert.assertTrue(null != u.getId())

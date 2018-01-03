@@ -1,6 +1,7 @@
 --USERS
 DELETE FROM USERS;
 INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Dawid', 'fiboll', 'Strembicki',    0);
+INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (nextval('USER_SEQUENCE'),'Dawid2', 'fiboll2', 'Strembicki2', 0);
 
 --TASKS
 DELETE FROM TASKS;
