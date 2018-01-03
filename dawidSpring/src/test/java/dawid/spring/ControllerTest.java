@@ -1,7 +1,6 @@
 package dawid.spring;
 
 import dawid.spring.manager.UserManager;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.Arrays;
 
 /**
  * Created by dawid on 09.06.17.
@@ -49,12 +46,11 @@ public class ControllerTest {
 
     @Test
     public void simpleTest() throws Exception{
-
-        Arrays.stream(wac.getBeanDefinitionNames()).forEach(System.out::println);
-
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/");
-        mockMvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk());
-        Assert.assertTrue(true);
+        mockMvc.perform(builder)
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.view().name("test"))
+               .andExpect(MockMvcResultMatchers.model().attributeExists("users"));
     }
 }
