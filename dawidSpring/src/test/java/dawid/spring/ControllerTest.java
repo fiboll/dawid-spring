@@ -1,5 +1,6 @@
 package dawid.spring;
 
+import dawid.spring.manager.UserManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,34 +10,51 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import java.util.Arrays;
 
 /**
  * Created by dawid on 09.06.17.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:*/WEB-INF/applicationContext.xml")
+@ContextConfiguration
+(
+    {
+            "classpath:**/applicationContext.xml",
+            "classpath:**/context_test.xml"
+    }
+)
 public class ControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
 
+    @Autowired
+    UserManager userManager;
+
     private MockMvc mockMvc;
 
     @Before
     public void setup() {
-        DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(this.wac);
+        DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(wac);
         this.mockMvc = builder.build();
     }
 
     @Test
     public void simpleTest() throws Exception{
-//        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/");
-//        mockMvc.perform(builder).
-//                andExpect(MockMvcResultMatchers.status().isOk());
+
+        Arrays.stream(wac.getBeanDefinitionNames()).forEach(System.out::println);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .get("/");
+        mockMvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk());
         Assert.assertTrue(true);
     }
 }
