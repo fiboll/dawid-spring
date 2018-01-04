@@ -57,11 +57,20 @@ public class ControllerTest {
     }
 
     @Test
-    public void getUserNotExist() throws Exception{
+    public void getNotExistUser() throws Exception{
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/user?nick=nonexist");
         mockMvc.perform(builder)
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.view().name("noUser"));
+    }
+
+    @Test
+    public void getUser() throws Exception{
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .get("/user?nick=fiboll");
+        mockMvc.perform(builder)
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.view().name("userDetails"));
     }
 }
