@@ -46,7 +46,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void simpleTest() throws Exception{
+    public void getAllTest() throws Exception{
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/");
         mockMvc.perform(builder)
@@ -54,5 +54,14 @@ public class ControllerTest {
                .andExpect(MockMvcResultMatchers.view().name("test"))
                .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
                .andExpect(MockMvcResultMatchers.model().attribute("users", IsCollectionWithSize.hasSize(2)) );
+    }
+
+    @Test
+    public void getUserNotExist() throws Exception{
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .get("/user?nick=nonexist");
+        mockMvc.perform(builder)
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.view().name("noUser"));
     }
 }
