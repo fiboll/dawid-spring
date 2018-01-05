@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by dawid on 02.06.17.
@@ -13,36 +15,14 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(
                 name = "User.findAll",
-                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.table table"
-                        + " LEFT JOIN FETCH table.backlog backlog"
-                            +  " LEFT JOIN FETCH backlog.tasks backlogTasks"
-                            +  " LEFT JOIN FETCH backlogTasks.labels backlogTasksLabels"
-                        + " LEFT JOIN FETCH table.nextTodo nextTodo"
-                            +  " LEFT JOIN FETCH nextTodo.tasks nextTodoTasks"
-                            +  " LEFT JOIN FETCH nextTodoTasks.labels nextTodoTasksLabels"
-                        + " LEFT JOIN FETCH table.doing doing"
-                            +  " LEFT JOIN FETCH doing.tasks doingTasks"
-                            +  " LEFT JOIN FETCH doingTasks.labels doingTasksLabels"
-                        + " LEFT JOIN FETCH table.done done"
-                            +  " LEFT JOIN FETCH done.tasks doneTasks"
-                            +  " LEFT JOIN FETCH doneTasks.labels doneTasksLabels"
+                query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks tasks"
+                        + " LEFT JOIN FETCH tasks.labels"
         ),
         @NamedQuery(
                 name = "User.findByNick",
-                query  = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.table table"
-                        + " LEFT JOIN FETCH table.backlog backlog"
-                            +  " LEFT JOIN FETCH backlog.tasks backlogTasks"
-                            +  " LEFT JOIN FETCH backlogTasks.labels backlogTasksLabels"
-                        + " LEFT JOIN FETCH table.nextTodo nextTodo"
-                            +  " LEFT JOIN FETCH nextTodo.tasks nextTodoTasks"
-                            +  " LEFT JOIN FETCH nextTodoTasks.labels nextTodoTasksLabels"
-                        + " LEFT JOIN FETCH table.doing doing"
-                            +  " LEFT JOIN FETCH doing.tasks doingTasks"
-                            +  " LEFT JOIN FETCH doingTasks.labels doingTasksLabels"
-                        + " LEFT JOIN FETCH table.done done"
-                            +  " LEFT JOIN FETCH done.tasks doneTasks"
-                            +  " LEFT JOIN FETCH doneTasks.labels doneTasksLabels"
-                        + " WHERE u.nickname = :nick"
+                query  = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks tasks"
+                            + " LEFT JOIN FETCH tasks.labels"
+                            + " WHERE u.nickname = :nick"
         )
 })
 @Table(name = "users")
@@ -62,8 +42,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @OneToOne()
-    private TaskTable table;
+    @OneToMany(mappedBy="user")
+    private Set<Task> tasks;
 
     @Version
     @Column(name = "VERSION")
@@ -77,10 +57,12 @@ public class User {
         firstName = builder.firstName;
         secondName = builder.secondName;
         nickname = builder.nickname;
+        tasks = new HashSet<>();
     }
 
     public void addTask(Task task) {
-        table.addTaskToBacklog(task);
+        tasks.add(task);
+        task.setUser(this);
     }
 
     @Override
@@ -136,8 +118,7 @@ public class User {
         return id;
     }
 
-    public TaskTable getTable() {
-        return table;
+    public Set<Task> getTasks() {
+        return tasks;
     }
-
 }

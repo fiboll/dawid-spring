@@ -2,8 +2,10 @@ package dawid.spring.model;
 
 import dawid.spring.comparator.TaskComparator;
 import dawid.spring.exceptions.DomainException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,12 +36,15 @@ public class Task implements Comparable<Task> {
     private Date dueDate;
 
     @ManyToOne
-    @JoinColumn(name="table_column")
-    private TableColumn column;
+    private User user;
 
     @Version
     @Column(name = "VERSION")
     private Long version;
+
+    @Column(name = "is_done")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean isDone;
 
     @ManyToMany
     @JoinTable(name="TASK_LABELS",
@@ -59,13 +64,10 @@ public class Task implements Comparable<Task> {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 
-    private void addLabel(Label label) {
-        if (labels == null) {
-            labels = new HashSet<>();
-        }
+    public void addLabel(Label label) {
         labels.add(label);
     }
 
@@ -76,6 +78,11 @@ public class Task implements Comparable<Task> {
         name = taskBuilder.name;
         desc = taskBuilder.desc;
         dueDate = taskBuilder.dueDate;
+        isDone = taskBuilder.isDone;
+
+        if (CollectionUtils.isNotEmpty(labels)) {
+            labels.addAll(taskBuilder.labels);
+        }
     }
 
     public static class TaskBuilder {
@@ -83,6 +90,8 @@ public class Task implements Comparable<Task> {
         private String name;
         private String desc;
         private Date dueDate;
+        private boolean isDone;
+        private HashSet<Label> labels;
 
         public Task build() {
             return new Task(this);
@@ -107,6 +116,20 @@ public class Task implements Comparable<Task> {
             this.dueDate = dueDate;
             return this;
         }
+
+        public TaskBuilder isDone(boolean isDone) {
+            this.isDone = isDone;
+            return this;
+        }
+
+        public TaskBuilder addLabel(Label label) {
+            this.labels.add(label);
+            return this;
+        }
+    }
+
+    public void doneTask() {
+        setDone(true);
     }
 
     public Long getId() {
@@ -122,18 +145,18 @@ public class Task implements Comparable<Task> {
     }
 
     public Date getDueDate() {
+        if (dueDate == null) {
+            return null;
+        }
+
         return (Date) dueDate.clone();
     }
 
-    public TableColumn getTaskColumn() {
-        return column;
-    }
-
-    public void setTableColumn(TableColumn tableColumn) {
-        if (!tableColumn.getTasks().contains(this)) {
+    public void setUser(User user) {
+        if (!user.getTasks().contains(this)) {
            throw new DomainException("Table columns don't contain assigned task!");
         }
-        this.column = tableColumn;
+        this.user = user;
     }
 
     public Set<Label> getLabels() {
@@ -152,15 +175,19 @@ public class Task implements Comparable<Task> {
         this.dueDate = dueDate;
     }
 
-    public TableColumn getColumn() {
-        return column;
-    }
-
-    public void setColumn(TableColumn column) {
-        this.column = column;
-    }
-
     public void setLabels(Set<Label> labels) {
         this.labels = labels;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }
