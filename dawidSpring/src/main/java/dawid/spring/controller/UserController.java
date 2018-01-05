@@ -44,7 +44,7 @@ public class UserController {
         if (user.isPresent()) {
             model.addAttribute("user", user.get()) ;
             model.addAttribute("newTask", new Task());
-            return "user";
+            return "userDetails";
         }
         model.addAttribute("searchNick",nick) ;
         return "noUser";
@@ -55,8 +55,6 @@ public class UserController {
     public String addTaskToUser(@ModelAttribute(value="task") Task task,
                                 @RequestParam String userNick,
                                 Model model) {
-
-        logger.info(String.format("Add task %s to user %s", task, userNick));
 
         if (StringUtils.isEmpty(userNick)) {
             return "redirect:noUser";
@@ -112,6 +110,6 @@ public class UserController {
 //        }
 
 
-        return "redirect:user";
+        return "redirect:userDetails";
     }
 }
