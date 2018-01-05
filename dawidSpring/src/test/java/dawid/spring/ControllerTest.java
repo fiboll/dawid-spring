@@ -108,4 +108,15 @@ public class ControllerTest {
                .andExpect(MockMvcResultMatchers.model().attribute("nick", "fiboll"))
                .andExpect(MockMvcResultMatchers.view().name("redirect:user"));
     }
+
+    @Test
+    public void addTaskUserNoNick() throws Exception {
+
+        RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
+                                                       .param("name", "test")
+                                                       .param("desc", "testDesc");
+        mockMvc.perform(builder)
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.view().name("redirect:noUser"));
+    }
 }

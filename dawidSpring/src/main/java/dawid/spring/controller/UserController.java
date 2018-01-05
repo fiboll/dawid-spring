@@ -53,7 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/addTask",method = RequestMethod.POST)
     public String addTaskToUser(@ModelAttribute(value="task") Task task,
-                                @RequestParam String userNick,
+                                @RequestParam(required = false) String userNick,
                                 Model model) {
 
         if (StringUtils.isEmpty(userNick)) {
