@@ -28,15 +28,16 @@
 
         <div class = "container">
             <div class="">
-                <h1 th:text="${user.table.title}" />
+                <h1 th:text="Title" />
             </div>
+            <!--
             <div class="row">
                    <div th:class="col-md-3" th:include="column :: column(${user.table.backlog})"></div>
                    <div th:class="col-md-3" th:include="column :: column(${user.table.nextTodo})"></div>
                    <div th:class="col-md-3" th:include="column :: column(${user.table.doing})"></div>
                    <div th:class="col-md-3" th:include="column :: column(${user.table.done})"></div>
             </div>
-
+            -->
             <div class="row">
                 <div class="col-md-3">
                     <form action="#" th:action="@{/addTask}" th:object="${newTask}" method="post">

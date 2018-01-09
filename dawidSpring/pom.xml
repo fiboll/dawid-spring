@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dawid.spring</groupId>
     <artifactId>dawidSpring</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>dawidSpring</name>
     <url>http://maven.apache.org</url>
@@ -154,6 +154,12 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.2.2.v20140723</version>
+                <configuration>
+                    <httpConnector>
+                        <!--host>localhost</host-->
+                        <port>8282</port>
+                    </httpConnector>
+                </configuration>
             </plugin>
         </plugins>
 

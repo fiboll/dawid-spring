@@ -67,7 +67,7 @@ public class UserController {
 
             model.addAttribute("nick", user.get().getNickname()) ;
             model.addAttribute("newTask", new Task());
-            return "redirect:user";
+            return "redirect:userDetails";
         }
 
 
@@ -89,6 +89,7 @@ public class UserController {
     public String editTask(@ModelAttribute(value="task") Task task,
                                 Model model) {
 
+        System.out.println("task" + task);
        taskDao.update(task);
        model.addAttribute("updatedTask", task);
        return "redirect:userDetails";
