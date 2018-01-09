@@ -44,7 +44,6 @@ public class UserManagerTest {
         Assert.assertEquals(user.get().getFirstName(), "Dawid");
         Assert.assertEquals(user.get().getSecondName(), "Strembicki");
         Assert.assertEquals(user.get().getNickname(), "fiboll");
-        Assert.assertEquals(user.get().getTable().getTitle(), "dawid table");
     }
 
     @Test
@@ -64,7 +63,6 @@ public class UserManagerTest {
         foundedUser = userManager.findUserByNick("fiboll");
         Assert.assertNotNull(foundedUser);
 
-        Assert.assertTrue(foundedUser.get().getTable().getBacklog().getTasks().contains(task));
     }
 
 
