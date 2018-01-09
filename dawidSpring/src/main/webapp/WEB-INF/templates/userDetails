@@ -30,6 +30,11 @@
             <div class="">
                 <h1 th:text="Title" />
             </div>
+            <div class="row">
+                <div th:class="col-md-3" th:include="column :: column(${nextToDo}, 'next')"></div>
+                <div th:class="col-md-3" th:include="column :: column(${doing}, 'doing')"></div>
+                <div th:class="col-md-3" th:include="column :: column(${done}, 'done')"></div>
+            </div>
             <!--
             <div class="row">
                    <div th:class="col-md-3" th:include="column :: column(${user.table.backlog})"></div>

@@ -1,5 +1,6 @@
 package dawid.spring.controller;
 
+import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
@@ -30,6 +31,9 @@ public class UserController {
     @Autowired
     private TaskDao taskDao;
 
+    @Autowired
+    IUserTable userTable;
+
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getAll(Model model) {
         model.addAttribute("users", userManager.getAllUsers());
@@ -43,6 +47,10 @@ public class UserController {
 
         if (user.isPresent()) {
             model.addAttribute("user", user.get()) ;
+            model.addAttribute("doing",  userTable.getDoing(user.get())) ;
+            model.addAttribute("nextToDo",  userTable.getNextToDo(user.get())) ;
+            model.addAttribute("done",  userTable.getDoneTasks(user.get())) ;
+
             model.addAttribute("newTask", new Task());
             return "userDetails";
         }

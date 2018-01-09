@@ -6,14 +6,14 @@
     </footer>
 </div>
 
-<div th:fragment="column(col)">
-	<h4 th:text="${col.title}" />
-	<table th:if="${not #lists.isEmpty(col.tasks)}" border="1">
+<div th:fragment="column(tasks, title)">
+	<h4 th:text="${title}" />
+	<table th:if="${not #lists.isEmpty(tasks)}" border="1">
 	     <tr>
 	        <th>name</th>
 	        <th>edit</th>
 	    </tr>
-	    <tr th:each="task : ${#lists.sort(col.tasks)}">
+	    <tr th:each="task : ${#lists.sort(tasks)}">
 	        <td>
 	           <div data-toggle="tooltip" data-placement="left" th:attr="title=${task.desc}">
 	                <span th:text="${task.name}" />
