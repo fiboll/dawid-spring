@@ -94,4 +94,45 @@ public class ControllerTest {
                .andDo(MockMvcResultHandlers.print())
                .andExpect(MockMvcResultMatchers.view().name("redirect:noUser"));
     }
+
+    @Test
+    public void addTaskUser() throws Exception {
+
+        RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
+                                                       .param("name", "test")
+                                                       .param("desc", "testDesc")
+                                                       .param("userNick", "fiboll");
+        mockMvc.perform(builder)
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
+               .andExpect(MockMvcResultMatchers.model().attribute("nick", "fiboll"))
+               .andExpect(MockMvcResultMatchers.view().name("redirect:user"));
+    }
+
+    @Test
+    public void addTaskUserNoNick() throws Exception {
+
+        RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
+                                                       .param("name", "test")
+                                                       .param("desc", "testDesc");
+        mockMvc.perform(builder)
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.view().name("redirect:noUser"));
+    }
+
+    @Test
+    public void testGetEditTaskNotExist() throws Exception {
+
+        RequestBuilder builder = MockMvcRequestBuilders.get("/editTask")
+                                    .param("taskId", String.valueOf(100L))
+                                    .param("userNick", "fiboll");
+
+        mockMvc.perform(builder)
+               .andDo(MockMvcResultHandlers.print())
+               .andExpect(MockMvcResultMatchers.view().name("editForm"))
+               .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
+               .andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("task"));
+
+
+    }
 }

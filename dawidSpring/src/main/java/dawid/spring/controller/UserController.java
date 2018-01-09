@@ -44,7 +44,7 @@ public class UserController {
         if (user.isPresent()) {
             model.addAttribute("user", user.get()) ;
             model.addAttribute("newTask", new Task());
-            return "user";
+            return "userDetails";
         }
         model.addAttribute("searchNick",nick) ;
         return "noUser";
@@ -53,10 +53,8 @@ public class UserController {
 
     @RequestMapping(value = "/addTask",method = RequestMethod.POST)
     public String addTaskToUser(@ModelAttribute(value="task") Task task,
-                                @RequestParam String userNick,
+                                @RequestParam(required = false) String userNick,
                                 Model model) {
-
-        logger.info(String.format("Add task %s to user %s", task, userNick));
 
         if (StringUtils.isEmpty(userNick)) {
             return "redirect:noUser";
@@ -78,16 +76,15 @@ public class UserController {
 
 
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
-    public Task updateTask(@ModelAttribute(value="taskId") Long taskId,
-                             @RequestParam String userNick,
-                             Model model) {
-        System.out.println("edit tastk");
-        Task task = taskDao.getTaskById(taskId).get();
-        model.addAttribute("nick", userNick) ;
-        model.addAttribute("newTask", new Task());
+    public String updateTask(@RequestParam(value="taskId") Long taskId,
+                    @RequestParam String userNick,
+                    Model model) {
+        Task task = taskDao.getTaskById(taskId).orElse(null);
+        model.addAttribute("nick", userNick);
+        model.addAttribute("task", task);
 //        mav.addObject("updateJob", updateJob);
 //        return mav;
-        return task;
+        return "editForm";
     }
 
     @RequestMapping(value = "/editTask",method = RequestMethod.POST)
@@ -112,6 +109,6 @@ public class UserController {
 //        }
 
 
-        return "redirect:user";
+        return "redirect:userDetails";
     }
 }
