@@ -82,33 +82,15 @@ public class UserController {
         Task task = taskDao.getTaskById(taskId).orElse(null);
         model.addAttribute("nick", userNick);
         model.addAttribute("task", task);
-//        mav.addObject("updateJob", updateJob);
-//        return mav;
         return "editForm";
     }
 
     @RequestMapping(value = "/editTask",method = RequestMethod.POST)
     public String editTask(@ModelAttribute(value="task") Task task,
-                                @RequestParam String userNick,
                                 Model model) {
 
-          logger.info(String.format("Edit task %s for user %s", task, userNick));
-//
-//        if (StringUtils.isEmpty(userNick)) {
-//            return "redirect:noUser";
-//        }
-//
-//        Optional<User> user= userManager.findUserByNick(userNick);
-//
-//        if (user.isPresent()) {
-//            userManager.addTaskToUSer(user.get(), task);
-//
-              model.addAttribute("nick", userNick) ;
-              model.addAttribute("newTask", new Task());
-//            return "redirect:user";
-//        }
-
-
-        return "redirect:userDetails";
+       taskDao.update(task);
+       model.addAttribute("updatedTask", task);
+       return "redirect:userDetails";
     }
 }

@@ -13,4 +13,6 @@ public interface TaskDao {
     public Optional<Task> getTaskById(Long id);
 
     public void addTask(Task user);
+
+    public Task update(Task task);
 }

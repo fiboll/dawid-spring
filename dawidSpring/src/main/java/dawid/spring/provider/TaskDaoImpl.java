@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 @Repository("taskDAO")
 @Transactional
-public class TaskDaoImpl implements TaskDao{
+public class TaskDaoImpl implements TaskDao {
 
     @PersistenceContext
     private EntityManager em;
@@ -32,8 +32,14 @@ public class TaskDaoImpl implements TaskDao{
         }
     }
 
+    @Override
     public void addTask(Task task) {
         em.persist(task);
+    }
+
+    @Override
+    public Task update(Task task) {
+        return em.merge(task);
     }
 
 }
