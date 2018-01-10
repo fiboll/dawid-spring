@@ -48,5 +48,14 @@ public class UserTable implements IUserTable {
                    .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Task> getBacklogTask(User user) {
+        int itemsToSkip = tableConfig.getMaxDoing() + tableConfig.getMaxNextDo();
 
+        return user.getTasks().stream()
+                   .sorted()
+                   .filter(t -> !t.isDone())
+                   .skip(itemsToSkip)
+                   .collect(Collectors.toList());
+    }
 }

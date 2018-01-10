@@ -15,4 +15,6 @@ public interface IUserTable {
     public List<Task> getDoing(User user);
 
     public List<Task> getNextToDo(User user);
+
+    public List<Task> getBacklogTask(User user);
 }
