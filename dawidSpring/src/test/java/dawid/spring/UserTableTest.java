@@ -160,4 +160,13 @@ public class UserTableTest {
         Assert.assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
         Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(1).getName());
     }
+
+    @Test
+    public void testGetBacklogTask() {
+        Optional<User> user = userManager.findUserByNick("Dawid");
+        Assert.assertTrue(user.isPresent());
+
+        Assert.assertEquals(2, userTable.getBacklogTask(user.get()).size());
+    }
+
 }
