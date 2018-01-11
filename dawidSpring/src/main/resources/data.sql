@@ -17,8 +17,8 @@ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('T
     'Test Task 5', 'Test Task Description 5', '2008-11-11', 0);
  INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
     'Test Task 6', 'Test Task Description 6', '2008-11-11', 0);
-    INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
-    'Test Task 7', 'Test Task Description 7', '2008-11-11', 0);
+ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, is_done, version) VALUES (nextval('TASKS_SEQUENCE'), (select id from USERS where nickname = 'fiboll'),
+    'Test Task 7', 'Test Task Description 7', '2008-11-11', 1, 0);
 
 --LABELS
 DELETE FROM LABELS;

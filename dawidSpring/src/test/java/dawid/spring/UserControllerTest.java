@@ -88,6 +88,10 @@ public class UserControllerTest {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.model().attributeExists("user"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("backlog"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("doing"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("nextToDo"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("done"))
                 .andExpect(MockMvcResultMatchers.view().name("userDetails"));
     }
 
