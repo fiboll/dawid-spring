@@ -46,8 +46,9 @@ public class UserController {
         Optional<User> user= userManager.findUserByNick(nick);
 
         if (user.isPresent()) {
-            model.addAttribute("user", user.get()) ;
-            model.addAttribute("doing",  userTable.getDoing(user.get())) ;
+            model.addAttribute("user", user.get());
+            model.addAttribute("backlog",  userTable.getBacklogTask(user.get()));
+            model.addAttribute("doing",  userTable.getDoing(user.get()));
             model.addAttribute("nextToDo",  userTable.getNextToDo(user.get())) ;
             model.addAttribute("done",  userTable.getDoneTasks(user.get())) ;
 
