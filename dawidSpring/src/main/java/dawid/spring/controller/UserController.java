@@ -97,9 +97,9 @@ public class UserController {
     public String editTask(@ModelAttribute(value="task") Task task,
                                 Model model) {
 
-        System.out.println("task" + task);
-       taskDao.update(task);
-       model.addAttribute("updatedTask", task);
+       System.out.println("task" + task);
+       //taskDao.update(task);
+       //model.addAttribute("updatedTask", task);
        return "redirect:userDetails";
     }
 }

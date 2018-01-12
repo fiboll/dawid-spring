@@ -8,8 +8,18 @@
             <td><label th:text="description" /></td>
             <td><input type="text" th:field="*{desc}" /></td>
         </tr>
+         <tr>
+            <td><label th:text="zrobione" /></td>
+            <td><input type="text" th:field="*{done}" /></td>
+        </tr>
+        <tr>
+            <td><label  id="date-started" th:text="data" /></td>
+            <td> <input type="date" th:field="*{dueDate}" id="date-started"/></td>
+        </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>
         </tr>
     </table>
 </form>
+
+
