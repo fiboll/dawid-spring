@@ -10,7 +10,14 @@
         </tr>
          <tr>
             <td><label th:text="zrobione" /></td>
-            <td><input type="text" th:field="*{done}" /></td>
+            <td>               <select th:field="*{done}">
+                                        <option value="false">do zrobienia</option>
+                                        <option value="true">zrobiony</option>
+                                    </select>
+
+                </select>
+            </td>
+
         </tr>
         <tr>
             <td><label  id="date-started" th:text="data" /></td>
