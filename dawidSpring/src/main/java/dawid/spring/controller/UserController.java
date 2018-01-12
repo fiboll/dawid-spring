@@ -86,10 +86,9 @@ public class UserController {
 
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value="taskId") Long taskId,
-                    @RequestParam String userNick,
                     Model model) {
         Task task = taskDao.getTaskById(taskId).orElse(null);
-        model.addAttribute("nick", userNick);
+        System.out.println(task);
         model.addAttribute("task", task);
         return "editForm";
     }

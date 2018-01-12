@@ -1,0 +1,15 @@
+ <form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
+    <table border="1">
+        <tr>
+            <td><label th:text="name" /></td>
+            <td><input type="text" th:field="*{name}" th:value="${task.name}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="description" /></td>
+            <td><input type="text" th:field="*{desc}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form>

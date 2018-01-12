@@ -66,6 +66,7 @@ public class UserControllerTest {
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
                 .get("/");
         mockMvc.perform(builder)
+                .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("test"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("users"))
@@ -145,7 +146,7 @@ public class UserControllerTest {
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.view().name("editForm"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
+//                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
                 .andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("task"));
 
 
