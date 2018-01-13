@@ -110,9 +110,7 @@ public class UserController {
         updated.setDesc(task.getDesc());
         updated.setName(task.getName());
 
-        System.out.println("task updated" + task);
         taskDao.update(updated);
-       //model.addAttribute("updatedTask", task);
        return "redirect:user?nick=" + updated.getUser().getNickname();
     }
 }
