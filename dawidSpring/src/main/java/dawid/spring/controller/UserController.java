@@ -4,13 +4,11 @@ import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
-import dawid.spring.provider.TaskDao;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,9 +26,6 @@ public class UserController {
 
     @Autowired
     private UserManager userManager;
-
-    @Autowired
-    private TaskDao taskDao;
 
     @Autowired
     IUserTable userTable;
@@ -82,35 +77,5 @@ public class UserController {
 
 
         return "redirect:noUser";
-    }
-
-
-    @RequestMapping(value = "/editTask", method = RequestMethod.GET)
-    public String updateTask(@RequestParam(value="taskId") Long taskId,
-                    Model model) {
-        Task task = taskDao.getTaskById(taskId).orElse(null);
-        model.addAttribute("task", task);
-        return "editForm";
-    }
-
-    @RequestMapping(value = "/editTask",method = RequestMethod.POST)
-    public String editTask(@ModelAttribute(value="task") Task task,
-                           final BindingResult bindingResult,
-                                Model model) {
-
-        if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().stream().forEach(System.out::println);
-            return null;
-        }
-
-        Task updated = taskDao.getTaskById(task.getId()).get();
-
-        updated.setDone(task.isDone());
-        updated.setDueDate(task.getDueDate());
-        updated.setDesc(task.getDesc());
-        updated.setName(task.getName());
-
-        taskDao.update(updated);
-       return "redirect:user?nick=" + updated.getUser().getNickname();
     }
 }

@@ -1,6 +1,5 @@
-package dawid.spring;
+package dawid.spring.dao;
 
-import dawid.spring.manager.UserManager;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
@@ -14,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Optional;
 
 /**

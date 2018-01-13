@@ -1,4 +1,4 @@
-package dawid.spring;
+package dawid.spring.dao;
 
 import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
