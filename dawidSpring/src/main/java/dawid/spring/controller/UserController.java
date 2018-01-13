@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -88,18 +89,30 @@ public class UserController {
     public String updateTask(@RequestParam(value="taskId") Long taskId,
                     Model model) {
         Task task = taskDao.getTaskById(taskId).orElse(null);
-        System.out.println(task);
         model.addAttribute("task", task);
         return "editForm";
     }
 
     @RequestMapping(value = "/editTask",method = RequestMethod.POST)
     public String editTask(@ModelAttribute(value="task") Task task,
+                           final BindingResult bindingResult,
                                 Model model) {
 
-       System.out.println("task" + task);
-       //taskDao.update(task);
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().stream().forEach(System.out::println);
+            return null;
+        }
+
+        Task updated = taskDao.getTaskById(task.getId()).get();
+
+        updated.setDone(task.isDone());
+        updated.setDueDate(task.getDueDate());
+        updated.setDesc(task.getDesc());
+        updated.setName(task.getName());
+
+        System.out.println("task updated" + task);
+        taskDao.update(updated);
        //model.addAttribute("updatedTask", task);
-       return "redirect:userDetails";
+       return "redirect:user?nick=" + updated.getUser().getNickname();
     }
 }

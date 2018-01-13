@@ -192,4 +192,8 @@ public class Task implements Comparable<Task> {
     public void setDone(boolean done) {
         isDone = done;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

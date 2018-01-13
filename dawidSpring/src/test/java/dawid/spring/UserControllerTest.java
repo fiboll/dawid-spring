@@ -160,16 +160,12 @@ public class UserControllerTest {
         Optional<Task> task = userTable.getNextToDo(user.get()).stream().findAny();
         Assert.assertTrue(task.isPresent());
 
-
-        task.get().setDesc("edit test task");
-
-        System.out.println(task.get());
+        System.out.println("original task: " + task.get());
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/editTask")
                 .param("id", String.valueOf(task.get().getId()))
-                .param("name", task.get().getName())
-                .param("desc", task.get().getDesc())
-                .param("desc", task.get().getDesc());
+                .param("desc", "edit test task");
+                //.param("dueDate", task.get().getDueDate().toString());
 
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print());
