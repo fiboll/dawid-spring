@@ -43,5 +43,13 @@ public class TaskController {
         taskDao.update(updated);
         return "redirect:user?nick=" + updated.getUser().getNickname();
     }
+
+    @RequestMapping(value = "/deleteTask", method = RequestMethod.DELETE)
+    public String deleteTask(@RequestParam(value="taskId") Long taskId,
+                           Model model) {
+        Task task = taskDao.getTaskById(taskId).get();
+        taskDao.removeTask(task);
+        return "redirect:user?nick=" + task.getUser().getNickname();
+    }
 }
 

@@ -42,7 +42,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @OneToMany(mappedBy="user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
     private Set<Task> tasks;
 
     @Version
