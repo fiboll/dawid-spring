@@ -37,7 +37,7 @@ public class Task implements Comparable<Task> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
     @Version

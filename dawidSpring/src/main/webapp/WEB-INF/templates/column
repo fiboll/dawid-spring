@@ -12,6 +12,7 @@
 	     <tr>
 	        <th>name</th>
 	        <th>edit</th>
+	        <th>remove</th>
 	    </tr>
 	    <tr th:each="task : ${#lists.sort(tasks)}">
 	        <td>
@@ -25,6 +26,11 @@
                 <p class="text-center">
                     <a th:href="@{'/editTask?taskId=' + ${task.id}}" class="btn btn-primary btn">edit</a>
                 </p>
+                 <td>
+                    <p class="text-center">
+                        <a th:href="@{'/deleteTask?taskId=' + ${task.id}}" data-method="delete" class="btn btn-primary btn">delete</a>
+                    </p>
+                </td>
             </td>
 
 	    </tr>

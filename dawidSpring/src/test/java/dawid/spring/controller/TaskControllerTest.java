@@ -38,7 +38,6 @@ import java.util.Optional;
                         "classpath:**/context_test.xml"
                 }
         )
-@Transactional
 @Rollback
 public class TaskControllerTest {
 
@@ -144,15 +143,13 @@ public class TaskControllerTest {
 
         System.out.println("deletedId " + deletedId);
 
-        RequestBuilder builder = MockMvcRequestBuilders.delete("/deleteTask")
+        RequestBuilder builder = MockMvcRequestBuilders.get("/deleteTask")
                 .param("taskId", String.valueOf(task.get().getId()));
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.view().name("redirect:user?nick=fiboll"));
 
-
-       // user = userManager.findUserByNick("fiboll");
-
+        user = userManager.findUserByNick("fiboll");
         Optional<Task> notExistTask= user.get().getTasks().stream()
                 .filter((t) -> t.getId() == deletedId)
                 .findAny();
@@ -160,9 +157,10 @@ public class TaskControllerTest {
         System.out.println(notExistTask);
 
         Assert.assertTrue(!notExistTask.isPresent());
-
         notExistTask = taskDao.getTaskById(deletedId);
 
+
+        System.out.println(notExistTask);
         Assert.assertTrue(!notExistTask.isPresent());
 
     }
