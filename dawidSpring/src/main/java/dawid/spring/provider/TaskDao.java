@@ -15,4 +15,7 @@ public interface TaskDao {
     public void addTask(Task user);
 
     public Task update(Task task);
+
+    public void removeTask(Task task);
+
 }

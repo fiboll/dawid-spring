@@ -42,4 +42,8 @@ public class TaskDaoImpl implements TaskDao {
         return em.merge(task);
     }
 
+    @Override
+    public void removeTask(Task task) {
+        em.remove(task);
+    }
 }
