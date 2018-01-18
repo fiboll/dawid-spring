@@ -19,7 +19,7 @@ import java.util.Set;
 @Entity
 @NamedQuery(
         name = "Task.findById",
-        query  = "SELECT DISTINCT t FROM Task t LEFT JOIN FETCH t.labels l"
+        query  = "SELECT DISTINCT t FROM Task t FETCH ALL PROPERTIES"
                 + " WHERE t.id = :id"
 )
 @Table(name = "tasks")
@@ -37,7 +37,7 @@ public class Task implements Comparable<Task> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Version

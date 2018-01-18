@@ -22,6 +22,8 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Optional<Task> getTaskById(Long id) {
+
+        em.find(Task.class, id);
         try {
             Task result = (Task) em.createNamedQuery("Task.findById")
                     .setParameter("id", id)
@@ -44,12 +46,12 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public void removeTask(Task task) {
-        //task.getUser().getTasks().remove(task);
+        task.getUser().getTasks().remove(task);
         if(!em.contains(task)) {
             task = em.merge(task);
         }
-
         task.getUser().getTasks().remove(task);
         em.remove(task);
+        em.flush();
     }
 }

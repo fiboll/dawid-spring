@@ -149,7 +149,11 @@ public class TaskControllerTest {
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.view().name("redirect:user?nick=fiboll"));
 
-        user = userManager.findUserByNick("fiboll");
+        //user = userManager.findUserByNick("fiboll");
+        task.get().getLabels();
+        System.out.println("deleteTask");
+        taskDao.removeTask(task.get());
+
         Optional<Task> notExistTask= user.get().getTasks().stream()
                 .filter((t) -> t.getId() == deletedId)
                 .findAny();
