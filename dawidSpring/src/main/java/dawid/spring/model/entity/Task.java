@@ -37,7 +37,7 @@ public class Task implements Comparable<Task> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Version
@@ -48,7 +48,7 @@ public class Task implements Comparable<Task> {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean isDone;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")

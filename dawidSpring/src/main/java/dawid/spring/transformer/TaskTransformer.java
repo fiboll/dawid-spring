@@ -9,18 +9,37 @@ import org.springframework.stereotype.Component;
 public class TaskTransformer implements ITaskTransformer {
 
     public TaskDTO entityToDao(Task task) {
-        TaskDTO taskDao = new TaskDTO();
+        TaskDTO taskDTO = new TaskDTO();
 
-        taskDao.setDesc(task.getDesc());
-        taskDao.setDone(task.isDone());
-        taskDao.setDueDate(task.getDueDate());
-        taskDao.setName(task.getName());
-        taskDao.setUserName(task.getUser().getNickname());
-        taskDao.setVersion(task.getVersion());
-        taskDao.setLabels(task.getLabels());
-        taskDao.setId(taskDao.getId());
+        if (task == null) {
+            return null;
+        }
 
-        return taskDao;
+        taskDTO.setDesc(task.getDesc());
+        taskDTO.setDone(task.isDone());
+        taskDTO.setDueDate(task.getDueDate());
+        taskDTO.setName(task.getName());
+        taskDTO.setUserName(task.getUser().getNickname());
+        taskDTO.setVersion(task.getVersion());
+        taskDTO.setLabels(task.getLabels());
+        taskDTO.setId(task.getId());
+
+        return taskDTO;
+    }
+
+    @Override
+    public Task updateTask(Task task, TaskDTO dto) {
+
+        dto.setDesc(task.getDesc());
+        dto.setDone(task.isDone());
+        dto.setDueDate(task.getDueDate());
+        dto.setName(task.getName());
+        dto.setUserName(task.getUser().getNickname());
+        dto.setVersion(task.getVersion());
+        dto.setLabels(task.getLabels());
+        dto.setId(task.getId());
+
+        return task;
     }
 
 }

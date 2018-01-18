@@ -7,4 +7,6 @@ public interface ITaskTransformer {
 
     public TaskDTO entityToDao(Task task);
 
+    public Task updateTask(Task task, TaskDTO dto);
+
 }

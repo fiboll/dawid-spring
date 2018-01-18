@@ -36,7 +36,6 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public void removeTask(Task task) {
-        task.getUser().getTasks().remove(task);
         if(!em.contains(task)) {
             task = em.merge(task);
         }

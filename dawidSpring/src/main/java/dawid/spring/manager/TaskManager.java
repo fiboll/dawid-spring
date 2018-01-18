@@ -20,4 +20,20 @@ public class TaskManager {
         return taskTransformer.entityToDao(taskDao.getTaskById(TaskId));
     }
 
+    public void updateTask(TaskDTO taskDTO) {
+
+        Task updated = taskDao.getTaskById(taskDTO.getId());
+        updated.setDone(taskDTO.isDone());
+        updated.setDueDate(taskDTO.getDueDate());
+        updated.setDesc(taskDTO.getDesc());
+        updated.setName(taskDTO.getName());
+
+        taskDao.update(updated);
+    }
+
+    public void deleteTask(Long id) {
+        Task deleted = taskDao.getTaskById(id);
+        taskDao.removeTask(deleted);
+    }
+
 }

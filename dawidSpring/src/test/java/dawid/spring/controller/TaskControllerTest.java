@@ -143,27 +143,21 @@ public class TaskControllerTest {
         System.out.println("deletedId " + deletedId);
 
         RequestBuilder builder = MockMvcRequestBuilders.get("/deleteTask")
-                .param("taskId", String.valueOf(task.get().getId()));
+                .param("taskId", String.valueOf(task.get().getId()))
+                .param("userName", "fiboll");
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.view().name("redirect:user?nick=fiboll"));
 
-        //user = userManager.findUserByNick("fiboll");
-        task.get().getLabels();
-        System.out.println("deleteTask");
-        taskDao.removeTask(task.get());
+        user = userManager.findUserByNick("fiboll");
 
         Optional<Task> notExistTask= user.get().getTasks().stream()
                 .filter((t) -> t.getId() == deletedId)
                 .findAny();
 
-        System.out.println(notExistTask);
-
         Assert.assertTrue(!notExistTask.isPresent());
+
         notExistTask = Optional.ofNullable(taskDao.getTaskById(deletedId));
-
-
-        System.out.println(notExistTask);
         Assert.assertTrue(!notExistTask.isPresent());
 
     }

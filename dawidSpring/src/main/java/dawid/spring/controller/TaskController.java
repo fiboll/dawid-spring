@@ -1,5 +1,7 @@
 package dawid.spring.controller;
 
+import dawid.spring.manager.TaskManager;
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.provider.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +20,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TaskController {
 
     @Autowired
+    private TaskManager taskManager;
+
+    @Autowired
     private TaskDao taskDao;
 
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value="taskId") Long taskId,
                              Model model) {
-        Task task = taskDao.getTaskById(taskId);
+        TaskDTO task = taskManager.getTask(taskId);
         model.addAttribute("task", task);
         return "editForm";
     }
 
     @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public String editTask(@ModelAttribute(value = "task") Task task,
+    public String editTask(@ModelAttribute(value = "task") TaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
 
-        Task updated = taskDao.getTaskById(task.getId());
+        taskManager.updateTask(taskDTO);
 
-        updated.setDone(task.isDone());
-        updated.setDueDate(task.getDueDate());
-        updated.setDesc(task.getDesc());
-        updated.setName(task.getName());
-
-        taskDao.update(updated);
-        return "redirect:user?nick=" + updated.getUser().getNickname();
+        return "redirect:user?nick=" + taskDTO.getUserName();
     }
 
     @RequestMapping(value = "/deleteTask", method = RequestMethod.GET)
     public String deleteTask(@RequestParam(value="taskId") Long taskId,
+                             @RequestParam(value="userName") String userName,
                            Model model) {
-        Task task = taskDao.getTaskById(taskId);
 
-        String userName = task.getUser().getNickname();
-
-        taskDao.removeTask(task);
+        taskManager.deleteTask(taskId);
         return "redirect:user?nick=" + userName;
     }
 }
