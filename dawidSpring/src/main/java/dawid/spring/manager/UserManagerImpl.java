@@ -1,7 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 import dawid.spring.provider.TaskDao;
 import dawid.spring.provider.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;

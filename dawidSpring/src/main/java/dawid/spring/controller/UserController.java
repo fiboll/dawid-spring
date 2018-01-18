@@ -2,8 +2,8 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

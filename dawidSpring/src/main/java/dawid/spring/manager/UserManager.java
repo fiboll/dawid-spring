@@ -1,7 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;

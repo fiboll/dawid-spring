@@ -1,6 +1,6 @@
 package dawid.spring.dao;
 
-import dawid.spring.model.User;
+import dawid.spring.model.entity.User;
 import dawid.spring.provider.UserDAO;
 import org.junit.Assert;
 import org.junit.Before;

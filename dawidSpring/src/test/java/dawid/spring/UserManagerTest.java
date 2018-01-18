@@ -1,8 +1,8 @@
 package dawid.spring;
 
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;

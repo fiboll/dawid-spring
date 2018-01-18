@@ -1,8 +1,8 @@
 package dawid.spring.manager;
 
 import dawid.spring.exceptions.DomainException;
-import dawid.spring.model.Label;
-import dawid.spring.model.Task;
+import dawid.spring.model.entity.Label;
+import dawid.spring.model.entity.Task;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 

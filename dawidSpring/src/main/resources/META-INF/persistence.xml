@@ -7,9 +7,9 @@
     <persistence-unit name="dawid-pu-server" transaction-type="RESOURCE_LOCAL">
 
         <!-- add classes -->
-        <class>dawid.spring.model.User</class>
-        <class>dawid.spring.model.Task</class>
-        <class>dawid.spring.model.Label</class>
+        <class>dawid.spring.model.entity.User</class>
+        <class>dawid.spring.model.entity.Task</class>
+        <class>dawid.spring.model.entity.Label</class>
         <class>dawid.spring.model.TableColumn</class>
         <class>dawid.spring.model.TaskTable</class>
 

@@ -1,6 +1,6 @@
 package dawid.spring.controller;
 
-import dawid.spring.model.Task;
+import dawid.spring.model.entity.Task;
 import dawid.spring.provider.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class TaskController {
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value="taskId") Long taskId,
                              Model model) {
-        Task task = taskDao.getTaskById(taskId).orElse(null);
+        Task task = taskDao.getTaskById(taskId);
         model.addAttribute("task", task);
         return "editForm";
     }
@@ -33,7 +33,7 @@ public class TaskController {
                            final BindingResult bindingResult,
                            Model model) {
 
-        Task updated = taskDao.getTaskById(task.getId()).get();
+        Task updated = taskDao.getTaskById(task.getId());
 
         updated.setDone(task.isDone());
         updated.setDueDate(task.getDueDate());
@@ -47,7 +47,7 @@ public class TaskController {
     @RequestMapping(value = "/deleteTask", method = RequestMethod.GET)
     public String deleteTask(@RequestParam(value="taskId") Long taskId,
                            Model model) {
-        Task task = taskDao.getTaskById(taskId).get();
+        Task task = taskDao.getTaskById(taskId);
 
         String userName = task.getUser().getNickname();
 

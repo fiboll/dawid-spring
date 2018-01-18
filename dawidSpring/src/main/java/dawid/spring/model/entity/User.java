@@ -1,4 +1,4 @@
-package dawid.spring.model;
+package dawid.spring.model.entity;
 
 
 import org.apache.commons.lang3.builder.ToStringBuilder;

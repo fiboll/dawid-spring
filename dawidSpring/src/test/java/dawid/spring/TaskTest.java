@@ -1,7 +1,7 @@
 package dawid.spring;
 
 
-import dawid.spring.model.Task;
+import dawid.spring.model.entity.Task;
 import org.junit.Assert;
 import org.junit.Test;
 

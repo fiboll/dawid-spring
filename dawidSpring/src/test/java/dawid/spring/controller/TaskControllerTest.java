@@ -2,8 +2,8 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 import dawid.spring.provider.TaskDao;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -161,7 +160,7 @@ public class TaskControllerTest {
         System.out.println(notExistTask);
 
         Assert.assertTrue(!notExistTask.isPresent());
-        notExistTask = taskDao.getTaskById(deletedId);
+        notExistTask = Optional.ofNullable(taskDao.getTaskById(deletedId));
 
 
         System.out.println(notExistTask);

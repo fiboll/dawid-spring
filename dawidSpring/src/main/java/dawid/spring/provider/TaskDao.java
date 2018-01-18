@@ -1,7 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
 
 import java.util.Optional;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
  */
 public interface TaskDao {
 
-    public Optional<Task> getTaskById(Long id);
+    public Task getTaskById(Long id);
 
     public void addTask(Task user);
 

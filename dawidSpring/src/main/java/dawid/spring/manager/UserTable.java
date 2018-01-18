@@ -1,8 +1,8 @@
 package dawid.spring.manager;
 
 import dawid.spring.config.TableConfig;
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
+import dawid.spring.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

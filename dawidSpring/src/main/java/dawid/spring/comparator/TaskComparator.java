@@ -1,7 +1,7 @@
 package dawid.spring.comparator;
 
-import dawid.spring.model.Label;
-import dawid.spring.model.Task;
+import dawid.spring.model.entity.Label;
+import dawid.spring.model.entity.Task;
 
 import java.util.Comparator;
 import java.util.Iterator;

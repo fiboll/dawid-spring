@@ -1,7 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.Task;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -21,17 +20,8 @@ public class TaskDaoImpl implements TaskDao {
     private EntityManager em;
 
     @Override
-    public Optional<Task> getTaskById(Long id) {
-
-        em.find(Task.class, id);
-        try {
-            Task result = (Task) em.createNamedQuery("Task.findById")
-                    .setParameter("id", id)
-                    .getSingleResult();
-            return Optional.ofNullable(result);
-        } catch (NoResultException ex) {
-            return Optional.empty();
-        }
+    public Task getTaskById(Long id) {
+        return em.find(Task.class, id);
     }
 
     @Override

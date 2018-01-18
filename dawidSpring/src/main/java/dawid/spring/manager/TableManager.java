@@ -1,7 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.Label;
-import dawid.spring.model.Task;
+import dawid.spring.model.entity.Label;
+import dawid.spring.model.entity.Task;
 
 /**
  * Created by private on 01.07.17.

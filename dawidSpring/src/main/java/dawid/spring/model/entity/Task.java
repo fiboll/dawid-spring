@@ -1,4 +1,4 @@
-package dawid.spring.model;
+package dawid.spring.model.entity;
 
 import dawid.spring.comparator.TaskComparator;
 import dawid.spring.exceptions.DomainException;
@@ -55,6 +55,10 @@ public class Task implements Comparable<Task> {
     
     )
     private Set<Label> labels = new HashSet<>();
+
+    public Long getVersion() {
+        return version;
+    }
 
     @Transient
     private TaskComparator defaultComparator = new TaskComparator();

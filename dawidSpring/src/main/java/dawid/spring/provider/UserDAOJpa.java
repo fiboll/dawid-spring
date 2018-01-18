@@ -1,7 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.Task;
-import dawid.spring.model.User;
+import dawid.spring.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
