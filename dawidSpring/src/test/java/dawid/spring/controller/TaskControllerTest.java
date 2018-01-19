@@ -1,7 +1,9 @@
 package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
+import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
 import dawid.spring.provider.TaskDao;
@@ -49,7 +51,7 @@ public class TaskControllerTest {
     UserManager userManager;
 
     @Autowired
-    TaskDao taskDao;
+    TaskManager taskManager;
 
     @Autowired
     IUserTable userTable;
@@ -157,7 +159,7 @@ public class TaskControllerTest {
 
         Assert.assertTrue(!notExistTask.isPresent());
 
-        notExistTask = Optional.ofNullable(taskDao.getTaskById(deletedId));
+        Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
         Assert.assertTrue(!notExistTask.isPresent());
 
     }
