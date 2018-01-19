@@ -37,12 +37,12 @@ public class UserDAOJpa implements UserDAO {
     }
 
     public List<User> findAll() {
-        return (List<User>) em.createNamedQuery("User.findAll", User.class).getResultList();
+        return (List<User>) em.createNamedQuery("User.findAllUsers", User.class).getResultList();
     }
 
     public Optional<User> findByNick(String nick) {
         try {
-            User result = (User) em.createNamedQuery("User.findByNick")
+            User result = (User) em.createNamedQuery("User.findUserByNick")
                     .setParameter("nick", nick)
                     .getSingleResult();
             return Optional.ofNullable(result);

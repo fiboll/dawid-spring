@@ -12,7 +12,7 @@
 
     <context:annotation-config />
     <context:component-scan base-package="dawid.spring.*" />
-    <tx:annotation-driven />
+    <tx:annotation-driven proxy-target-class="true" />
 
     <bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="dawid-pu-server" />

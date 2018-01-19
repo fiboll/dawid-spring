@@ -28,7 +28,7 @@
                 </p>
                  <td>
                     <p class="text-center">
-                        <a th:href="@{'/deleteTask?taskId=' + ${task.id}}" data-method="delete" class="btn btn-primary btn">delete</a>
+                        <a th:href="@{'/deleteTask?taskId=' + ${task.id} + '&userName=' + ${task.userName}}" data-method="delete" class="btn btn-primary btn">delete</a>
                     </p>
                 </td>
             </td>

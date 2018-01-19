@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Entity
 @NamedQuery(
-        name = "Task.findById",
+        name = "Task.findTaskById",
         query  = "SELECT DISTINCT t FROM Task t FETCH ALL PROPERTIES"
                 + " WHERE t.id = :id"
 )
@@ -163,6 +163,10 @@ public class Task implements Comparable<Task> {
            throw new DomainException("Table columns don't contain assigned task!");
         }
         this.user = user;
+    }
+
+    public String getUserName() {
+        return getUser().getNickname();
     }
 
     public Set<Label> getLabels() {

@@ -22,9 +22,6 @@ public class TaskController {
     @Autowired
     private TaskManager taskManager;
 
-    @Autowired
-    private TaskDao taskDao;
-
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value="taskId") Long taskId,
                              Model model) {
@@ -39,7 +36,6 @@ public class TaskController {
                            Model model) {
 
         taskManager.updateTask(taskDTO);
-
         return "redirect:user?nick=" + taskDTO.getUserName();
     }
 

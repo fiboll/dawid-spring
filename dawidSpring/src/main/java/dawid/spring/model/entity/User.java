@@ -14,12 +14,12 @@ import java.util.Set;
 @Entity
 @NamedQueries({
         @NamedQuery(
-                name = "User.findAll",
+                name = "User.findAllUsers",
                 query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks tasks"
                         + " LEFT JOIN FETCH tasks.labels"
         ),
         @NamedQuery(
-                name = "User.findByNick",
+                name = "User.findUserByNick",
                 query  = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.tasks tasks"
                             + " LEFT JOIN FETCH tasks.labels"
                             + " WHERE u.nickname = :nick"
