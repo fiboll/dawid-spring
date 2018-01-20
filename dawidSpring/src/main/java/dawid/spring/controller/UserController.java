@@ -2,8 +2,9 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
+import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UserController {
     @RequestMapping(value = "/user",method = RequestMethod.GET)
     public String getByNick(@RequestParam String nick, Model model) {
 
-        Optional<User> user= userManager.findUserByNick(nick);
+        Optional<UserDTO> user= userManager.findUserByNick(nick);
 
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
@@ -57,7 +58,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addTask",method = RequestMethod.POST)
-    public String addTaskToUser(@ModelAttribute(value="task") Task task,
+    public String addTaskToUser(@ModelAttribute(value="task") TaskDTO task,
                                 @RequestParam(required = false) String userNick,
                                 Model model) {
 
@@ -65,7 +66,7 @@ public class UserController {
             return "redirect:noUser";
         }
 
-        Optional<User> user= userManager.findUserByNick(userNick);
+        Optional<UserDTO> user= userManager.findUserByNick(userNick);
 
         if (user.isPresent()) {
             userManager.addTaskToUSer(user.get(), task);

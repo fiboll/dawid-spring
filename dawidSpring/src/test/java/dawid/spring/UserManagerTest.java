@@ -1,8 +1,8 @@
 package dawid.spring;
 
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.dto.UserDTO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,18 +27,18 @@ public class UserManagerTest {
 
     @Test
     public void testFindAll() {
-        List<User> users =  userManager.getAllUsers();
+        List<UserDTO> users =  userManager.getAllUsers();
         Assert.assertNotNull(users);
         Assert.assertEquals(2, users.size());
 
         users.forEach(
-                (User u) -> Assert.assertTrue(null != u.getId())
+                (UserDTO u) -> Assert.assertTrue(null != u.getId())
         );
     }
 
     @Test
     public void testUserByNick() {
-        Optional<User> user = userManager.findUserByNick("fiboll");
+        Optional<UserDTO> user = userManager.findUserByNick("fiboll");
         Assert.assertNotNull(user);
         Assert.assertEquals(user.get().getFirstName(), "Dawid");
         Assert.assertEquals(user.get().getSecondName(), "Strembicki");
@@ -47,15 +47,15 @@ public class UserManagerTest {
 
     @Test
     public void testAddTaskToUSer() {
-        Optional<User> foundedUser = userManager.findUserByNick("fiboll");
+        Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
         Assert.assertNotNull(foundedUser);
 
         Calendar dueDate = Calendar.getInstance();
         dueDate.add(Calendar.MONTH, 2);
-        Task task = new Task.TaskBuilder().name("Test Task")
-                .dueDate(dueDate.getTime())
-                .desc("Test desc")
-                .build();
+        TaskDTO task = new TaskDTO.TaskBuilder().name("Test Task")
+                                             .dueDate(dueDate.getTime())
+                                             .desc("Test desc")
+                                             .build();
 
         userManager.addTaskToUSer(foundedUser.get(), task);
 
@@ -63,6 +63,5 @@ public class UserManagerTest {
         Assert.assertNotNull(foundedUser);
 
     }
-
 
 }

@@ -15,6 +15,15 @@ public class UserDTO {
     private Set<TaskDTO> tasks = new HashSet<>();
     private Long version;
 
+    public void addTask(TaskDTO task) {
+
+        if (!tasks.contains(task)) {
+            tasks.add(task);
+        }
+
+        task.setUserName(this.getNickname());
+    }
+
     public Long getId() {
         return id;
     }

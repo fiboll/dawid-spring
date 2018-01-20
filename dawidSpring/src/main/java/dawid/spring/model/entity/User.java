@@ -62,6 +62,10 @@ public class User {
 
     public void addTask(Task task) {
 
+        if (tasks == null) {
+           tasks = new HashSet<>();
+        }
+
         if (!tasks.contains(task)) {
             tasks.add(task);
         }

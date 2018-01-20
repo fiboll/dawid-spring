@@ -1,7 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.dto.UserDTO;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface IUserTable {
 
-    public List<Task> getDoneTasks(User user);
+    public List<TaskDTO> getDoneTasks(UserDTO user);
 
-    public List<Task> getDoing(User user);
+    public List<TaskDTO> getDoing(UserDTO user);
 
-    public List<Task> getNextToDo(User user);
+    public List<TaskDTO> getNextToDo(UserDTO user);
 
-    public List<Task> getBacklogTask(User user);
+    public List<TaskDTO> getBacklogTask(UserDTO user);
 }

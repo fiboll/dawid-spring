@@ -5,20 +5,26 @@ import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 /**
  * Created by private on 20.01.18.
  */
+@Component
 public class UserTransformer implements IUserTransformer {
 
     @Autowired
     private ITaskTransformer taskTransformer;
 
-    @Autowired
+    @Override
     public UserDTO entityToDTO(User user) {
         UserDTO userDTO = new UserDTO();
+
+        if (user == null) {
+            return userDTO;
+        }
 
         userDTO.setFirstName(user.getFirstName());
         userDTO.setId(user.getId());
@@ -34,7 +40,7 @@ public class UserTransformer implements IUserTransformer {
         return userDTO;
     }
 
-    @Autowired
+    @Override
     public void update(User user, UserDTO userDTO) {
 
         user.setFirstName(userDTO.getFirstName());

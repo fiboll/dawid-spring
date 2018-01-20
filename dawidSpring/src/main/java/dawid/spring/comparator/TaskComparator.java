@@ -1,7 +1,7 @@
 package dawid.spring.comparator;
 
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -10,18 +10,18 @@ import java.util.TreeSet;
 /**
  * Created by private on 01.07.17.
  */
-public class TaskComparator implements Comparator<Task> {
+public class TaskComparator implements Comparator<TaskDTO> {
 
     @Override
-    public int compare(Task task, Task task2) {
+    public int compare(TaskDTO task, TaskDTO task2) {
         return Comparator.nullsLast(TaskComparator::compareLabelsList)
-                .thenComparing(Task::getDueDate, Comparator.nullsLast(Comparator.naturalOrder()))
-                .thenComparing(Task::getName, Comparator.nullsLast(Comparator.naturalOrder()))
-                .thenComparing(Task::getDesc, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(TaskDTO::getDueDate, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(TaskDTO::getName, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(TaskDTO::getDesc, Comparator.nullsLast(Comparator.naturalOrder()))
                 .compare(task, task2);
     }
 
-    private static int compareLabelsList(Task task, Task otherTask) {
+    private static int compareLabelsList(TaskDTO task, TaskDTO otherTask) {
         Iterator<Label> thisLabels = new TreeSet<>(task.getLabels()).iterator();
         Iterator<Label> otherLabels = new TreeSet<>(otherTask.getLabels()).iterator();
 

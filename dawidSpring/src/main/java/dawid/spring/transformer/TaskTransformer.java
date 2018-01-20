@@ -2,29 +2,29 @@ package dawid.spring.transformer;
 
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TaskTransformer implements ITaskTransformer {
 
     public TaskDTO entityToDao(Task task) {
-        TaskDTO taskDTO = new TaskDTO();
+
+        TaskDTO.TaskBuilder builder = new TaskDTO.TaskBuilder();
 
         if (task == null) {
-            return null;
+            return builder.build();
         }
 
-        taskDTO.setDesc(task.getDesc());
-        taskDTO.setDone(task.isDone());
-        taskDTO.setDueDate(task.getDueDate());
-        taskDTO.setName(task.getName());
-        taskDTO.setUserName(task.getUser().getNickname());
-        taskDTO.setVersion(task.getVersion());
-        taskDTO.setLabels(task.getLabels());
-        taskDTO.setId(task.getId());
+        builder.desc(task.getDesc());
+        builder.isDone(task.isDone());
+        builder.dueDate(task.getDueDate());
+        builder.name(task.getName());
+        builder.username(task.getUser().getNickname());
+        builder.version(task.getVersion());
+        builder.labels(task.getLabels());
+        builder.id(task.getId());
 
-        return taskDTO;
+        return builder.build();
     }
 
     @Override
