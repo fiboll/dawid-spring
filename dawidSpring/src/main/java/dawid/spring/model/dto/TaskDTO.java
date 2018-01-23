@@ -3,6 +3,8 @@ package dawid.spring.model.dto;
 import dawid.spring.comparator.TaskComparator;
 import dawid.spring.model.entity.Label;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.Transient;
 import java.util.Date;
@@ -33,7 +35,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
         dueDate = taskBuilder.dueDate;
         isDone = taskBuilder.isDone;
 
-        if (CollectionUtils.isNotEmpty(labels)) {
+        if (CollectionUtils.isNotEmpty(taskBuilder.labels)) {
             labels.addAll(taskBuilder.labels);
         }
 
@@ -44,6 +46,11 @@ public class TaskDTO implements Comparable<TaskDTO> {
     @Override
     public int compareTo(TaskDTO other) {
         return defaultComparator.compare(this, other);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 
     public static class TaskBuilder {

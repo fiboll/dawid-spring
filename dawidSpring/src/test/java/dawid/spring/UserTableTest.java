@@ -152,7 +152,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         Assert.assertEquals(1, userTable.getDoing(user.get()).size());
-        Assert.assertEquals("test", userTable.getDoing(user.get()).get(0).getName());
+        Assert.assertEquals("test1", userTable.getDoing(user.get()).get(0).getName());
     }
 
     @Test
@@ -161,7 +161,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         Assert.assertEquals(3, userTable.getNextToDo(user.get()).size());
-        Assert.assertEquals("test1", userTable.getNextToDo(user.get()).get(0).getName());
+        Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
     }
 
     @Test
@@ -194,11 +194,12 @@ public class UserTableTest {
         b.setDescription("b");
         taskBuilder.addLabel(b);
 
-        user.get().addTask(taskBuilder.build());
+        TaskDTO buildTask = taskBuilder.build();
+        user.get().addTask(buildTask);
 
         Assert.assertEquals(3, userTable.getNextToDo(user.get()).size());
         Assert.assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
-        Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(1).getName());
+
     }
 
     @Test
