@@ -43,6 +43,8 @@ public class TaskDTO implements Comparable<TaskDTO> {
         version = taskBuilder.version;
     }
 
+    public TaskDTO() {}
+
     @Override
     public int compareTo(TaskDTO other) {
         return defaultComparator.compare(this, other);
