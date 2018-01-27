@@ -2,10 +2,13 @@ package dawid.spring.comparator;
 
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Label;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,8 +17,10 @@ import java.util.stream.Stream;
  */
 public class TaskComparatorTest {
 
-    TaskDTO t1,t2,t3,t4;
+    TaskDTO t1,t2,t3, tDate1, tDate2;
     Label  a,b,c,d;
+
+    List<TaskDTO> tasks;
 
     @Before
     public void setup() {
@@ -24,9 +29,7 @@ public class TaskComparatorTest {
         b = new Label("b", "yellow");
         c = new Label("c", "green");
         d = new Label("d", "grey");
-
-
-
+        
         t1 = new TaskDTO.TaskBuilder()
                 .name("test 1")
                 .desc("test desc")
@@ -51,25 +54,40 @@ public class TaskComparatorTest {
                 .addLabel(b)
                 .addLabel(a)
                 .build();
+
+        tasks = Stream.of(t1, t2, t3).collect(Collectors.toList());
+
+        tDate1 = new TaskDTO.TaskBuilder()
+                    .dueDate(new Date(100L))
+                    .build();
+
+        tDate1 = new TaskDTO.TaskBuilder()
+                .dueDate(new Date(1000L))
+                .build();
     }
 
     @Test
     public void testCompareList() {
-        Stream.of(t1,t2,t3)
-              .sorted()
-              .collect(Collectors.toList())
-              .forEach(System.out::println);
+        tasks.sort(Comparator.naturalOrder());
+        List<TaskDTO> sorted = Stream.of(t3, t1, t2)
+                                      .sorted()
+                                      .collect(Collectors.toList());
+        Assert.assertTrue(tasks.equals(sorted));
     }
 
 
     @Test
     public void testCompareByLabel() {
 
-        System.out.println(t1.compareTo(t2));
-
-//        Assert.assertTrue(t1.compareTo(t2) > 0);
-//        Assert.assertTrue(t3.compareTo(t2) > 0);
-//        Assert.assertTrue(t1.compareTo(t2) > 0);
+        Assert.assertTrue(t1.compareTo(t2) < 0);
+        Assert.assertTrue(t3.compareTo(t2) < 0);
+        Assert.assertTrue(t1.compareTo(t2) < 0);
     }
+
+    @Test
+    public void testCompareByDate() {
+        Assert.assertTrue(tDate1.compareTo(tDate2) < 0);
+    }
+
 
 }
