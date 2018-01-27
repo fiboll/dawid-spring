@@ -5,6 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Created by private on 23.01.18.
  */
@@ -16,6 +21,7 @@ public  class LabeComparatorlTest {
     Label n1;
     Label n2;
 
+    List<Label> labels;
 
     @Before
     public void prepareTest() {
@@ -30,6 +36,15 @@ public  class LabeComparatorlTest {
 
         n2 = new Label();
         n2.setDescription("2");
+
+        labels = Stream.of(n2, a, b, n1).collect(Collectors.toList());
+    }
+
+    @Test
+    public void testListOrder() {
+        labels.sort(Comparator.naturalOrder());
+        List<Label> sortedLabels = Stream.of(n1,n2,a,b).collect(Collectors.toList());
+        Assert.assertTrue(labels.equals(sortedLabels));
     }
 
     @Test
@@ -40,15 +55,26 @@ public  class LabeComparatorlTest {
         Assert.assertEquals(0, n2.compareTo(n2));
     }
 
+
+
     @Test
-    public void testGratherThan() {
-        Assert.assertEquals(1, b.compareTo(a));
-        Assert.assertEquals(1, n2.compareTo(n1));
+    public void testLessThan() {
+        Assert.assertTrue(n1.compareTo(n2) < 0);
+        Assert.assertTrue(a.compareTo(b) < 0);
+        Assert.assertTrue(n1.compareTo(a) < 0);
+        Assert.assertTrue(n1.compareTo(b) < 0);
+        Assert.assertTrue(n2.compareTo(a) < 0);
+        Assert.assertTrue(n2.compareTo(b) < 0);
+
     }
 
     @Test
     public void testThan() {
-        Assert.assertEquals(-1, a.compareTo(b));
-        Assert.assertEquals(-1, n1.compareTo(n2));
+        Assert.assertTrue(n2.compareTo(n1) > 0);
+        Assert.assertTrue(b.compareTo(a) > 0);
+        Assert.assertTrue(a.compareTo(n1) > 0);
+        Assert.assertTrue(a.compareTo(n2) > 0);
+        Assert.assertTrue(b.compareTo(n2) > 0);
+        Assert.assertTrue(b.compareTo(n1) > 0);
     }
 }

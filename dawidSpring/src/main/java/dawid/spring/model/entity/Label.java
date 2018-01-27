@@ -31,11 +31,12 @@ public class Label implements Comparable<Label>{
     private Long version;
 
     @Override
-	public int compareTo(Label other) {
-    	return Comparator.comparing((Label label) -> StringUtils.isNumeric(label.description))
-    			.thenComparing(Label::getDescription)
-    			.compare(this, other);
-	}
+    public int compareTo(Label other) {
+        return Comparator.comparing((Label label) -> StringUtils.isNumeric(label.description))
+                         .reversed()
+                         .thenComparing((Label label) -> label.getDescription())
+                         .compare(this, other);
+    }
     
 //    @Override
 //    public int hashCode() {
