@@ -30,6 +30,17 @@ public class Label implements Comparable<Label>{
     @Column(name = "VERSION")
     private Long version;
 
+    public Label() {}
+
+    public Label(String description, String colour) {
+        this(description);
+        this.colour = colour;
+    }
+
+    public Label(String description) {
+        this.description = description;
+    }
+
     @Override
     public int compareTo(Label other) {
         return Comparator.comparing((Label label) -> StringUtils.isNumeric(label.description))

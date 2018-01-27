@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 /**
  * Created by private on 23.01.18.
  */
-public  class LabeComparatorlTest {
+public  class LabelComparatorlTest {
 
     Label a;
     Label b;
@@ -25,17 +25,10 @@ public  class LabeComparatorlTest {
 
     @Before
     public void prepareTest() {
-        a = new Label();
-        a.setDescription("a");
-
-        b = new Label();
-        b.setDescription("b");
-
-        n1 = new Label();
-        n1.setDescription("1");
-
-        n2 = new Label();
-        n2.setDescription("2");
+        a = new Label("a");
+        b = new Label("b");
+        n1 = new Label("1");
+        n2 = new Label("2");
 
         labels = Stream.of(n2, a, b, n1).collect(Collectors.toList());
     }
