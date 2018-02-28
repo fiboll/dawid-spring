@@ -22,7 +22,7 @@ public class TaskManager {
         return findTaskById(taskId);
     }
 
-    public void updateTask(TaskDTO taskDTO) {
+    public TaskDTO updateTask(TaskDTO taskDTO) {
 
         Task updated = taskDao.getTaskById(taskDTO.getId());
         updated.setDone(taskDTO.isDone());
@@ -31,6 +31,8 @@ public class TaskManager {
         updated.setName(taskDTO.getName());
 
         taskDao.update(updated);
+
+        return taskTransformer.entityToDao(updated);
     }
 
     public void deleteTask(Long id) {

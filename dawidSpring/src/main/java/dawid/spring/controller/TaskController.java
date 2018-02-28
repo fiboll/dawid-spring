@@ -23,7 +23,7 @@ public class TaskController {
     private TaskManager taskManager;
 
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
-    public String updateTask(@RequestParam(value="taskId") Long taskId,
+    public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
         model.addAttribute("task", task);
@@ -35,14 +35,14 @@ public class TaskController {
                            final BindingResult bindingResult,
                            Model model) {
 
-        taskManager.updateTask(taskDTO);
+        taskDTO = taskManager.updateTask(taskDTO);
         return "redirect:user?nick=" + taskDTO.getUserName();
     }
 
     @RequestMapping(value = "/deleteTask", method = RequestMethod.GET)
-    public String deleteTask(@RequestParam(value="taskId") Long taskId,
-                             @RequestParam(value="userName") String userName,
-                           Model model) {
+    public String deleteTask(@RequestParam(value = "taskId") Long taskId,
+                             @RequestParam(value = "userName") String userName,
+                             Model model) {
 
         taskManager.deleteTask(taskId);
         return "redirect:user?nick=" + userName;

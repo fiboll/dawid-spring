@@ -35,7 +35,7 @@ public class Task  {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @Version
@@ -46,7 +46,7 @@ public class Task  {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean isDone;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="TASK_LABELS",
             joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
