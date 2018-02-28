@@ -2,6 +2,7 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +58,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addTask",method = RequestMethod.POST)
-    public String addTaskToUser(@ModelAttribute(value="task") Task task,
+    public String addTaskToUser(@ModelAttribute(value="task") TaskDTO task,
                                 @RequestParam(required = false) String userNick,
                                 Model model) {
 
@@ -72,7 +73,7 @@ public class UserController {
 
             model.addAttribute("nick", user.get().getNickname()) ;
             model.addAttribute("newTask", new Task());
-            return "redirect:userDetails";
+            return "redirect:user";
         }
 
 

@@ -36,7 +36,9 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public void addTaskToUSer(User user, Task task) {
+
         user.addTask(task);
+        userDAO.update(user);
     }
 
 }
