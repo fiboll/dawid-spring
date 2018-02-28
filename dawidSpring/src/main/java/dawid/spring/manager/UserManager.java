@@ -1,7 +1,7 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +11,12 @@ import java.util.Optional;
  */
 public interface UserManager {
 
-    public List<User> getAllUsers();
+    public List<UserDTO> getAllUsers();
 
-    public Optional<User> findUserByNick(String nick);
+    public Optional<UserDTO> findUserByNick(String nick);
 
-    public void addTaskToUSer(User user, Task task);
+    public void addTaskToUSer(UserDTO user, TaskDTO task);
+
+    void userUpdate(UserDTO userDTO);
 }
 

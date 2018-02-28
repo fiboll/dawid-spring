@@ -1,7 +1,7 @@
 package dawid.spring;
 
 
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.dto.TaskDTO;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class TaskTest {
 
         long testDateLong = 10000000000l;
 
-        Task task = new Task.TaskBuilder()
+        TaskDTO task = new TaskDTO.TaskBuilder()
                 .id(1L)
                 .desc("test desc")
                 .name("test task")
@@ -27,7 +27,6 @@ public class TaskTest {
         Assert.assertEquals(new Date(testDateLong), task.getDueDate());
         task.getDueDate().setTime(5000000);
         Assert.assertEquals(new Date(testDateLong), task.getDueDate());
-
 
     }
 }

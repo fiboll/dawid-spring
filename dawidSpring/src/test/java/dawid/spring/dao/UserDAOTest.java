@@ -76,11 +76,10 @@ public class UserDAOTest {
         User user = userDAO.findByNick("fiboll").
                 orElseThrow(() -> new IllegalStateException("User do not exist"));
 
-        Task task = new Task.TaskBuilder()
-                .desc("test desc a")
-                .name("test task b")
-                .dueDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()))
-                .build();
+        Task task = new Task();
+        task.setDesc("test desc a");
+        task.setName("test task b");
+        task.setDueDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
 
         user.addTask(task);
         user = userDAO.update(user);

@@ -61,7 +61,15 @@ public class User {
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
+
+        if (tasks == null) {
+           tasks = new HashSet<>();
+        }
+
+        if (!tasks.contains(task)) {
+            tasks.add(task);
+        }
+
         task.setUser(this);
     }
 
@@ -120,5 +128,25 @@ public class User {
 
     public Set<Task> getTasks() {
         return tasks;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

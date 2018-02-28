@@ -4,9 +4,7 @@ import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
-import dawid.spring.provider.TaskDao;
+import dawid.spring.model.dto.UserDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,10 +62,10 @@ public class TaskControllerTest {
 
     @Test
     public void testEditTaskPost() throws Exception {
-        Optional<User> user = userManager.findUserByNick("fiboll");
+        Optional<UserDTO> user = userManager.findUserByNick("fiboll");
         Assert.assertTrue(user.isPresent());
 
-        Optional<Task> task = userTable.getNextToDo(user.get()).stream().findAny();
+        Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
         Assert.assertTrue(task.isPresent());
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/editTask")
@@ -134,10 +132,10 @@ public class TaskControllerTest {
 
     @Test
     public void testDeleteTask() throws Exception {
-        Optional<User> user = userManager.findUserByNick("fiboll");
+        Optional<UserDTO> user = userManager.findUserByNick("fiboll");
         Assert.assertTrue(user.isPresent());
 
-        Optional<Task> task = userTable.getNextToDo(user.get()).stream().findAny();
+        Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
         Assert.assertTrue(task.isPresent());
 
         Long deletedId = task.get().getId();
@@ -153,7 +151,7 @@ public class TaskControllerTest {
 
         user = userManager.findUserByNick("fiboll");
 
-        Optional<Task> notExistTask= user.get().getTasks().stream()
+        Optional<TaskDTO> notExistTask= user.get().getTasks().stream()
                 .filter((t) -> t.getId() == deletedId)
                 .findAny();
 
