@@ -34,7 +34,6 @@ public class TaskController {
     public String editTask(@ModelAttribute(value = "task") TaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
-
         taskDTO = taskManager.updateTask(taskDTO);
         return "redirect:user?nick=" + taskDTO.getUserName();
     }

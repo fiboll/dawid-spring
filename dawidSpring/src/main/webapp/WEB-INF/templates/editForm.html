@@ -1,4 +1,5 @@
- <form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
+<label th:text="${task}" />
+<form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
     <table border="1">
         <tr>
             <td><label th:text="name" /></td>
@@ -15,13 +16,20 @@
                                         <option value="true">zrobiony</option>
                                     </select>
 
-                </select>
             </td>
 
         </tr>
         <tr>
             <td><label  id="date-started" th:text="data" /></td>
             <td> <input type="date" th:field="*{dueDate}" id="date-started"/></td>
+        </tr>
+        <tr>
+            <td>Labelki</td>
+            <td>
+                <select th:field="*{labels}" multiple="multiple">
+                    <option th:each="label : ${#lists.sort(task.labels)}" th:value="${{label}}" th:text="${label.description}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><input type="submit" value="Submit"/></td>

@@ -1,6 +1,7 @@
 package dawid.spring.transformer;
 
 import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
 import org.springframework.stereotype.Component;
 

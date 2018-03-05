@@ -22,16 +22,16 @@ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE,is_done, version) VALUES (ne
 
 --LABELS
 DELETE FROM LABELS;
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A1', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A2', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A3', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A4', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A5', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B1', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B2', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B3', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B4', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B5', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'RED', 'A1', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'RED', 'A2', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'RED', 'A3', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'RED', 'A4', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'RED', 'A5', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'YELLOW', 'B1', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'YELLOW', 'B2', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'YELLOW', 'B3', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'YELLOW', 'B4', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'YELLOW', 'B5', 0);
 INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'GREEN', 'C1', 0);
 INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'GREEN', 'C2', 0);
 INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'GREEN', 'C3', 0);

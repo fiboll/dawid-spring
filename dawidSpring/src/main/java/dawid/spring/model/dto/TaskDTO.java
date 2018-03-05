@@ -38,7 +38,6 @@ public class TaskDTO implements Comparable<TaskDTO> {
         if (CollectionUtils.isNotEmpty(taskBuilder.labels)) {
             labels.addAll(taskBuilder.labels);
         }
-
         userName = taskBuilder.username;
         version = taskBuilder.version;
     }
@@ -100,7 +99,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
         }
 
         public TaskBuilder labels(Set<Label> labels) {
-            this.labels = labels;
+            this.labels.addAll(labels);
             return this;
         }
 

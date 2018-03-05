@@ -31,10 +31,7 @@ public class TaskManager {
     public TaskDTO updateTask(TaskDTO taskDTO) {
 
         Task updated = taskDao.getTaskById(taskDTO.getId());
-        updated.setDone(taskDTO.isDone());
-        updated.setDueDate(taskDTO.getDueDate());
-        updated.setDesc(taskDTO.getDesc());
-        updated.setName(taskDTO.getName());
+        taskTransformer.updateTask(updated, taskDTO);
 
         taskDao.update(updated);
 
