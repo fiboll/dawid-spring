@@ -23,23 +23,35 @@ INSERT INTO TASKS(id, USER_ID, name, desc, DUE_DATE, version) VALUES (nextval('T
 
 --LABELS
 DELETE FROM LABELS;
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFFFF', 'A', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFF00', 'B', 0);
-INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('USER_SEQUENCE'),'#FFFF00', 'C', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A1', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A2', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A3', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A4', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFFFF', 'A5', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B1', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B2', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B3', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B4', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'B5', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'C1', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'C2', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'C3', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'C4', 0);
+INSERT INTO LABELS(id,colour, description, version) VALUES (nextval('LABEL_SEQUENCE'),'#FFFF00', 'C5', 0);
 
 --TASK/LABELS
 DELETE FROM TASK_LABELS;
 INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM TASKS WHERE name = 'Test Task'),
-    (SELECT ID FROM LABELS WHERE description = 'A')
+    (SELECT ID FROM LABELS WHERE description = 'A1')
 );
 
 INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM TASKS WHERE name = 'Test Task'),
-    (SELECT ID FROM LABELS WHERE description = 'B')
+    (SELECT ID FROM LABELS WHERE description = 'B1')
 );
 
 INSERT INTO TASK_LABELS (TASK_ID, LABEL_ID) values  (
     (SELECT ID FROM TASKS WHERE name = 'Test Task 2'),
-    (SELECT ID FROM LABELS WHERE description = 'A')
+    (SELECT ID FROM LABELS WHERE description = 'A1')
 );
