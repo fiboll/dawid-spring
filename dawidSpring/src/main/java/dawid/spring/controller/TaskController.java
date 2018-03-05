@@ -3,6 +3,7 @@ package dawid.spring.controller;
 import dawid.spring.manager.TaskManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
+import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,15 @@ public class TaskController {
     @Autowired
     private TaskManager taskManager;
 
+    @Autowired
+    private LabelDao labelDao;
+
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
         model.addAttribute("task", task);
+        model.addAttribute("allLabels", labelDao.getAllLabels());
         return "editForm";
     }
 

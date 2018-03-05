@@ -26,9 +26,17 @@
         <tr>
             <td>Labelki</td>
             <td>
-                <select th:field="*{labels}" multiple="multiple">
-                    <option th:each="label : ${#lists.sort(task.labels)}" th:value="${{label}}" th:text="${label.description}"></option>
-                </select>
+
+          
+
+                <ul>
+                    <li th:each="label : ${#lists.sort(allLabels)}">
+                        <input type="checkbox" th:field="*{labels}" th:value="${label}" />
+                        <label th:for="${#ids.prev('labels')}"
+                               th:text="${label.description}"/>
+                    </li>
+                </ul>
+
             </td>
         </tr>
         <tr>
