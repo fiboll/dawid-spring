@@ -10,7 +10,9 @@
 	<h4 th:text="${title}" />
 	<table th:if="${not #lists.isEmpty(tasks)}" border="1">
 	     <tr>
-	        <th>name</th>
+	     	<th>name</th>
+			<th>desrtiption</th>
+			<th>due date</th>
 	        <th>edit</th>
 	        <th>remove</th>
 	    </tr>
@@ -22,6 +24,12 @@
 	            <span th:each="label: ${#lists.sort(task.labels)}" th:text="${label.description}"
                 	                th:style="'color:'+${label.colour}" />
 	        </td>
+			<td>
+				<span th:text="${task.desc}" />
+			</td>
+			<td>
+				<span th:text="${task.dueDate}" />
+			</td>
             <td>
                 <p class="text-center">
                     <a th:href="@{'/editTask?taskId=' + ${task.id}}" class="btn btn-primary btn">edit</a>
