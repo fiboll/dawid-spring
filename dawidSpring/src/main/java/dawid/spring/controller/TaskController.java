@@ -2,6 +2,7 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.TaskManager;
 import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.TaskDao;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * Created by private on 13.01.18.
@@ -26,12 +29,16 @@ public class TaskController {
     @Autowired
     private LabelDao labelDao;
 
+    @ModelAttribute("allLabels")
+    public List<Label> getAllLabels() {
+        return labelDao.getAllLabels();
+    }
+
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
         model.addAttribute("task", task);
-        model.addAttribute("allLabels", labelDao.getAllLabels());
         return "editForm";
     }
 
@@ -39,8 +46,6 @@ public class TaskController {
     public String editTask(@ModelAttribute(value = "task") TaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
-
-        System.out.println(taskDTO);
 
         taskDTO = taskManager.updateTask(taskDTO);
         return "redirect:user?nick=" + taskDTO.getUserName();

@@ -46,6 +46,29 @@
                                             <label class="control-label" th:text="data" />
                                             <input type="date" th:field="*{dueDate}" id="form-control"/>
 
+                                            <hr>
+                                            <label th:text="zrobione" class="control-label"/>
+                                            <select th:field="*{done}">
+                                                <option value="false">do zrobienia</option>
+                                                <option value="true">zrobiony</option>
+                                            </select>
+
+                                            <hr>
+                                            <label th:text="labelki" class="control-label" />
+                                            <div>
+                                                <span th:each="label, labelStat : ${#lists.sort(allLabels)}">
+
+                                                    <input type="checkbox"  th:field="*{labels}" th:value="${label}" />
+
+
+                                                    <label th:for="${#ids.prev('labels')}"
+                                                           th:text="${label.description}"/>
+
+                                                    <br th:if="${labelStat.count % 5 == 0}"/>
+
+                                                </span>
+                                            </div>
+
                                             </table>
                                         </div>
 
