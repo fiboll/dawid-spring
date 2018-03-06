@@ -7,10 +7,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/resources/css/popup.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
     </head>
     <body>
 
@@ -22,24 +19,43 @@
                  <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
 
 
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addTaskModal">
                     add Task
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="row">
+                    <div class="modal fade"  id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLAbel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="addTaskModalLAbel">Modal title</h4>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="#" th:action="@{/addTask}" th:object="${newTask}" method="post">
+
+                                        <div class="form-group">
+                                            <input type=hidden th:name="userNick" th:value="${user.nickname}"/>
+                                            <label th:text="name" class="control-label" />
+                                            <input type="text" th:field="*{name}" class="form-control"/>
+
+                                            <label th:text="description" class="control-label"/>
+                                            <input type="text" th:field="*{desc}" class="form-control"/>
+
+                                            <label class="control-label" th:text="data" />
+                                            <input type="date" th:field="*{dueDate}" id="form-control"/>
+
+                                            </table>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,6 +65,8 @@
 
             </div>
         </div>
+
+
 
 
 
@@ -72,40 +90,18 @@
                 <div th:class="col-md-9" th:include="column :: column(${done}, 'zrobione')"></div>
             </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    <form action="#" th:action="@{/addTask}" th:object="${newTask}" method="post">
-                        <input type=hidden th:name="userNick" th:value="${user.nickname}"/>
-                        <table border="1">
-                            <tr>
-                                <td><label th:text="name" /></td>
-                                <td><input type="text" th:field="*{name}" /></td>
-                            </tr>
-                            <tr>
-                                <td><label th:text="description" /></td>
-                                <td><input type="text" th:field="*{desc}" /></td>
-                            </tr>
-                            <tr>
-                                <td><input type="submit" value="Submit"/></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-            </div>
-             <hr>
-             <th:block th:insert="~{column :: copy}"/>
-        </div>
+            <hr>
+            <th:block th:insert="~{column :: copy}"/>
 
-    <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="/resources/js/bootstrap.min.js"></script>
-        <script src="/resources/js/tooltip.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
+            <!-- Bootstrap core JavaScript
+         ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+            <script src="/resources/js/bootstrap.min.js"></script>
+            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+            <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
 
     </body>
 </html>

@@ -5,6 +5,7 @@ import dawid.spring.model.entity.Label;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Transient;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
     private Long id;
     private String name;
     private String desc;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
     private Long version;
     private boolean isDone;
