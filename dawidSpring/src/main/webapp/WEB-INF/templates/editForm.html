@@ -1,5 +1,9 @@
-<label th:text="${task}" />
 <form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
+
+    <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Błędne dane</li>
+    </ul>
+
     <table border="1">
         <tr>
             <td><label th:text="name" /></td>
