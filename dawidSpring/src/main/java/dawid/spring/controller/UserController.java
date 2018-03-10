@@ -1,10 +1,13 @@
 package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
+import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
+import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
+import dawid.spring.provider.LabelDao;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,6 +34,15 @@ public class UserController {
 
     @Autowired
     IUserTable userTable;
+
+    @Autowired
+    private LabelDao labelDao;
+
+    @ModelAttribute("allLabels")
+    public List<Label> getAllLabels() {
+        return labelDao.getAllLabels();
+    }
+
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public String getAll(Model model) {
@@ -73,7 +86,7 @@ public class UserController {
 
             model.addAttribute("nick", user.get().getNickname()) ;
             model.addAttribute("newTask", new Task());
-            return "redirect:userDetails";
+            return "redirect:user";
         }
 
 

@@ -2,6 +2,7 @@ package dawid.spring.manager;
 
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
+import dawid.spring.model.entity.User;
 import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.IUserTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,19 +29,28 @@ public class UserManagerImpl implements UserManager {
     @Override
     public List<UserDTO> getAllUsers() {
         return userDAO.findAll().stream()
-               .map(u -> userTransformer.entityToDTO(u))
-               .collect(Collectors.toList());
+                .map(u -> userTransformer.entityToDTO(u))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<UserDTO> findUserByNick(String nick) {
         return userDAO.findByNick(nick)
-                      .map(userTransformer::entityToDTO);
+                .map(userTransformer::entityToDTO);
     }
 
     @Override
     public void addTaskToUSer(UserDTO user, TaskDTO task) {
         user.getTasks().add(task);
+        task.setUserName(user.getNickname());
+        userUpdate(user);
+    }
+
+    @Override
+    public void userUpdate(UserDTO userDTO) {
+        User user = userDAO.findByNick(userDTO.getNickname()).orElse(new User());
+        userTransformer.update(user, userDTO);
+        userDAO.update(user);
     }
 
 }

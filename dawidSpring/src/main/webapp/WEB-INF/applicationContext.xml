@@ -15,7 +15,7 @@
 
     <context:annotation-config />
     <context:component-scan base-package="dawid.spring.*" />
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="conversionService"/>
     <tx:annotation-driven />
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
@@ -39,7 +39,18 @@
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver" class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
         <property name="templateMode" value="HTML" />
+    </bean>
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <ref bean="labelFormatter" />
+            </set>
+        </property>
+
     </bean>
 
 </beans>

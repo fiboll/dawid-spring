@@ -10,5 +10,5 @@ public interface IUserTransformer {
 
     UserDTO entityToDTO(User user);
 
-    void update(User user, UserDTO userDTO);
+    User update(User user, UserDTO userDTO);
 }

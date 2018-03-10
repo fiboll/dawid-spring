@@ -4,9 +4,11 @@ import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,7 +43,7 @@ public class UserTransformer implements IUserTransformer {
     }
 
     @Override
-    public void update(User user, UserDTO userDTO) {
+    public User update(User user, UserDTO userDTO) {
 
         user.setFirstName(userDTO.getFirstName());
         user.setId(userDTO.getId());
@@ -49,11 +51,19 @@ public class UserTransformer implements IUserTransformer {
         user.setSecondName(userDTO.getSecondName());
 
         for (TaskDTO taskDTO : userDTO.getTasks()) {
-            Optional<Task> updateTask = user.getTasks().stream().filter(t -> t.getId() == taskDTO.getId()).findFirst();
+
+            Optional<Task> updateTask = user.getTasks().stream().filter(t -> Objects.equals(t.getId(), taskDTO.getId())).findAny();
+
+            if (!updateTask.isPresent() && taskDTO.getId() != null) {
+                user.getTasks().stream().forEach(System.out::println);
+                throw new IllegalStateException("there is not task with id " + taskDTO.getId());
+            }
 
             Task updatedTask = taskTransformer.updateTask(updateTask.orElse(new Task()), taskDTO);
             user.addTask(updatedTask);
         }
+
+        return user;
 
     }
 }

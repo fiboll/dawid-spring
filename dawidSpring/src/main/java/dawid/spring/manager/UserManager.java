@@ -16,5 +16,7 @@ public interface UserManager {
     public Optional<UserDTO> findUserByNick(String nick);
 
     public void addTaskToUSer(UserDTO user, TaskDTO task);
+
+    void userUpdate(UserDTO userDTO);
 }
 

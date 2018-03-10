@@ -2,7 +2,9 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.TaskManager;
 import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
+import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Created by private on 13.01.18.
  */
@@ -22,8 +26,16 @@ public class TaskController {
     @Autowired
     private TaskManager taskManager;
 
+    @Autowired
+    private LabelDao labelDao;
+
+    @ModelAttribute("allLabels")
+    public List<Label> getAllLabels() {
+        return labelDao.getAllLabels();
+    }
+
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
-    public String updateTask(@RequestParam(value="taskId") Long taskId,
+    public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
         model.addAttribute("task", task);
@@ -35,14 +47,14 @@ public class TaskController {
                            final BindingResult bindingResult,
                            Model model) {
 
-        taskManager.updateTask(taskDTO);
+        taskDTO = taskManager.updateTask(taskDTO);
         return "redirect:user?nick=" + taskDTO.getUserName();
     }
 
     @RequestMapping(value = "/deleteTask", method = RequestMethod.GET)
-    public String deleteTask(@RequestParam(value="taskId") Long taskId,
-                             @RequestParam(value="userName") String userName,
-                           Model model) {
+    public String deleteTask(@RequestParam(value = "taskId") Long taskId,
+                             @RequestParam(value = "userName") String userName,
+                             Model model) {
 
         taskManager.deleteTask(taskId);
         return "redirect:user?nick=" + userName;

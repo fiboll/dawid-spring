@@ -100,7 +100,7 @@ public class TaskControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
                 .andExpect(MockMvcResultMatchers.model().attribute("nick", "fiboll"))
-                .andExpect(MockMvcResultMatchers.view().name("redirect:userDetails"));
+                .andExpect(MockMvcResultMatchers.view().name("redirect:user"));
     }
 
     @Test
