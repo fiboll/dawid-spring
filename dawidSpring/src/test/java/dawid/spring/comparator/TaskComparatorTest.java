@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  */
 public class TaskComparatorTest {
 
-    TaskDTO t1,t2,t3, tDate1, tDate2;
+    TaskDTO t1,t2,t3, tDate1, tDate2, tName1, tName2;
     Label  a,b,c,d;
 
     List<TaskDTO> tasks;
@@ -64,6 +64,14 @@ public class TaskComparatorTest {
         tDate1 = new TaskDTO.TaskBuilder()
                 .dueDate(new Date(1000L))
                 .build();
+
+        tName1 = new TaskDTO.TaskBuilder()
+                .name("aaaa")
+                .build();
+
+        tDate1 = new TaskDTO.TaskBuilder()
+                .name("bbbbb")
+                .build();
     }
 
     @Test
@@ -87,6 +95,11 @@ public class TaskComparatorTest {
     @Test
     public void testCompareByDate() {
         Assert.assertTrue(tDate1.compareTo(tDate2) < 0);
+    }
+
+    @Test
+    public void testCompareNames() {
+        Assert.assertTrue(tName2.compareTo(tName1) < 0);
     }
 
 
