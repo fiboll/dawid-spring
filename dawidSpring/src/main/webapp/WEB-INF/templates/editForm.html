@@ -1,51 +1,65 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+
 <form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
 
-    <table border="1">
-        <tr>
-            <td><label th:text="name" /></td>
-            <td><input type="text" th:field="*{name}" th:value="${task.name}" />
-                <div th:errors="*{name}" class="red-text">Błąd</div>
-            </td>
+    <div class="form-group">
+        <label for="nameInput" >nazwa</label>
+        <input type="text" th:field="*{name}" th:value="${task.name}" class="form-control" id="nameInput">
+        <div th:errors="*{name}" class="red-text">Błąd</div>
+    </div>
+    <div class="form-group">
+        <label for="descInput">opis</label>
+            <input type="text" th:field="*{desc}" class="form-control" id="descInput"/>
+        <div th:errors="*{desc}" class="red-text">Błąd</div>
+    </div>
+    <div class="form-group">
+            <label for="isDoneInput">zrobione</label>
+            <select th:field="*{done}" class="form-control" id="isDoneInput">
+                <option value="false">do zrobienia</option>
+                <option value="true">zrobiony</option>
+            </select>
 
-        </tr>
-        <tr>
-            <td><label th:text="description" /></td>
-            <td><input type="text" th:field="*{desc}" />
-                <div th:errors="*{desc}" class="red-text">Błąd</div>
-            </td>
-        </tr>
-         <tr>
-            <td><label th:text="zrobione" /></td>
-            <td>               <select th:field="*{done}">
-                                        <option value="false">do zrobienia</option>
-                                        <option value="true">zrobiony</option>
-                                    </select>
-
-            </td>
-
-        </tr>
-        <tr>
-            <td><label  id="finishDate" th:text="data" /></td>
-            <td> <input type="date" th:field="*{dueDate}" id="finishDate"/></td>
-        </tr>
-        <tr>
-            <td>Labelki</td>
-            <td>
-                <ul>
-                    <li th:each="label : ${#lists.sort(allLabels)}">
-                        <input type="checkbox" th:field="*{labels}" th:value="${label}" />
-                        <label th:for="${#ids.prev('labels')}"
-                               th:text="${label.description}"/>
-                    </li>
-                </ul>
-                <div th:errors="*{labels}" class="red-text">Błąd</div>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Submit"/></td>
-        </tr>
-    </table>
+    </div>
+    <div class="form-group">
+            <label  for="finishDate" th:text="data" />
+            <input type="date" th:field="*{dueDate}" class="form-control" id="finishDate"/>
+    </div>
+    <div class="form-check">
+        <label th:text="labels" />
+        <ul>
+            <li th:each="label : ${#lists.sort(allLabels)}">
+                <input type="checkbox" class="form-check-input" th:field="*{labels}" th:value="${label}" />
+                <label th:for="${#ids.prev('labels')}"
+                       th:text="${label.description}"/>
+            </li>
+        </ul>
+        <div th:errors="*{labels}" class="red-text">Błąd</div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit"/>
     <input type="hidden" th:field="*{id}">
 </form>
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
 
+</body>
+</html>
