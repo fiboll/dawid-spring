@@ -28,7 +28,7 @@ public class TaskComparator implements Comparator<TaskDTO> {
         while (true) {
 
             if (!thisLabels.hasNext() && !otherLabels.hasNext()) {
-                break;
+                return 0;
             }
 
             int result = Comparator.comparing(Iterator<Label>::hasNext).reversed()
@@ -39,6 +39,5 @@ public class TaskComparator implements Comparator<TaskDTO> {
                 return result;
             }
         }
-        return 0;
     }
 }

@@ -88,20 +88,11 @@ public class UserTableTest {
         task7.setDone(false);
 
 
-        Label a = new Label();
-        a.setDescription("a");
-
-        Label b = new Label();
-        b.setDescription("b");
-
-        Label c = new Label();
-        c.setDescription("c");
-
-        Label d = new Label();
-        d.setDescription("d");
-
-        Label e = new Label();
-        e.setDescription("e");
+        Label a = new Label("a");
+        Label b = new Label("b");
+        Label c = new Label("c");
+        Label d = new Label("d");
+        Label e = new Label("e");
 
         task1.addLabel(a);
         task2.addLabel(b);
@@ -170,9 +161,8 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        Label b = new Label();
+        Label b = new Label("a");
         b.setDescription("a");
-        taskBuilder.addLabel(b);
 
         TaskDTO taskDTO = taskBuilder.build();
 
@@ -190,8 +180,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        Label b = new Label();
-        b.setDescription("b");
+        Label b = new Label("b");
         taskBuilder.addLabel(b);
 
         TaskDTO buildTask = taskBuilder.build();

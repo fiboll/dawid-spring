@@ -5,9 +5,11 @@ import dawid.spring.model.entity.Label;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +17,19 @@ import java.util.Set;
 public class TaskDTO implements Comparable<TaskDTO> {
 
     private Long id;
+
+    @Size(min = 4)
     private String name;
+
+    @Size(min = 4)
     private String desc;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
     private Long version;
     private boolean isDone;
     private String userName;
+
+    @NotEmpty
     private Set<Label> labels = new HashSet<>();
     @Transient
     private TaskComparator defaultComparator = new TaskComparator();
