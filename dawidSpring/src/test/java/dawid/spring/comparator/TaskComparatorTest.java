@@ -69,7 +69,7 @@ public class TaskComparatorTest {
                 .name("aaaa")
                 .build();
 
-        tDate1 = new TaskDTO.TaskBuilder()
+        tName2 = new TaskDTO.TaskBuilder()
                 .name("bbbbb")
                 .build();
     }
@@ -99,7 +99,7 @@ public class TaskComparatorTest {
 
     @Test
     public void testCompareNames() {
-        Assert.assertTrue(tName2.compareTo(tName1) < 0);
+        Assert.assertTrue(tName2.compareTo(tName1) > 0);
     }
 
 
