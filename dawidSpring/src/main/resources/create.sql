@@ -45,6 +45,6 @@ DROP sequence IF EXISTS TASKS_SEQUENCE;
 DROP sequence IF EXISTS LABEL_SEQUENCE;
 
 
-create sequence USER_SEQUENCE start with 10000 increment by 1;
-create sequence TASKS_SEQUENCE start with 10000 increment by 1;
-create sequence LABEL_SEQUENCE start with 10000 increment by 1;
+create sequence USER_SEQUENCE start with 1000 increment by 1;
+create sequence TASKS_SEQUENCE start with 1000 increment by 1;
+create sequence LABEL_SEQUENCE start with 1000 increment by 1;
