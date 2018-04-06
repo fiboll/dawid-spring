@@ -1,29 +1,21 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Contacts</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-        <!-- Bootstrap core CSS -->
-        <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-
-    </head>
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/template">
     <body>
+        <div class = "container" layout:fragment="content">
 
-        <th:block th:insert="~{nav :: navi}"/>
+            <div class="jumbotron">
+                <div class="container">
+                    <h2 th:text="${user.firstName + ' ' + user.secondName}"/>
+                    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
 
-        <div class="jumbotron">
-            <div class="container">
-                 <h2 th:text="${user.firstName + ' ' + user.secondName}"/>
-                 <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                    <th:block th:insert="~{addTask :: addTaskModal}" />
 
-                <th:block th:insert="~{addTask :: addTaskModal}" />
-
+                </div>
             </div>
-        </div>
 
-        <div class = "container">
             <div class="">
                 <h1 th:text="Title" />
             </div>
@@ -42,19 +34,6 @@
             <div class="row">
                 <div th:class="col-md-9" th:include="column :: column(${done}, 'zrobione')"></div>
             </div>
-
-            <hr>
-            <th:block th:insert="~{column :: copy}"/>
-
-            <!-- Bootstrap core JavaScript
-         ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-            <script src="/resources/js/bootstrap.min.js"></script>
-            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-            <script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
-
+        </div>
     </body>
 </html>

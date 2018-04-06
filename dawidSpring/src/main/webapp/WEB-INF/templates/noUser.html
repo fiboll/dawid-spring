@@ -4,17 +4,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/template">
 
-<head>
-    <title>User not exist</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+    <head>
+        <title>User not exist</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
 
-<div layout:fragment="content">
-    <div class="alert alert-warning">
-        <strong>Warning!</strong> <span th:text="${searchNick + ' do not exist'}">test</span>
+        <div layout:fragment="content">
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> <span th:text="${searchNick + ' do not exist'}">test</span>
+            </div>
+        </div>
+    </body>
 
-</div>
-
-</body>
 </html>
