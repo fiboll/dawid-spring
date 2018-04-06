@@ -1,15 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/template">
+
 <head>
     <title>User not exist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
-<div>
-
-        	<span th:text="${searchNick + ' do not exist'}">test</span>
+<div layout:fragment="content">
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> <span th:text="${searchNick + ' do not exist'}">test</span>
 
 </div>
 
