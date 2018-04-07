@@ -1,7 +1,7 @@
 --USERS
 DELETE FROM USERS;
-INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (1, 'Dawid', 'fiboll', 'Strembicki',    0);
-INSERT INTO USERS(id,first_name, nickname, second_name, version) VALUES (2 ,'Dawid2', 'fiboll2', 'Strembicki2', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, email, password, version) VALUES (1, 'Dawid', 'fiboll', 'Strembicki', 'fiboll@o2.pl', 'qaz12345', 0);
+INSERT INTO USERS(id,first_name, nickname, second_name, email, password, version) VALUES (2 ,'Dawid2', 'fiboll2', 'Strembicki2', 'dawid@o2.pl', 'qaz12345', 0);
 
 --TASKS
 DELETE FROM TASKS;

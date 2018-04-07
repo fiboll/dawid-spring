@@ -13,6 +13,9 @@ public class UserDTO {
     private String secondName;
     private String nickname;
     private Set<TaskDTO> tasks = new HashSet<>();
+    private String password;
+    private String matchingPassword;
+    private String email;
     private Long version;
 
     public void addTask(TaskDTO task) {
@@ -70,5 +73,29 @@ public class UserDTO {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

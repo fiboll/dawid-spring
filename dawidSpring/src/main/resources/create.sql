@@ -4,6 +4,8 @@ CREATE TABLE USERS (
   first_name varchar(255) DEFAULT NULL,
   second_name varchar(255) DEFAULT NULL,
   nickname varchar(255) NOT NULL UNIQUE,
+  email varchar(255) NOT NULL UNIQUE,
+  password varchar(255) NOT NULL,
   VERSION BIGINT NOT NULL,
   PRIMARY KEY (id)
 );
