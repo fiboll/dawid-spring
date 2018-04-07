@@ -18,7 +18,7 @@
     <mvc:annotation-driven conversion-service="conversionService"/>
     <tx:annotation-driven />
     <mvc:resources mapping="/resources/**" location="/resources/" />
-
+    <mvc:resources mapping="/webjars/**" location="/webjars/"/>
 
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
     <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
