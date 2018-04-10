@@ -10,10 +10,16 @@
     </head>
     <body>
 
-        <div layout:fragment="content">
-            <div class="alert alert-warning">
-                <strong>Warning!</strong> <span th:text="${searchNick + ' do not exist'}">test</span>
+        <div class layout:fragment="content">
+
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="alert alert-warning">
+                        <strong>Warning!</strong> <span th:text="${searchNick + ' do not exist'}">test</span>
+                    </div>
+                </div>
             </div>
+
         </div>
     </body>
 

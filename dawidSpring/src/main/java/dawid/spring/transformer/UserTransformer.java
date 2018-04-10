@@ -32,6 +32,9 @@ public class UserTransformer implements IUserTransformer {
         userDTO.setId(user.getId());
         userDTO.setNickname(user.getNickname());
         userDTO.setSecondName(user.getSecondName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setMatchingPassword(user.getPassword());
         userDTO.setVersion(user.getVersion());
         for (Task task : user.getTasks()) {
             TaskDTO taskDTO = taskTransformer.entityToDao(task);
@@ -49,6 +52,8 @@ public class UserTransformer implements IUserTransformer {
         user.setId(userDTO.getId());
         user.setNickname(userDTO.getNickname());
         user.setSecondName(userDTO.getSecondName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
 
         for (TaskDTO taskDTO : userDTO.getTasks()) {
 

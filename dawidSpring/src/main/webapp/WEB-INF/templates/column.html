@@ -34,12 +34,12 @@
                 <p class="text-center">
                     <a th:href="@{'/editTask?taskId=' + ${task.id}}" class="btn btn-primary btn">edit</a>
                 </p>
-                 <td>
-                    <p class="text-center">
-                        <a th:href="@{'/deleteTask?taskId=' + ${task.id} + '&userName=' + ${task.userName}}" data-method="delete" class="btn btn-primary btn">delete</a>
-                    </p>
-                </td>
-            </td>
+			</td>
+			<td>
+				<p class="text-center">
+					<a th:href="@{'/deleteTask?taskId=' + ${task.id} + '&userName=' + ${task.userName}}" data-method="delete" class="btn btn-primary btn">delete</a>
+				</p>
+			</td>
 
 	    </tr>
 	</table>

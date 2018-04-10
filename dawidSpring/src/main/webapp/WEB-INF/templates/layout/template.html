@@ -13,12 +13,12 @@
 </head>
 <body>
 
-<th:block th:insert="~{nav :: navi}"/>
-
-    <section layout:fragment="content">
-        <p>Zawartość strony</p>
-    </section>
-
+    <th:block th:insert="~{nav :: navi}"/>
+    <main role="main">
+        <section layout:fragment="content">
+            <p>Zawartość strony</p>
+        </section>
+    </main>
 <hr>
     <th:block th:insert="~{column :: copy}"/>
 
