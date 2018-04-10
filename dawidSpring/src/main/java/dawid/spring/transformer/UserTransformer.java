@@ -60,7 +60,6 @@ public class UserTransformer implements IUserTransformer {
             Optional<Task> updateTask = user.getTasks().stream().filter(t -> Objects.equals(t.getId(), taskDTO.getId())).findAny();
 
             if (!updateTask.isPresent() && taskDTO.getId() != null) {
-                user.getTasks().stream().forEach(System.out::println);
                 throw new IllegalStateException("there is not task with id " + taskDTO.getId());
             }
 
@@ -70,5 +69,10 @@ public class UserTransformer implements IUserTransformer {
 
         return user;
 
+    }
+
+    @Override
+    public User create(UserDTO accountDto) {
+        return update(new User(), accountDto);
     }
 }

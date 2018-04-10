@@ -1,5 +1,6 @@
 package dawid.spring.manager;
 
+import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.User;
@@ -51,6 +52,13 @@ public class UserManagerImpl implements UserManager {
         User user = userDAO.findByNick(userDTO.getNickname()).orElse(new User());
         userTransformer.update(user, userDTO);
         userDAO.update(user);
+    }
+
+    @Override
+    public UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException {
+        User user = userTransformer.create(accountDto);
+        user = userDAO.update(user);
+        return userTransformer.entityToDTO(user);
     }
 
 }

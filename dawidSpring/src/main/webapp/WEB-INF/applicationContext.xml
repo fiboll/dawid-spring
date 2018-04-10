@@ -27,6 +27,10 @@
         <property name="characterEncoding" value="UTF-8" />
     </bean>
 
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/WEB-INF/messages"></property>
+    </bean>
+
     <!-- Thymeleaf Template Engine (Spring4-specific version) -->
     <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
         <property name="templateResolvers">
@@ -57,7 +61,5 @@
         </property>
 
     </bean>
-
-
 
 </beans>

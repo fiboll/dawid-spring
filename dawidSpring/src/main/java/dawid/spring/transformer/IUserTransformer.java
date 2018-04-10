@@ -11,4 +11,6 @@ public interface IUserTransformer {
     UserDTO entityToDTO(User user);
 
     User update(User user, UserDTO userDTO);
+
+    User create(UserDTO accountDto);
 }

@@ -1,7 +1,9 @@
 package dawid.spring.manager;
 
+import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
+import dawid.spring.model.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +20,7 @@ public interface UserManager {
     public void addTaskToUSer(UserDTO user, TaskDTO task);
 
     void userUpdate(UserDTO userDTO);
+
+    UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 }
 

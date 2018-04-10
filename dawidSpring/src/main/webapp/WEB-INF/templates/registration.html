@@ -18,7 +18,7 @@
     </div>
 
     <div class="container">
-        <form action="/" th:object="${user}" method="POST" enctype="utf8">
+        <form action="/user/registration" th:object="${user}" method="POST" enctype="utf8">
             <div class="form-group">
                 <label th:text="#{label.user.nickname}">nick</label>
                 <input th:field="*{nickname}"/>
