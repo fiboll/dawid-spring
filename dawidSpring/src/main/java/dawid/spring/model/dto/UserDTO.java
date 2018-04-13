@@ -30,7 +30,7 @@ public class UserDTO {
 
     @NotNull
     @NotEmpty
-    @Email
+    @org.hibernate.validator.constraints.Email
     private String email;
 
     private Long version;

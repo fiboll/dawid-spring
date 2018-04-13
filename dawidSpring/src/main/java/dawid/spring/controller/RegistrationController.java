@@ -34,13 +34,17 @@ public class RegistrationController {
     public ModelAndView registerUserAccount
             (@ModelAttribute("user") @Valid UserDTO accountDto,
              BindingResult result, WebRequest request, Errors errors) {
+
         UserDTO registered = null;
+
         if (!result.hasErrors()) {
             registered = createUserAccount(accountDto, result);
+            if (registered == null) {
+                result.rejectValue("email", "message.regError");
+            }
         }
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
+
+        System.out.println(errors);
 
         if (result.hasErrors()) {
             return new ModelAndView("registration", "user", accountDto);
