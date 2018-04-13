@@ -27,9 +27,12 @@
         <property name="characterEncoding" value="UTF-8" />
     </bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="/WEB-INF/messages"></property>
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="/locale/messages" />
+        <!--<property name="cacheSeconds" value="0" />-->
+        <!--<property name="defaultEncoding" value="UTF-8" />-->
     </bean>
+
 
     <!-- Thymeleaf Template Engine (Spring4-specific version) -->
     <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
