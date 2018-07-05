@@ -21,9 +21,4 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
         <property name="entityManagerFactory" ref="emf" />
     </bean>
-
-    <bean id="firstBean" class="dawid.spring.HelloWorld">
-        <property name="name" value="Dawid" />
-    </bean>
-
 </beans>
