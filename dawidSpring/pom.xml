@@ -3,8 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>dawid.spring</groupId>
     <artifactId>dawidSpring</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>time-manager-api</module>
+        <module>time-manager-core</module>
+        <module>timer-manager-rest</module>
+        <module>time-manager-www</module>
+    </modules>
     <name>dawidSpring</name>
     <url>http://maven.apache.org</url>
 
