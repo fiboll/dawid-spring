@@ -1,17 +1,16 @@
 package dawid.spring.manager;
 
-import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.dto.TaskDTO;
 
 /**
  * Created by private on 01.07.17.
  */
 public interface TableManager {
 
-    public void doneTask(Task task);
+    void doneTask(TaskDTO task);
 
-    public void addLabel(Task task, Label label);
+    void addLabel(TaskDTO task, TaskDTO label);
 
-    public void removeLabel(Task task, Label label);
+    void removeLabel(TaskDTO task, TaskDTO label);
     
 }
