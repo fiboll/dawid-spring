@@ -1,7 +1,7 @@
 package dawid.spring.comparator;
 
+import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Label;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -22,8 +22,8 @@ public class TaskComparator implements Comparator<TaskDTO> {
     }
 
     private static int compareLabelsList(TaskDTO task, TaskDTO otherTask) {
-        Iterator<Label> thisLabels = new TreeSet<>(task.getLabels()).iterator();
-        Iterator<Label> otherLabels = new TreeSet<>(otherTask.getLabels()).iterator();
+        Iterator<LabelDTO> thisLabels = new TreeSet<>(task.getLabels()).iterator();
+        Iterator<LabelDTO> otherLabels = new TreeSet<>(otherTask.getLabels()).iterator();
 
         while (true) {
 
@@ -31,7 +31,7 @@ public class TaskComparator implements Comparator<TaskDTO> {
                 return 0;
             }
 
-            int result = Comparator.comparing(Iterator<Label>::hasNext).reversed()
+            int result = Comparator.comparing(Iterator<LabelDTO>::hasNext).reversed()
                     .thenComparing(Iterator::next)
                     .compare(thisLabels, otherLabels);
 

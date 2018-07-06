@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "labels")
-public class Label implements Comparable<Label>{
+public class Label{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LABEL_SEQUENCE")
@@ -39,14 +39,6 @@ public class Label implements Comparable<Label>{
 
     public Label(String description) {
         this.description = description;
-    }
-
-    @Override
-    public int compareTo(Label other) {
-        return Comparator.comparing((Label label) -> StringUtils.isNumeric(label.description))
-                         .reversed()
-                         .thenComparing((Label label) -> label.getDescription())
-                         .compare(this, other);
     }
     
 //    @Override
@@ -87,5 +79,4 @@ public class Label implements Comparable<Label>{
     public void setId(Long id) {
         this.id = id;
     }
-
 }

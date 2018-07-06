@@ -7,7 +7,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>time-manager-api</module>
-        <module>time-manager-dto</module>
+        <module>time-manager-dto-api</module>
+        <module>time-manager-transformers-api</module>
+        <module>time-manager-transformers</module>
         <module>time-manager-core</module>
         <module>timer-manager-rest</module>
         <module>time-manager-www</module>

@@ -1,7 +1,6 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.comparator.TaskComparator;
-import dawid.spring.model.entity.Label;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -30,7 +29,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
     private String userName;
 
     @NotEmpty
-    private Set<Label> labels = new HashSet<>();
+    private Set<LabelDTO> labels = new HashSet<>();
     @Transient
     private TaskComparator defaultComparator = new TaskComparator();
 
@@ -70,7 +69,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
         private String desc;
         private Date dueDate;
         private boolean isDone;
-        private Set<Label> labels = new HashSet<>();
+        private Set<LabelDTO> labels;
         private String username;
         private Long version;
 
@@ -103,12 +102,12 @@ public class TaskDTO implements Comparable<TaskDTO> {
             return this;
         }
 
-        public TaskBuilder addLabel(Label label) {
+        public TaskBuilder addLabel(LabelDTO label) {
             this.labels.add(label);
             return this;
         }
 
-        public TaskBuilder labels(Set<Label> labels) {
+        public TaskBuilder labels(Set<LabelDTO> labels) {
             this.labels.addAll(labels);
             return this;
         }
@@ -184,11 +183,11 @@ public class TaskDTO implements Comparable<TaskDTO> {
         this.userName = userName;
     }
 
-    public Set<Label> getLabels() {
+    public Set<LabelDTO> getLabels() {
         return labels;
     }
 
-    public void setLabels(Set<Label> labels) {
+    public void setLabels(Set<LabelDTO> labels) {
         this.labels = labels;
     }
 }

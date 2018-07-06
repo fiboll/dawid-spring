@@ -22,7 +22,7 @@ public class TaskTransformer implements ITaskTransformer {
         builder.name(task.getName());
         builder.username(task.getUser().getNickname());
         builder.version(task.getVersion());
-        builder.labels(task.getLabels());
+        //builder.labels(task.getLabels());
         builder.id(task.getId());
 
         return builder.build();
@@ -35,7 +35,7 @@ public class TaskTransformer implements ITaskTransformer {
         task.setDone(dto.isDone());
         task.setDueDate(dto.getDueDate());
         task.setName(dto.getName());
-        task.setLabels(dto.getLabels());
+        //task.setLabels(dto.getLabels());
         return task;
     }
 
