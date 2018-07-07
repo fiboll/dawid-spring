@@ -11,6 +11,15 @@ public class LabelDTO implements Comparable<LabelDTO>{
 
     private String description;
 
+    public LabelDTO(String description, String colour) {
+        this(description);
+        this.colour = colour;
+    }
+
+    public LabelDTO(String description) {
+        this.description = description;
+    }
+
     @Override
     public int compareTo(LabelDTO other) {
         return Comparator.comparing((LabelDTO label) -> StringUtils.isNumeric(label.description))

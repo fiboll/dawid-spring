@@ -69,7 +69,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
         private String desc;
         private Date dueDate;
         private boolean isDone;
-        private Set<LabelDTO> labels;
+        private Set<LabelDTO> labels = new HashSet<>();
         private String username;
         private Long version;
 

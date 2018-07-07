@@ -31,15 +31,6 @@ public class Label{
     private Long version;
 
     public Label() {}
-
-    public Label(String description, String colour) {
-        this(description);
-        this.colour = colour;
-    }
-
-    public Label(String description) {
-        this.description = description;
-    }
     
 //    @Override
 //    public int hashCode() {
