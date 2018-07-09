@@ -43,7 +43,7 @@ public class TaskManager {
         taskDao.removeTask(deleted);
     }
 
-    public List<Label> getAvailableLebels() {
+    public List<Label> getAvailableLabels() {
         return labelDao.getAllLabels();
     }
 

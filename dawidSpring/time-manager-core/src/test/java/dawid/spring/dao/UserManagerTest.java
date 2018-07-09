@@ -1,4 +1,4 @@
-package dawid.spring;
+package dawid.spring.dao;
 
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;

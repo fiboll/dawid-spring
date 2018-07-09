@@ -4,10 +4,9 @@ import dawid.spring.comparator.TaskComparator;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
@@ -30,8 +29,8 @@ public class TaskDTO implements Comparable<TaskDTO> {
 
     @NotEmpty
     private Set<LabelDTO> labels = new HashSet<>();
-    @Transient
-    private TaskComparator defaultComparator = new TaskComparator();
+
+    private transient TaskComparator defaultComparator = new TaskComparator();
 
     public void doneTask() {
         setDone(true);

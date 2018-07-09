@@ -1,10 +1,8 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.model.adnotation.PasswordMatches;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,17 +16,14 @@ public class UserDTO {
     private String firstName;
     private String secondName;
 
-    @NotNull
     @NotEmpty
     private String nickname;
     private Set<TaskDTO> tasks = new HashSet<>();
 
-    @NotNull
     @NotEmpty
     private String password;
     private String matchingPassword;
 
-    @NotNull
     @NotEmpty
     @org.hibernate.validator.constraints.Email
     private String email;

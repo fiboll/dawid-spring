@@ -1,9 +1,6 @@
 package dawid.spring.model.entity;
 
-import org.apache.commons.lang3.StringUtils;
-
 import javax.persistence.*;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,8 +1,11 @@
 package dawid.spring.manager;
 
 import dawid.spring.exceptions.DomainException;
+import dawid.spring.model.dto.LabelDTO;
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
+import dawid.spring.provider.LabelDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +21,7 @@ public class TableManagerImpl implements TableManager {
     private static final Logger logger = Logger.getLogger(TableManagerImpl.class);
 
     @Override
-    public void doneTask(Task task) {
+    public void doneTask(TaskDTO task) {
 
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Task: %s is marked as done",  task.getId()));
@@ -28,7 +31,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public void addLabel(Task task, Label label) {
+    public void addLabel(TaskDTO task, LabelDTO label) {
 
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Remove label: %s from task: %s",  task.getId(), label.getDescription()));
@@ -38,7 +41,7 @@ public class TableManagerImpl implements TableManager {
     }
 
     @Override
-    public void removeLabel(Task task, Label label) {
+    public void removeLabel(TaskDTO task, LabelDTO label) {
         if (!task.getLabels().contains(label)) {
             throw new DomainException(String.format("Task %s doesn't contain label %s",
                     task.getId(), label.getId()));
