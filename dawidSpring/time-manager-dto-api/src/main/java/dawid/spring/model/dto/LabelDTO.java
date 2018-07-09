@@ -11,9 +11,10 @@ public class LabelDTO implements Comparable<LabelDTO>{
 
     private String description;
 
-    public LabelDTO(String description, String colour) {
+    public LabelDTO(Long id,String description, String colour) {
         this(description);
         this.colour = colour;
+        this.id = id;
     }
 
     public LabelDTO(String description) {
@@ -26,6 +27,15 @@ public class LabelDTO implements Comparable<LabelDTO>{
                 .reversed()
                 .thenComparing((LabelDTO label) -> label.getDescription())
                 .compare(this, other);
+    }
+
+    @Override public String toString() {
+        final StringBuffer sb = new StringBuffer("LabelDTO{");
+        sb.append("id=").append(id);
+        sb.append(", colour='").append(colour).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     public Long getId() {

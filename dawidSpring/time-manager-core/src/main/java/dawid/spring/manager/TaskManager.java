@@ -35,7 +35,7 @@ public class TaskManager {
 
         taskDao.update(updated);
 
-        return taskTransformer.entityToDao(updated);
+        return taskTransformer.entityToDTO(updated);
     }
 
     public void deleteTask(Long id) {
@@ -49,7 +49,7 @@ public class TaskManager {
 
     private TaskDTO findTaskById(Long taskId) {
         try {
-            return taskTransformer.entityToDao(taskDao.getTaskById(taskId));
+            return taskTransformer.entityToDTO(taskDao.getTaskById(taskId));
         } catch (NoResultException exception) {
             return null;
         }

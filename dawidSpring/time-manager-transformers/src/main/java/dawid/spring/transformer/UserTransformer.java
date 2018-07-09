@@ -4,7 +4,6 @@ import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +36,7 @@ public class UserTransformer implements IUserTransformer {
         userDTO.setMatchingPassword(user.getPassword());
         userDTO.setVersion(user.getVersion());
         for (Task task : user.getTasks()) {
-            TaskDTO taskDTO = taskTransformer.entityToDao(task);
+            TaskDTO taskDTO = taskTransformer.entityToDTO(task);
             taskDTO.setUserName(user.getNickname());
             userDTO.getTasks().add(taskDTO);
         }

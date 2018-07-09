@@ -26,10 +26,10 @@ public class TaskComparatorTest {
     @Before
     public void setup() {
 
-        a = new LabelDTO("a", "red");
-        b = new LabelDTO("b", "yellow");
-        c = new LabelDTO("c", "green");
-        d = new LabelDTO("d", "grey");
+        a = new LabelDTO(1L,"a", "red");
+        b = new LabelDTO(2L,"b", "yellow");
+        c = new LabelDTO(3L, "c", "green");
+        d = new LabelDTO(4L, "d", "grey");
 
         t1 = new TaskDTO.TaskBuilder()
                 .name("test 1")

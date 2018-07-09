@@ -11,17 +11,18 @@ import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
+import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.UserDAO;
-import dawid.spring.transformer.ITaskTransformer;
-import dawid.spring.transformer.IUserTransformer;
-import dawid.spring.transformer.TaskTransformer;
-import dawid.spring.transformer.UserTransformer;
+import dawid.spring.transformer.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import java.util.Arrays;
 import java.util.Optional;
+
+import static org.mockito.Matchers.anyString;
 
 /**
  * Created by private on 23.12.17.
@@ -33,21 +34,31 @@ public class UserTableTest {
     @Mock
     UserDAO userDAO;
 
+    @Mock
+    LabelDao labelDao;
+
     @InjectMocks
     @Spy
     IUserTransformer userTransformer = new UserTransformer();
 
+    @InjectMocks
     @Spy
     ITaskTransformer taskTransformer = new TaskTransformer();
 
     @InjectMocks
+    @Spy
     UserManager userManager = new UserManagerImpl();
 
     @Spy
     TableConfig tableConfig = new TableConfig();
 
     @InjectMocks
+    @Spy
     IUserTable userTable = new UserTable();
+
+    @InjectMocks
+    @Spy
+    ILabelTransformer labelTransformer = new LabelTransformer();
 
     @Before
     public void prepareUser() {
@@ -90,15 +101,24 @@ public class UserTableTest {
 
 
         Label a = new Label();
+        a.setId(1L);
         a.setDescription("a");
+
         Label b = new Label();
         b.setDescription("b");
+        b.setId(2L);
+
         Label c = new Label();
-        a.setDescription("c");
+        c.setDescription("c");
+        c.setId(3L);
+
         Label d = new Label();
-        a.setDescription("d");
+        d.setDescription("d");
+        d.setId(4L);
+
         Label e = new Label();
-        a.setDescription("e");
+        e.setDescription("e");
+        e.setId(5L);
 
         task1.addLabel(a);
         task2.addLabel(b);
@@ -116,7 +136,8 @@ public class UserTableTest {
         user.addTask(task6);
         user.addTask(task7);
 
-        Mockito.when(userDAO.findByNick(Mockito.anyString())).thenReturn(Optional.ofNullable(user));
+        Mockito.when(userDAO.findByNick(anyString())).thenReturn(Optional.ofNullable(user));
+        Mockito.when(labelDao.getAllLabels()).thenReturn(Arrays.asList(a,b,c,d,e));
     }
 
     @Test
@@ -168,6 +189,8 @@ public class UserTableTest {
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
         LabelDTO a = new LabelDTO("a");
+        a.setId(1L);
+        taskBuilder.addLabel(a);
         TaskDTO taskDTO = taskBuilder.build();
 
         user.get().addTask(taskDTO);
@@ -185,6 +208,9 @@ public class UserTableTest {
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
         LabelDTO b = new LabelDTO("b");
+        b.setId(2L);
+        taskBuilder.addLabel(b);
+
 
         TaskDTO buildTask = taskBuilder.build();
         user.get().addTask(buildTask);
