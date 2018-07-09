@@ -1,4 +1,4 @@
-package comparator;
+package dawid.spring.comparator.;
 
 import dawid.spring.model.dto.LabelDTO;
 import org.junit.Before;

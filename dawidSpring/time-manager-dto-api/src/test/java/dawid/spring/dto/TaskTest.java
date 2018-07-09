@@ -1,11 +1,12 @@
-package dawid.spring;
+package dawid.spring.dto;
 
 
 import dawid.spring.model.dto.TaskDTO;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Date;
+
+import static org.junit.Assert.assertEquals;
 
 public class TaskTest {
 
@@ -20,13 +21,14 @@ public class TaskTest {
                 .name("test task")
                 .dueDate(new Date(testDateLong))
                 .build();
-        Assert.assertEquals(Long.valueOf("1"), task.getId());
-        Assert.assertEquals("test desc", task.getDesc());
-        Assert.assertEquals("test task", task.getName());
 
-        Assert.assertEquals(new Date(testDateLong), task.getDueDate());
+        assertEquals(Long.valueOf("1"), task.getId());
+        assertEquals("test desc", task.getDesc());
+        assertEquals("test task", task.getName());
+
+        assertEquals(new Date(testDateLong), task.getDueDate());
         task.getDueDate().setTime(5000000);
-        Assert.assertEquals(new Date(testDateLong), task.getDueDate());
+        assertEquals(new Date(testDateLong), task.getDueDate());
 
     }
 }

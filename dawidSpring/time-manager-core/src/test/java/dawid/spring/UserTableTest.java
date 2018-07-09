@@ -5,6 +5,7 @@ import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.manager.UserManagerImpl;
 import dawid.spring.manager.UserTable;
+import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Label;
@@ -88,11 +89,16 @@ public class UserTableTest {
         task7.setDone(false);
 
 
-        Label a = new Label("a");
-        Label b = new Label("b");
-        Label c = new Label("c");
-        Label d = new Label("d");
-        Label e = new Label("e");
+        Label a = new Label();
+        a.setDescription("a");
+        Label b = new Label();
+        b.setDescription("b");
+        Label c = new Label();
+        a.setDescription("c");
+        Label d = new Label();
+        a.setDescription("d");
+        Label e = new Label();
+        a.setDescription("e");
 
         task1.addLabel(a);
         task2.addLabel(b);
@@ -161,9 +167,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        Label a = new Label("a");
-        a.setDescription("a");
-        taskBuilder.addLabel(a);
+        LabelDTO a = new LabelDTO("a");
         TaskDTO taskDTO = taskBuilder.build();
 
         user.get().addTask(taskDTO);
@@ -180,8 +184,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        Label b = new Label("b");
-        taskBuilder.addLabel(b);
+        LabelDTO b = new LabelDTO("b");
 
         TaskDTO buildTask = taskBuilder.build();
         user.get().addTask(buildTask);
