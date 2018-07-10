@@ -1,7 +1,6 @@
-package controller;
+package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
-import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;

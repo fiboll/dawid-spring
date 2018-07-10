@@ -11,14 +11,12 @@ public class LabelDTO implements Comparable<LabelDTO>{
 
     private String description;
 
+    public LabelDTO() {}
+
     public LabelDTO(Long id,String description, String colour) {
-        this(description);
+        this.description = description;
         this.colour = colour;
         this.id = id;
-    }
-
-    public LabelDTO(String description) {
-        this.description = description;
     }
 
     @Override

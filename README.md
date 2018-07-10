@@ -1,5 +1,5 @@
 # dawid-spring
 spring-for-fun
 
-run:
-jetty:run-war
+#$ run:
+mvn jetty:run --projects time-manager-www

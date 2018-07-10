@@ -29,10 +29,10 @@ public  class LabelComparatorlTest {
 
     @Before
     public void prepareTest() {
-        a = new LabelDTO("a");
-        b = new LabelDTO("b");
-        n1 = new LabelDTO("1");
-        n2 = new LabelDTO("2");
+        a = new LabelDTO(1L, "a", "");
+        b = new LabelDTO(2L, "b", "");
+        n1 = new LabelDTO(3L,"1", "");
+        n2 = new LabelDTO(4L, "2", "");
 
         labels = Stream.of(n2, a, b, n1).collect(Collectors.toList());
     }

@@ -1,4 +1,4 @@
-package dawid.spring.controller;
+package controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.TaskManager;
@@ -41,17 +41,17 @@ import java.util.Optional;
 public class TaskControllerTest {
 
     @Autowired
-    private WebApplicationContext wac;
+    WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
-    @Autowired
+//    @Autowired
     UserManager userManager;
 
-    @Autowired
+//    @Autowired
     TaskManager taskManager;
 
-    @Autowired
+//    @Autowired
     IUserTable userTable;
 
     @Before

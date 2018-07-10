@@ -1,4 +1,4 @@
-package controller;
+package dawid.spring.controller;
 
 import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.manager.UserManager;

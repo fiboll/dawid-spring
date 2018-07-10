@@ -107,7 +107,10 @@ public class TaskDTO implements Comparable<TaskDTO> {
         }
 
         public TaskBuilder labels(Set<LabelDTO> labels) {
-            this.labels.addAll(labels);
+            System.out.println(labels);
+            if (CollectionUtils.isNotEmpty(labels)) {
+                this.labels.addAll(labels);
+            }
             return this;
         }
 

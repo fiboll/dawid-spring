@@ -188,7 +188,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        LabelDTO a = new LabelDTO("a");
+        LabelDTO a = new LabelDTO(1L, "a", "");
         a.setId(1L);
         taskBuilder.addLabel(a);
         TaskDTO taskDTO = taskBuilder.build();
@@ -207,7 +207,7 @@ public class UserTableTest {
         Assert.assertTrue(user.isPresent());
 
         TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        LabelDTO b = new LabelDTO("b");
+        LabelDTO b = new LabelDTO(2L, "b", "");
         b.setId(2L);
         taskBuilder.addLabel(b);
 

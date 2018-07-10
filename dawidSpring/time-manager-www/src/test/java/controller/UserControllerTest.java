@@ -1,4 +1,4 @@
-package dawid.spring.controller;
+package controller;
 
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.Before;
