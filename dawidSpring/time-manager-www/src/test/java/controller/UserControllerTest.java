@@ -28,8 +28,7 @@ import javax.transaction.Transactional;
 @ContextConfiguration
         (
                 {
-                        "classpath:**/applicationContext.xml",
-                        "classpath:**/context_test.xml"
+                        "classpath:context_test.xml"
                 }
         )
 @Transactional

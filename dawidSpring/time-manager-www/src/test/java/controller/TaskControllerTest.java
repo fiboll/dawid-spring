@@ -5,7 +5,6 @@ import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by private on 13.01.18.
  */
@@ -33,8 +34,7 @@ import java.util.Optional;
 @ContextConfiguration
         (
                 {
-                        "classpath:**/applicationContext.xml",
-                        "classpath:**/context_test.xml"
+                        "classpath:context_test.xml"
                 }
         )
 @Rollback
@@ -45,13 +45,13 @@ public class TaskControllerTest {
 
     private MockMvc mockMvc;
 
-//    @Autowired
+    @Autowired
     UserManager userManager;
 
-//    @Autowired
+    @Autowired
     TaskManager taskManager;
 
-//    @Autowired
+    @Autowired
     IUserTable userTable;
 
     @Before
@@ -63,10 +63,10 @@ public class TaskControllerTest {
     @Test
     public void testEditTaskPost() throws Exception {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
-        Assert.assertTrue(user.isPresent());
+        assertTrue(user.isPresent());
 
         Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
-        Assert.assertTrue(task.isPresent());
+        assertTrue(task.isPresent());
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/editTask")
                 .param("id", String.valueOf(task.get().getId()))
@@ -133,10 +133,10 @@ public class TaskControllerTest {
     @Test
     public void testDeleteTask() throws Exception {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
-        Assert.assertTrue(user.isPresent());
+        assertTrue(user.isPresent());
 
         Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
-        Assert.assertTrue(task.isPresent());
+        assertTrue(task.isPresent());
 
         Long deletedId = task.get().getId();
 
@@ -155,10 +155,10 @@ public class TaskControllerTest {
                 .filter((t) -> t.getId() == deletedId)
                 .findAny();
 
-        Assert.assertTrue(!notExistTask.isPresent());
+        assertTrue(!notExistTask.isPresent());
 
         Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
-        Assert.assertTrue(!notExistTask.isPresent());
+        assertTrue(!notExistTask.isPresent());
 
     }
 

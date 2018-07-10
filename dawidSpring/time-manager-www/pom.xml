@@ -22,6 +22,7 @@
             <groupId>dawid.spring</groupId>
             <artifactId>time-manager-transformers</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
@@ -29,6 +30,15 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>dawid.spring</groupId>
+            <artifactId>time-manager-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -76,6 +86,8 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>${thymeleaf.layout.verison}</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
