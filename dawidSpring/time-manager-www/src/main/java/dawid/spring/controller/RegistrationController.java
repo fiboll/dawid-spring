@@ -1,9 +1,8 @@
-package dawid.spring.controller;
+package controller;
 
 import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.UserDTO;
-import dawid.spring.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

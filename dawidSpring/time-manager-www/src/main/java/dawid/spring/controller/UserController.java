@@ -1,4 +1,4 @@
-package dawid.spring.controller;
+package controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.TaskManager;
@@ -88,7 +88,6 @@ public class UserController {
             model.addAttribute("newTask", new Task());
             return "redirect:user";
         }
-
 
         return "redirect:noUser";
     }
