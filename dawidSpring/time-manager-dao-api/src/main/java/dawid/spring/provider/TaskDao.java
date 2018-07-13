@@ -9,12 +9,12 @@ import java.util.Optional;
  */
 public interface TaskDao {
 
-    public Task getTaskById(Long id);
+    Task getTaskById(Long id);
 
-    public void addTask(Task user);
+    void addTask(Task user);
 
-    public Task update(Task task);
+    Task update(Task task);
 
-    public void removeTask(Task task);
+    void removeTask(Task task);
 
 }

@@ -10,16 +10,16 @@ import java.util.Optional;
  */
 public interface UserDAO {
 
-    public Optional<User> getUserById(Long id);
+    Optional<User> getUserById(Long id);
 
-    public void addUser(User user);
+    void addUser(User user);
 
-    public void removeUser(User user);
+    void removeUser(User user);
 
-    public User update(User user);
+    User update(User user);
 
-    public List<User> findAll();
+    List<User> findAll();
 
-    public Optional<User> findByNick(String nick);
+    Optional<User> findByNick(String nick);
 
 }
