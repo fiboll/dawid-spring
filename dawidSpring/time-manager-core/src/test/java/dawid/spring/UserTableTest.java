@@ -22,6 +22,8 @@ import org.mockito.*;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 
 /**
@@ -62,70 +64,29 @@ public class UserTableTest {
 
     @Before
     public void prepareUser() {
-
         MockitoAnnotations.initMocks(this);
-
         user = new User();
 
-        Task task =  new Task();
-        task.setName("test");
-        task.setDone(false);
+        Task task = prepareTask("test", false);
+        Task task1 = prepareTask("test1", false);
+        Task task2 = prepareTask("test2", true);
+        Task task3 = prepareTask("test3", true);
+        Task task4 = prepareTask("test4", false);
+        Task task5 = prepareTask("test5", false);
+        Task task6 = prepareTask("test6", false);
+        Task task7 = prepareTask("test7", false);
 
-        Task task1 = new Task();
-        task1.setName("test1");
-        task1.setDone(false);
+        Label a = prepareLabel(1L, "a");
+        Label b = prepareLabel(2L, "b");
+        Label c = prepareLabel(3L, "c");
+        Label d = prepareLabel(4L, "d");
+        Label e = prepareLabel(5L, "e");
 
-        Task task2 = new Task();
-        task2.setName("test2");
-        task2.setDone(true);
-
-        Task task3 = new Task();
-        task3.setName("test3");
-        task3.setDone(true);
-
-        Task task4 = new Task();
-        task4.setName("test4");
-        task4.setDone(false);
-
-        Task task5 = new Task();
-        task5.setName("test5");
-        task5.setDone(false);
-
-        Task task6 = new Task();
-        task6.setName("test6");
-        task6.setDone(false);
-
-        Task task7 = new Task();
-        task7.setName("test7");
-        task7.setDone(false);
-
-
-        Label a = new Label();
-        a.setId(1L);
-        a.setDescription("a");
-
-        Label b = new Label();
-        b.setDescription("b");
-        b.setId(2L);
-
-        Label c = new Label();
-        c.setDescription("c");
-        c.setId(3L);
-
-        Label d = new Label();
-        d.setDescription("d");
-        d.setId(4L);
-
-        Label e = new Label();
-        e.setDescription("e");
-        e.setId(5L);
-
+        task.addLabel(c);
+        task.addLabel(e);
         task1.addLabel(a);
         task2.addLabel(b);
         task3.addLabel(e);
-        task.addLabel(c);
-        task.addLabel(e);
-
 
         user.addTask(task);
         user.addTask(task1);
@@ -137,95 +98,108 @@ public class UserTableTest {
         user.addTask(task7);
 
         Mockito.when(userDAO.findByNick(anyString())).thenReturn(Optional.ofNullable(user));
-        Mockito.when(labelDao.getAllLabels()).thenReturn(Arrays.asList(a,b,c,d,e));
+        Mockito.when(labelDao.getAllLabels()).thenReturn(Arrays.asList(a, b, c, d, e));
     }
 
     @Test
     public void testIsDone() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
-
-        Assert.assertEquals(2, userTable.getDoneTasks(user.get()).size());
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals(2, userTable.getDoneTasks(user.get()).size());
     }
 
     @Test
-    public void testIsDoneAfterDone() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
+    public void testIsDoneAfterDoneTask() {
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals(2, userTable.getDoneTasks(user.get()).size());
 
-        Assert.assertEquals(2, userTable.getDoneTasks(user.get()).size());
+        doneOneTask(user.get());
 
-        user.get().getTasks().stream()
-            .filter(task -> !task.isDone())
-            .findFirst()
-            .ifPresent(TaskDTO::doneTask);
+        assertEquals(3, userTable.getDoneTasks(user.get()).size());
+    }
 
-        Assert.assertEquals(3, userTable.getDoneTasks(user.get()).size());
-
+    private void doneOneTask(UserDTO user) {
+        user.getTasks().stream()
+                .filter(task -> task.isDone() == false)
+                .findAny()
+                .ifPresent(TaskDTO::doneTask);
     }
 
     @Test
     public void testIsDoing() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
 
-        Assert.assertEquals(1, userTable.getDoing(user.get()).size());
-        Assert.assertEquals("test1", userTable.getDoing(user.get()).get(0).getName());
+        assertEquals(1, userTable.getDoing(user.get()).size());
+        assertEquals("test1", userTable.getDoing(user.get()).get(0).getName());
     }
 
     @Test
     public void testGetNextToDo() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
 
-        Assert.assertEquals(3, userTable.getNextToDo(user.get()).size());
-        Assert.assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
+        assertEquals(3, userTable.getNextToDo(user.get()).size());
+        assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
     }
 
     @Test
     public void testIsDoingAfterAddTask() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
+        Optional<UserDTO> user = findUser();
 
-        TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        LabelDTO a = new LabelDTO(1L, "a", "");
-        a.setId(1L);
-        taskBuilder.addLabel(a);
-        TaskDTO taskDTO = taskBuilder.build();
+        assertTrue(user.isPresent());
+
+        TaskDTO taskDTO = new TaskDTO.TaskBuilder()
+                .name("addedTask")
+                .isDone(false)
+                .addLabel(new LabelDTO(1L, "a", ""))
+                .build();
 
         user.get().addTask(taskDTO);
-        user.get().addTask(taskDTO);
 
-        Assert.assertEquals(1, userTable.getDoing(user.get()).size());
-        Assert.assertEquals("addedTask", userTable.getDoing(user.get()).get(0).getName());
-
+        assertEquals(1, userTable.getDoing(user.get()).size());
+        assertEquals("addedTask", userTable.getDoing(user.get()).get(0).getName());
     }
 
     @Test
     public void testGetNextToDoAfterAddTask() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
 
-        TaskDTO.TaskBuilder taskBuilder = new TaskDTO.TaskBuilder().name("addedTask").isDone(false);
-        LabelDTO b = new LabelDTO(2L, "b", "");
-        b.setId(2L);
-        taskBuilder.addLabel(b);
+        TaskDTO addedTask = new TaskDTO.TaskBuilder()
+                .name("addedTask")
+                .isDone(false)
+                .addLabel(new LabelDTO(2L, "b", ""))
+                .build();
 
-
-        TaskDTO buildTask = taskBuilder.build();
-        user.get().addTask(buildTask);
-
-        Assert.assertEquals(3, userTable.getNextToDo(user.get()).size());
-        Assert.assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
-
+        user.get().addTask(addedTask);
+        assertEquals(3, userTable.getNextToDo(user.get()).size());
+        assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
     }
 
     @Test
     public void testGetBacklogTask() {
-        Optional<UserDTO> user = userManager.findUserByNick("Dawid");
-        Assert.assertTrue(user.isPresent());
-
-        Assert.assertEquals(2, userTable.getBacklogTask(user.get()).size());
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals(2, userTable.getBacklogTask(user.get()).size());
     }
 
+    private static Label prepareLabel(Long id, String description) {
+        Label label = new Label();
+        label.setId(id);
+        label.setDescription(description);
+        return label;
+    }
+
+    private static Task prepareTask(String test, boolean isDone) {
+        Task task = new Task();
+        task.setName(test);
+        task.setDone(isDone);
+        return task;
+    }
+
+    private Optional<UserDTO> findUser() {
+        return userManager.findUserByNick("Dawid");
+    }
 }

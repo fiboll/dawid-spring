@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface IUserTable {
 
-    public List<TaskDTO> getDoneTasks(UserDTO user);
+    List<TaskDTO> getDoneTasks(UserDTO user);
 
-    public List<TaskDTO> getDoing(UserDTO user);
+    List<TaskDTO> getDoing(UserDTO user);
 
-    public List<TaskDTO> getNextToDo(UserDTO user);
+    List<TaskDTO> getNextToDo(UserDTO user);
 
-    public List<TaskDTO> getBacklogTask(UserDTO user);
+    List<TaskDTO> getBacklogTask(UserDTO user);
 }
