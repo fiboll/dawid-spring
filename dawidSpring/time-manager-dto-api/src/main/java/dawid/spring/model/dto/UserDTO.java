@@ -31,7 +31,6 @@ public class UserDTO {
     private Long version;
 
     public void addTask(TaskDTO task) {
-
         if (!tasks.contains(task)) {
             tasks.add(task);
         }

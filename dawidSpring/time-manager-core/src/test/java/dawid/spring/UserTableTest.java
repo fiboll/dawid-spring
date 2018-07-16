@@ -105,14 +105,14 @@ public class UserTableTest {
 
     @Test
     public void shouldReturnValidNumberOfDoneTasks() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
     }
 
     @Test
     public void shouldReturnValidNumberOfDoneTaskAfterDoneOneTasks() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
 
@@ -130,7 +130,7 @@ public class UserTableTest {
 
     @Test
     public void shouldReturnValidNumberOfDoingTasks() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
 
         assertEquals(1, userTable.getDoingTasks(user.get()).size());
@@ -139,25 +139,25 @@ public class UserTableTest {
 
     @Test
     public void shouldReturnValidNumberOfNextToDoTasks() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
         assertEquals(3, userTable.getNextToDoTasks(user.get()).size());
     }
 
     @Test
     public void shouldReturnValidNextToDoTask() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
         assertEquals("test", userTable.getNextToDoTasks(user.get()).get(0).getName());
     }
 
     @Test
     public void shouldReturnValidIsDoingAfterAddTask() {
-        Optional<UserDTO> user = findUser();
+        var user= findUser();
 
         assertTrue(user.isPresent());
 
-        TaskDTO taskDTO = new TaskDTO.TaskBuilder()
+        var taskDTO = new TaskDTO.TaskBuilder()
                 .name("addedTask")
                 .isDone(false)
                 .addLabel(new LabelDTO(1L, "a", ""))
@@ -171,10 +171,10 @@ public class UserTableTest {
 
     @Test
     public void shouldReturnValidGetNextToDoAfterAddTask() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
 
-        TaskDTO addedTask = new TaskDTO.TaskBuilder()
+        var addedTask = new TaskDTO.TaskBuilder()
                 .name("addedTask")
                 .isDone(false)
                 .addLabel(new LabelDTO(2L, "b", ""))
@@ -186,7 +186,7 @@ public class UserTableTest {
     }
 
     public void shouldReturnValidNumberOfGetBacklogTask() {
-        Optional<UserDTO> user = findUser();
+        var user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getBacklogTasks(user.get()).size());
     }
@@ -212,14 +212,14 @@ public class UserTableTest {
     }
 
     private static Label prepareLabel(Long id, String description) {
-        Label label = new Label();
+        var label = new Label();
         label.setId(id);
         label.setDescription(description);
         return label;
     }
 
     private static Task prepareTask(String test, boolean isDone) {
-        Task task = new Task();
+        var task = new Task();
         task.setName(test);
         task.setDone(isDone);
         return task;

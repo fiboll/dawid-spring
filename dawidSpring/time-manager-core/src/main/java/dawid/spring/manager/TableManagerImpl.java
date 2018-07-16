@@ -22,7 +22,6 @@ public class TableManagerImpl implements TableManager {
 
     @Override
     public void doneTask(TaskDTO task) {
-
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Task: %s is marked as done",  task.getId()));
         }

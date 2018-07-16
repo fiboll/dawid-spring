@@ -43,8 +43,6 @@ public class RegistrationController {
             }
         }
 
-        System.out.println(errors);
-
         if (result.hasErrors()) {
             return new ModelAndView("registration", "user", accountDto);
         }
@@ -54,12 +52,10 @@ public class RegistrationController {
     }
 
     private UserDTO createUserAccount(UserDTO accountDto, BindingResult result) {
-        UserDTO registered = null;
         try {
-            registered = userManager.registerNewUserAccount(accountDto);
+            return userManager.registerNewUserAccount(accountDto);
         } catch (EmailExistsException e) {
             return null;
         }
-        return registered;
     }
 }
