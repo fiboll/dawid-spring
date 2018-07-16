@@ -65,7 +65,7 @@ public class TaskControllerTest {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
         assertTrue(user.isPresent());
 
-        Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
+        Optional<TaskDTO> task = userTable.getNextToDoTasks(user.get()).stream().findAny();
         assertTrue(task.isPresent());
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/editTask")
@@ -135,7 +135,7 @@ public class TaskControllerTest {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
         assertTrue(user.isPresent());
 
-        Optional<TaskDTO> task = userTable.getNextToDo(user.get()).stream().findAny();
+        Optional<TaskDTO> task = userTable.getNextToDoTasks(user.get()).stream().findAny();
         assertTrue(task.isPresent());
 
         Long deletedId = task.get().getId();

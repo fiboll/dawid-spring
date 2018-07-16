@@ -12,9 +12,9 @@ public interface IUserTable {
 
     List<TaskDTO> getDoneTasks(UserDTO user);
 
-    List<TaskDTO> getDoing(UserDTO user);
+    List<TaskDTO> getDoingTasks(UserDTO user);
 
-    List<TaskDTO> getNextToDo(UserDTO user);
+    List<TaskDTO> getNextToDoTasks(UserDTO user);
 
-    List<TaskDTO> getBacklogTask(UserDTO user);
+    List<TaskDTO> getBacklogTasks(UserDTO user);
 }

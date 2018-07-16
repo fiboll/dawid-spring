@@ -1,6 +1,7 @@
 package dawid.spring;
 
 import dawid.spring.config.TableConfig;
+import dawid.spring.exceptions.DomainException;
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.manager.UserManagerImpl;
@@ -19,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
+import javax.persistence.Entity;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -121,7 +123,7 @@ public class UserTableTest {
 
     private void doneOneTask(UserDTO user) {
         user.getTasks().stream()
-                .filter(task -> task.isDone() == false)
+                .filter(task -> !task.isDone())
                 .findAny()
                 .ifPresent(TaskDTO::doneTask);
     }
@@ -131,27 +133,26 @@ public class UserTableTest {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
 
-        assertEquals(1, userTable.getDoing(user.get()).size());
-        assertEquals("test1", userTable.getDoing(user.get()).get(0).getName());
+        assertEquals(1, userTable.getDoingTasks(user.get()).size());
+        assertEquals("test1", userTable.getDoingTasks(user.get()).get(0).getName());
     }
 
     @Test
     public void shouldReturnValidNumberOfNextToDoTasks() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
-        assertEquals(3, userTable.getNextToDo(user.get()).size());
-        assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
+        assertEquals(3, userTable.getNextToDoTasks(user.get()).size());
     }
 
     @Test
     public void shouldReturnValidNextToDoTask() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
-        assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
+        assertEquals("test", userTable.getNextToDoTasks(user.get()).get(0).getName());
     }
 
     @Test
-    public void testIsDoingAfterAddTask() {
+    public void shouldReturnValidIsDoingAfterAddTask() {
         Optional<UserDTO> user = findUser();
 
         assertTrue(user.isPresent());
@@ -164,12 +165,12 @@ public class UserTableTest {
 
         user.get().addTask(taskDTO);
 
-        assertEquals(1, userTable.getDoing(user.get()).size());
-        assertEquals("addedTask", userTable.getDoing(user.get()).get(0).getName());
+        assertEquals(1, userTable.getDoingTasks(user.get()).size());
+        assertEquals("addedTask", userTable.getDoingTasks(user.get()).get(0).getName());
     }
 
     @Test
-    public void testGetNextToDoAfterAddTask() {
+    public void shouldReturnValidGetNextToDoAfterAddTask() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
 
@@ -180,15 +181,34 @@ public class UserTableTest {
                 .build();
 
         user.get().addTask(addedTask);
-        assertEquals(3, userTable.getNextToDo(user.get()).size());
-        assertEquals("addedTask", userTable.getNextToDo(user.get()).get(0).getName());
+        assertEquals(3, userTable.getNextToDoTasks(user.get()).size());
+        assertEquals("addedTask", userTable.getNextToDoTasks(user.get()).get(0).getName());
     }
 
-    @Test
-    public void testGetBacklogTask() {
+    public void shouldReturnValidNumberOfGetBacklogTask() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
-        assertEquals(2, userTable.getBacklogTask(user.get()).size());
+        assertEquals(2, userTable.getBacklogTasks(user.get()).size());
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetBacklogTasksWithNullUser() {
+        userTable.getBacklogTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetNextToDosWithNullUser() {
+        userTable.getNextToDoTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetDoingWithNullUser() {
+        userTable.getDoingTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetDoneTasksWithNullUser() {
+        userTable.getDoneTasks(null);
     }
 
     private static Label prepareLabel(Long id, String description) {

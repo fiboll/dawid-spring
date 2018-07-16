@@ -56,9 +56,9 @@ public class UserController {
 
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
-            model.addAttribute("backlog",  userTable.getBacklogTask(user.get()));
-            model.addAttribute("doing",  userTable.getDoing(user.get()));
-            model.addAttribute("nextToDo",  userTable.getNextToDo(user.get())) ;
+            model.addAttribute("backlog",  userTable.getBacklogTasks(user.get()));
+            model.addAttribute("doing",  userTable.getDoingTasks(user.get()));
+            model.addAttribute("nextToDo",  userTable.getNextToDoTasks(user.get())) ;
             model.addAttribute("done",  userTable.getDoneTasks(user.get())) ;
 
             model.addAttribute("newTask", new Task());
