@@ -102,14 +102,14 @@ public class UserTableTest {
     }
 
     @Test
-    public void testIsDone() {
+    public void shouldReturnValidNumberOfDoneTasks() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
     }
 
     @Test
-    public void testIsDoneAfterDoneTask() {
+    public void shouldReturnValidNumberOfDoneTaskAfterDoneOneTasks() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
@@ -127,7 +127,7 @@ public class UserTableTest {
     }
 
     @Test
-    public void testIsDoing() {
+    public void shouldReturnValidNumberOfDoingTasks() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
 
@@ -136,11 +136,17 @@ public class UserTableTest {
     }
 
     @Test
-    public void testGetNextToDo() {
+    public void shouldReturnValidNumberOfNextToDoTasks() {
         Optional<UserDTO> user = findUser();
         assertTrue(user.isPresent());
-
         assertEquals(3, userTable.getNextToDo(user.get()).size());
+        assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
+    }
+
+    @Test
+    public void shouldReturnValidNextToDoTask() {
+        Optional<UserDTO> user = findUser();
+        assertTrue(user.isPresent());
         assertEquals("test", userTable.getNextToDo(user.get()).get(0).getName());
     }
 
