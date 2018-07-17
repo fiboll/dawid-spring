@@ -17,6 +17,7 @@ public class LabelDaoImpl implements LabelDao {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Label> getAllLabels() {
         return em.createQuery("SELECT DISTINCT l FROM Label l FETCH ALL PROPERTIES").getResultList();
     }

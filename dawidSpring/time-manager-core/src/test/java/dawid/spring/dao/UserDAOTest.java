@@ -4,6 +4,7 @@ import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
 import dawid.spring.provider.UserDAO;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Optional;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by dawid on 02.06.17.
@@ -28,47 +31,37 @@ public class UserDAOTest {
     private UserDAO userDAO;
 
     @Test
-    public void testGetUserById() {
-        User user = new User.UserBuilder()
-                .nickname("fiboll")
-                .firstName("Dawid")
-                .secondName("Strembicki")
-                .build();
+    public void testFindUserByNick() {
+        Optional<User> foundUser = userDAO.findByNick("fiboll");
+        assertTrue(foundUser.isPresent());
 
-        userDAO.addUser(user);
-        Optional<User> findedUser = userDAO.getUserById(user.getId());
+        User user = foundUser.get();
 
-        Assert.assertTrue(findedUser.isPresent());
-
-        user = findedUser.get();
-
-        Assert.assertEquals("Dawid", user.getFirstName());
-        Assert.assertEquals("Strembicki", user.getSecondName());
-        Assert.assertEquals("fiboll", user.getNickname());
+        assertEquals("Dawid", user.getFirstName());
+        assertEquals("Strembicki", user.getSecondName());
+        assertEquals("fiboll@o2.pl", user.getEmail());
+        assertEquals("qaz12345", user.getPassword());
+        assertEquals("fiboll", user.getNickname());
     }
 
     @Test
     public void testAddUser() {
-        User user = new User.UserBuilder()
-                .firstName("Jan")
-                .secondName("Kowalski")
-                .nickname("ktoś")
-                .build();
-        Assert.assertNotNull(user);
-        System.out.println(user);
+        User user = new User();
+        user.setFirstName("Jan");
+        user.setSecondName("Kowalski");
+        user.setNickname("ktoś");
+        user.setPassword("password");
+        user.setEmail("email@o2.pl");
+        userDAO.addUser(user);
+
+        assertTrue(userDAO.findAll().size() == 3);
     }
 
     @Test
     public void testDeleteUser() {
-        User user = new User.UserBuilder()
-                .firstName("Jan")
-                .secondName("Kowalski")
-                .nickname("ktoś")
-                .build();
-        Assert.assertNotNull(user);
-
-        userDAO.addUser(user);
-        userDAO.removeUser(user);
+        userDAO.removeUser(findKnownUserWithId(1L));
+        userDAO.removeUser(findKnownUserWithId(2L));
+        assertTrue(userDAO.findAll().isEmpty());
     }
 
     @Test
@@ -83,6 +76,15 @@ public class UserDAOTest {
 
         user.addTask(task);
         user = userDAO.update(user);
+        assertTrue(user.getId() != null);
+        assertTrue(user.getTasks().size() == 8);
     }
 
+    private User findKnownUserWithId(long id) {
+        return userDAO.getUserById(id).orElseThrow(() -> new IllegalStateException("can find user"));
+    }
+
+    private User findKnownUserWithNick(String nick) {
+        return userDAO.findByNick(nick).orElseThrow(() -> new IllegalStateException("can find user"));
+    }
 }

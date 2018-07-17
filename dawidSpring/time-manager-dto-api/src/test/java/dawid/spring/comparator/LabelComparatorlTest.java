@@ -19,8 +19,8 @@ import static org.junit.Assert.assertTrue;
  */
 public  class LabelComparatorlTest {
 
-    LabelDTO a;
-    LabelDTO b;
+    private LabelDTO a;
+    private LabelDTO b;
 
     LabelDTO n1;
     LabelDTO n2;

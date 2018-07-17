@@ -64,14 +64,6 @@ public class User {
     public User() {
     }
 
-    private User(UserBuilder builder) {
-        id = builder.id;
-        firstName = builder.firstName;
-        secondName = builder.secondName;
-        nickname = builder.nickname;
-        tasks = new HashSet<>();
-    }
-
     public void addTask(Task task) {
 
         if (tasks == null) {
@@ -90,37 +82,6 @@ public class User {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
-    public static final class UserBuilder {
-
-        private Long id;
-        private String firstName;
-        private String secondName;
-        private String nickname;
-
-        public UserBuilder id(long id) {
-            this.id = id;
-            return this;
-        }
-
-        public UserBuilder firstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public UserBuilder secondName(String secondName) {
-            this.secondName = secondName;
-            return this;
-        }
-
-        public UserBuilder nickname(String nickname) {
-            this.nickname = nickname;
-            return this;
-        }
-
-        public User build() {
-            return new User(this);
-        }
-    }
 
     public String getFirstName() {
         return firstName;

@@ -185,6 +185,7 @@ public class UserTableTest {
         assertEquals("addedTask", userTable.getNextToDoTasks(user.get()).get(0).getName());
     }
 
+    @Test
     public void shouldReturnValidNumberOfGetBacklogTask() {
         var user = findUser();
         assertTrue(user.isPresent());

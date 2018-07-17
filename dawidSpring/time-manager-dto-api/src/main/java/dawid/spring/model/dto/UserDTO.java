@@ -38,6 +38,81 @@ public class UserDTO {
         task.setUserName(this.getNickname());
     }
 
+    private UserDTO(UserBuilder builder) {
+        id = builder.id;
+        firstName = builder.firstName;
+        secondName = builder.secondName;
+        nickname = builder.nickname;
+        password = builder.password;
+        matchingPassword = builder.matchingPassword;
+        email = builder.email;
+        version = builder.version;
+        tasks = builder.tasks;
+    }
+
+    public static final class UserBuilder {
+
+        private Long id;
+        private String firstName;
+        private String secondName;
+        private String nickname;
+        private String password;
+        private String matchingPassword;
+        private String email;
+        private Long version;
+        private Set<TaskDTO> tasks = new HashSet<>();
+
+        public UserBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public UserBuilder secondName(String secondName) {
+            this.secondName = secondName;
+            return this;
+        }
+
+        public UserBuilder nickname(String nickname) {
+            this.nickname = nickname;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder matchingPassword(String matchingPassword) {
+            this.matchingPassword = matchingPassword;
+            return this;
+        }
+
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder tasks(Set<TaskDTO> tasks) {
+            this.tasks = tasks;
+            return this;
+        }
+
+        public UserBuilder version(Long version) {
+            this.version = version;
+            return this;
+        }
+
+
+        public UserDTO build() {
+            return new UserDTO(this);
+        }
+    }
+
     public Long getId() {
         return id;
     }

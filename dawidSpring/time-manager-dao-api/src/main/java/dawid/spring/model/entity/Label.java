@@ -16,9 +16,9 @@ public class Label{
     @SequenceGenerator(name = "LABEL_SEQUENCE", sequenceName = "LABEL_SEQUENCE", allocationSize = 1)
     private Long id;
 
-    String colour;
+    private String colour;
 
-    String description;
+    private String description;
 
     @ManyToMany(mappedBy = "labels")
     private Set<Task> tasks = new HashSet<>();

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toSet;
+
 /**
  * Created by private on 20.01.18.
  */
@@ -21,27 +23,29 @@ public class UserTransformer implements IUserTransformer {
 
     @Override
     public UserDTO entityToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
+        var builder = new UserDTO.UserBuilder();
 
         if (user == null) {
-            return userDTO;
+            return builder.build();
         }
 
-        userDTO.setFirstName(user.getFirstName());
-        userDTO.setId(user.getId());
-        userDTO.setNickname(user.getNickname());
-        userDTO.setSecondName(user.getSecondName());
-        userDTO.setEmail(user.getEmail());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setMatchingPassword(user.getPassword());
-        userDTO.setVersion(user.getVersion());
-        for (Task task : user.getTasks()) {
-            TaskDTO taskDTO = taskTransformer.entityToDTO(task);
-            taskDTO.setUserName(user.getNickname());
-            userDTO.getTasks().add(taskDTO);
-        }
+        builder.firstName(user.getFirstName());
+        builder.id(user.getId());
+        builder.nickname(user.getNickname());
+        builder.secondName(user.getSecondName());
+        builder.email(user.getEmail());
+        builder.password(user.getPassword());
+        builder.matchingPassword(user.getPassword());
+        builder.version(user.getVersion());
 
-        return userDTO;
+        var tasks = user.getTasks().stream()
+                .map(taskTransformer::entityToDTO)
+                .collect(toSet());
+        tasks.forEach(taskDTO -> taskDTO.setUserName(user.getNickname()));
+
+        builder.tasks(tasks);
+
+        return builder.build();
     }
 
     @Override
