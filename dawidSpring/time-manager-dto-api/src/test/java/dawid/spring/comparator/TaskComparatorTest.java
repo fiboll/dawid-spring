@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -18,10 +19,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class TaskComparatorTest {
 
-    TaskDTO t1,t2,t3, tDate1, tDate2, tName1, tName2;
-    LabelDTO a,b,c,d;
+    private TaskDTO t1,t2,t3, tDate1, tDate2, tName1, tName2;
+    private LabelDTO a,b,c,d;
 
-    List<TaskDTO> tasks;
+    private List<TaskDTO> tasks;
 
     @Before
     public void setup() {
@@ -63,7 +64,7 @@ public class TaskComparatorTest {
                     .dueDate(new Date(100L))
                     .build();
 
-        tDate1 = new TaskDTO.TaskBuilder()
+        tDate2 = new TaskDTO.TaskBuilder()
                 .dueDate(new Date(1000L))
                 .build();
 
@@ -82,7 +83,7 @@ public class TaskComparatorTest {
         List<TaskDTO> sorted = Stream.of(t3, t1, t2)
                                       .sorted()
                                       .collect(toList());
-        assertTrue(tasks.equals(sorted));
+        assertEquals(tasks,sorted);
     }
 
 

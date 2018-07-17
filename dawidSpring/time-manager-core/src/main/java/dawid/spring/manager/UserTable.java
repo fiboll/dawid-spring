@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-
 /**
  * Created by private on 23.12.17.
  */
@@ -19,7 +16,7 @@ import static java.util.Objects.requireNonNull;
 public class UserTable implements IUserTable {
 
     @Autowired
-    TableConfig tableConfig;
+    private TableConfig tableConfig;
 
     @Override
     public List<TaskDTO> getDoneTasks(UserDTO user) {

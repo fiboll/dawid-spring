@@ -22,10 +22,10 @@ public  class LabelComparatorlTest {
     private LabelDTO a;
     private LabelDTO b;
 
-    LabelDTO n1;
-    LabelDTO n2;
+    private LabelDTO n1;
+    private LabelDTO n2;
 
-    List<LabelDTO> labels;
+    private List<LabelDTO> labels;
 
     @Before
     public void prepareTest() {

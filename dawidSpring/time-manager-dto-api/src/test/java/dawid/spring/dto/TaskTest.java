@@ -13,7 +13,7 @@ public class TaskTest {
     @Test
     public void testTaskBuild() {
 
-        long testDateLong = 10000000000l;
+        long testDateLong = 10000000000L;
 
         TaskDTO task = new TaskDTO.TaskBuilder()
                 .id(1L)

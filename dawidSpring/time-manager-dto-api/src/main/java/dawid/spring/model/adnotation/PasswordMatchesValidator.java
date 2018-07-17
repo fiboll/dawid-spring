@@ -5,7 +5,7 @@ import dawid.spring.model.dto.UserDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
+class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
      
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {       

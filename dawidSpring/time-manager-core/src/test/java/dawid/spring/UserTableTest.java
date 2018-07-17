@@ -15,12 +15,10 @@ import dawid.spring.model.entity.User;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.*;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.*;
 
-import javax.persistence.Entity;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -36,33 +34,33 @@ public class UserTableTest {
     private User user;
 
     @Mock
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Mock
-    LabelDao labelDao;
+    private LabelDao labelDao;
 
     @InjectMocks
     @Spy
-    IUserTransformer userTransformer = new UserTransformer();
+    private IUserTransformer userTransformer = new UserTransformer();
 
     @InjectMocks
     @Spy
-    ITaskTransformer taskTransformer = new TaskTransformer();
+    private ITaskTransformer taskTransformer = new TaskTransformer();
 
     @InjectMocks
     @Spy
-    UserManager userManager = new UserManagerImpl();
+    private UserManager userManager = new UserManagerImpl();
 
     @Spy
-    TableConfig tableConfig = new TableConfig();
-
-    @InjectMocks
-    @Spy
-    IUserTable userTable = new UserTable();
+    private TableConfig tableConfig = new TableConfig();
 
     @InjectMocks
     @Spy
-    ILabelTransformer labelTransformer = new LabelTransformer();
+    private IUserTable userTable = new UserTable();
+
+    @InjectMocks
+    @Spy
+    private ILabelTransformer labelTransformer = new LabelTransformer();
 
     @Before
     public void prepareUser() {

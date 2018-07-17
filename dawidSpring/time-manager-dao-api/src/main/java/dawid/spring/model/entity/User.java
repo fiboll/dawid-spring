@@ -69,10 +69,8 @@ public class User {
         if (tasks == null) {
            tasks = new HashSet<>();
         }
+        tasks.add(task);
 
-        if (!tasks.contains(task)) {
-            tasks.add(task);
-        }
 
         task.setUser(this);
     }

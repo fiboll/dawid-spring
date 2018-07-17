@@ -32,7 +32,7 @@ public class UserController {
     private UserManager userManager;
 
     @Autowired
-    IUserTable userTable;
+    private IUserTable userTable;
 
     @Autowired
     private LabelDao labelDao;

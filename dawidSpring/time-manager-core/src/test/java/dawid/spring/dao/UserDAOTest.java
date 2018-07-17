@@ -3,8 +3,6 @@ package dawid.spring.dao;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
 import dawid.spring.provider.UserDAO;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +52,7 @@ public class UserDAOTest {
         user.setEmail("email@o2.pl");
         userDAO.addUser(user);
 
-        assertTrue(userDAO.findAll().size() == 3);
+        assertEquals(3, userDAO.findAll().size());
     }
 
     @Test
@@ -76,8 +74,8 @@ public class UserDAOTest {
 
         user.addTask(task);
         user = userDAO.update(user);
-        assertTrue(user.getId() != null);
-        assertTrue(user.getTasks().size() == 8);
+        assertNotNull(user.getId());
+        assertEquals(8, user.getTasks().size());
     }
 
     private User findKnownUserWithId(long id) {

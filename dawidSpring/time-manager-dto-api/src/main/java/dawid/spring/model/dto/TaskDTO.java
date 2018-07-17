@@ -30,7 +30,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
     @NotEmpty
     private Set<LabelDTO> labels = new HashSet<>();
 
-    private transient TaskComparator defaultComparator = new TaskComparator();
+    private static final transient TaskComparator defaultComparator = new TaskComparator();
 
     public void doneTask() {
         setDone(true);
@@ -68,7 +68,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
         private String desc;
         private Date dueDate;
         private boolean isDone;
-        private Set<LabelDTO> labels = new HashSet<>();
+        private final Set<LabelDTO> labels = new HashSet<>();
         private String username;
         private Long version;
 

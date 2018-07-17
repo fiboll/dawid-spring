@@ -3,9 +3,6 @@ package dawid.spring.manager;
 import dawid.spring.exceptions.DomainException;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
-import dawid.spring.provider.LabelDao;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 

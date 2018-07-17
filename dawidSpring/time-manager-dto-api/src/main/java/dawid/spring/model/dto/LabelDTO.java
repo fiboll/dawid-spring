@@ -1,6 +1,7 @@
 package dawid.spring.model.dto;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.StrBuilder;
 
 import java.util.Comparator;
 
@@ -23,12 +24,12 @@ public class LabelDTO implements Comparable<LabelDTO>{
     public int compareTo(LabelDTO other) {
         return Comparator.comparing((LabelDTO label) -> StringUtils.isNumeric(label.description))
                 .reversed()
-                .thenComparing((LabelDTO label) -> label.getDescription())
+                .thenComparing(LabelDTO::getDescription)
                 .compare(this, other);
     }
 
     @Override public String toString() {
-        final StringBuffer sb = new StringBuffer("LabelDTO{");
+        var sb = new StringBuilder("LabelDTO{");
         sb.append("id=").append(id);
         sb.append(", colour='").append(colour).append('\'');
         sb.append(", description='").append(description).append('\'');

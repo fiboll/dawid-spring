@@ -41,18 +41,18 @@ import static org.junit.Assert.assertTrue;
 public class TaskControllerTest {
 
     @Autowired
-    WebApplicationContext wac;
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
     @Autowired
-    UserManager userManager;
+    private UserManager userManager;
 
     @Autowired
-    TaskManager taskManager;
+    private TaskManager taskManager;
 
     @Autowired
-    IUserTable userTable;
+    private IUserTable userTable;
 
     @Before
     public void setup() {
@@ -152,13 +152,13 @@ public class TaskControllerTest {
         user = userManager.findUserByNick("fiboll");
 
         Optional<TaskDTO> notExistTask= user.get().getTasks().stream()
-                .filter((t) -> t.getId() == deletedId)
+                .filter((t) -> t.getId().equals(deletedId))
                 .findAny();
 
         assertTrue(!notExistTask.isPresent());
 
         Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
-        assertTrue(!notExistTask.isPresent());
+        assertTrue(!deletedTask.isPresent());
 
     }
 

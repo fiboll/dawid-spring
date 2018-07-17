@@ -16,6 +16,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertNotNull;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:context_test.xml")
 @Transactional
@@ -28,18 +30,18 @@ public class UserManagerTest {
     @Test
     public void testFindAll() {
         List<UserDTO> users =  userManager.getAllUsers();
-        Assert.assertNotNull(users);
+        assertNotNull(users);
         Assert.assertEquals(2, users.size());
 
         users.forEach(
-                (UserDTO u) -> Assert.assertTrue(null != u.getId())
+                (UserDTO u) -> assertNotNull(null != u.getId())
         );
     }
 
     @Test
     public void testUserByNick() {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
-        Assert.assertNotNull(user);
+        assertNotNull(user);
         Assert.assertEquals(user.get().getFirstName(), "Dawid");
         Assert.assertEquals(user.get().getSecondName(), "Strembicki");
         Assert.assertEquals(user.get().getNickname(), "fiboll");
@@ -48,7 +50,7 @@ public class UserManagerTest {
     @Test
     public void testAddTaskToUSer() {
         Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
-        Assert.assertNotNull(foundedUser);
+        assertNotNull(foundedUser);
 
         Calendar dueDate = Calendar.getInstance();
         dueDate.add(Calendar.MONTH, 2);
@@ -60,7 +62,7 @@ public class UserManagerTest {
         userManager.addTaskToUSer(foundedUser.get(), task);
 
         foundedUser = userManager.findUserByNick("fiboll");
-        Assert.assertNotNull(foundedUser);
+        assertNotNull(foundedUser);
 
     }
 

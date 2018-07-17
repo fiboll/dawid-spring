@@ -1,15 +1,11 @@
 package dawid.spring.provider;
 
 import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Optional;
-
 /**
  * Created by dawid on 14.07.17.
  */

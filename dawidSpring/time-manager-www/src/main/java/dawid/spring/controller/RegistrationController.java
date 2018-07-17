@@ -34,10 +34,9 @@ public class RegistrationController {
             (@ModelAttribute("user") @Valid UserDTO accountDto,
              BindingResult result, WebRequest request, Errors errors) {
 
-        UserDTO registered = null;
 
         if (!result.hasErrors()) {
-            registered = createUserAccount(accountDto, result);
+            UserDTO registered = createUserAccount(accountDto, result);
             if (registered == null) {
                 result.rejectValue("email", "message.regError");
             }

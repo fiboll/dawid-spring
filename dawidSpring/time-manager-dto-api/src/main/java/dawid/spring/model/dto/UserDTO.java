@@ -18,7 +18,7 @@ public class UserDTO {
 
     @NotEmpty
     private String nickname;
-    private Set<TaskDTO> tasks = new HashSet<>();
+    private Set<TaskDTO> tasks;
 
     @NotEmpty
     private String password;
@@ -31,10 +31,7 @@ public class UserDTO {
     private Long version;
 
     public void addTask(TaskDTO task) {
-        if (!tasks.contains(task)) {
-            tasks.add(task);
-        }
-
+        tasks.add(task);
         task.setUserName(this.getNickname());
     }
 

@@ -16,7 +16,7 @@ public class LabelFormatter implements Formatter<Label> {
     private LabelDao labelDao;
 
     @Override
-    public Label parse(String text, Locale locale) throws ParseException {
+    public Label parse(String text, Locale locale) {
         return labelDao.getAllLabels().stream()
                 .filter((l)  -> l.getDescription().equals(text))
                 .findFirst()
