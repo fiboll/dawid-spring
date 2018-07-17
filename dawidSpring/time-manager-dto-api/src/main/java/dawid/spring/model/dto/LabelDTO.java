@@ -1,7 +1,6 @@
 package dawid.spring.model.dto;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.StrBuilder;
 
 import java.util.Comparator;
 

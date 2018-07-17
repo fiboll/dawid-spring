@@ -31,8 +31,6 @@ import static org.mockito.Matchers.anyString;
  */
 public class UserTableTest {
 
-    private User user;
-
     @Mock
     private UserDAO userDAO;
 
@@ -65,7 +63,7 @@ public class UserTableTest {
     @Before
     public void prepareUser() {
         MockitoAnnotations.initMocks(this);
-        user = new User();
+        var user = new User();
 
         Task task = prepareTask("test", false);
         Task task1 = prepareTask("test1", false);

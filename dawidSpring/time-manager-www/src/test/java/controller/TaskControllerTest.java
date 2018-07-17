@@ -150,6 +150,7 @@ public class TaskControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("redirect:user?nick=fiboll"));
 
         user = userManager.findUserByNick("fiboll");
+        assertTrue(user.isPresent());
 
         Optional<TaskDTO> notExistTask= user.get().getTasks().stream()
                 .filter((t) -> t.getId().equals(deletedId))

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:context_test.xml")
@@ -41,7 +42,7 @@ public class UserManagerTest {
     @Test
     public void testUserByNick() {
         Optional<UserDTO> user = userManager.findUserByNick("fiboll");
-        assertNotNull(user);
+        assertTrue(user.isPresent());
         Assert.assertEquals(user.get().getFirstName(), "Dawid");
         Assert.assertEquals(user.get().getSecondName(), "Strembicki");
         Assert.assertEquals(user.get().getNickname(), "fiboll");
