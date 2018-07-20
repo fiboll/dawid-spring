@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +55,7 @@ public class UserManagerTest {
         Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
         assertNotNull(foundedUser);
         TaskDTO task = new TaskDTO.TaskBuilder().name("Test Task")
-                                             .dueDate(Date.from(Instant.now().plus(2, ChronoUnit.MONTHS)))
+                                             .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
                                              .desc("Test desc")
                                              .build();
 
@@ -65,5 +65,4 @@ public class UserManagerTest {
         assertNotNull(foundedUser);
 
     }
-
 }
