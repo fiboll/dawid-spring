@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TaskDTO implements Comparable<TaskDTO> {
 
@@ -28,7 +29,7 @@ public class TaskDTO implements Comparable<TaskDTO> {
     private String userName;
 
     @NotEmpty
-    private Set<LabelDTO> labels = new HashSet<>();
+    private Set<LabelDTO> labels = new TreeSet<>();
 
     private static final transient TaskComparator defaultComparator = new TaskComparator();
 

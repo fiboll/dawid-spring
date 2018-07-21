@@ -18,7 +18,7 @@ public class LabelTransformer implements ILabelTransformer {
     }
 
     @Override
-    public Label dTOToEntity(LabelDTO label) {
+    public Label dtoToEntity(LabelDTO label) {
         return labelDao.getAllLabels().stream()
                 .filter(l -> l.getId().equals(label.getId()))
                 .findAny()

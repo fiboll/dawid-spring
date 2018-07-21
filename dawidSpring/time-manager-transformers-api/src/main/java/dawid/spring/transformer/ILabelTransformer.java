@@ -5,5 +5,5 @@ import dawid.spring.model.entity.Label;
 
 public interface ILabelTransformer {
     LabelDTO entityToDTO(Label label);
-    Label dTOToEntity(LabelDTO label);
+    Label dtoToEntity(LabelDTO label);
 }

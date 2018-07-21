@@ -5,7 +5,8 @@ import dawid.spring.model.dto.TaskDTO;
 
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.TreeSet;
+
+import static java.util.Comparator.*;
 
 /**
  * Created by private on 01.07.17.
@@ -14,30 +15,29 @@ public class TaskComparator implements Comparator<TaskDTO> {
 
     @Override
     public int compare(TaskDTO task, TaskDTO task2) {
-        return Comparator.nullsLast(TaskComparator::compareLabelsList)
-                .thenComparing(TaskDTO::getDueDate, Comparator.nullsLast(Comparator.naturalOrder()))
-                .thenComparing(TaskDTO::getName, Comparator.nullsLast(Comparator.naturalOrder()))
-                .thenComparing(TaskDTO::getDesc, Comparator.nullsLast(Comparator.naturalOrder()))
+        return nullsLast(TaskComparator::compareLabelsList)
+                .thenComparing(TaskDTO::getDueDate, nullsLast(naturalOrder()))
+                .thenComparing(TaskDTO::getName, nullsLast(naturalOrder()))
+                .thenComparing(TaskDTO::getDesc, nullsLast(naturalOrder()))
                 .compare(task, task2);
     }
 
     private static int compareLabelsList(TaskDTO task, TaskDTO otherTask) {
-        Iterator<LabelDTO> thisLabels = new TreeSet<>(task.getLabels()).iterator();
-        Iterator<LabelDTO> otherLabels = new TreeSet<>(otherTask.getLabels()).iterator();
+        var thisLabelsIterator = task.getLabels().iterator();
+        var otherLabelsIterator = otherTask.getLabels().iterator();
 
-        while (true) {
-
-            if (!thisLabels.hasNext() && !otherLabels.hasNext()) {
-                return 0;
-            }
-
-            int result = Comparator.comparing(Iterator<LabelDTO>::hasNext).reversed()
+        while (hasMoreLabels(thisLabelsIterator, otherLabelsIterator)) {
+            int result = comparing(Iterator<LabelDTO>::hasNext).reversed()
                     .thenComparing(Iterator::next)
-                    .compare(thisLabels, otherLabels);
-
+                    .compare(thisLabelsIterator, otherLabelsIterator);
             if (result != 0 ) {
                 return result;
             }
         }
+        return  0;
+    }
+
+    private static boolean hasMoreLabels(Iterator<LabelDTO> thisLabelsIterator, Iterator<LabelDTO> otherLabelsIterator) {
+        return thisLabelsIterator.hasNext() || otherLabelsIterator.hasNext();
     }
 }

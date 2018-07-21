@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class TaskComparatorTest {
 
     private TaskDTO t1,t2,t3, tDate1, tDate2, tName1, tName2;
-    private LabelDTO a,b,c,d;
+    private LabelDTO a,b;
 
     private List<TaskDTO> tasks;
 
@@ -29,8 +29,6 @@ public class TaskComparatorTest {
 
         a = new LabelDTO(1L,"a", "red");
         b = new LabelDTO(2L,"b", "yellow");
-        c = new LabelDTO(3L, "c", "green");
-        d = new LabelDTO(4L, "d", "grey");
 
         t1 = new TaskDTO.TaskBuilder()
                 .name("test 1")
