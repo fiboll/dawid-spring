@@ -2,8 +2,8 @@ package dawid.spring.comparator;
 
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.Date;
@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by private on 27.01.18.
@@ -24,7 +24,7 @@ public class TaskComparatorTest {
 
     private List<TaskDTO> tasks;
 
-    @Before
+    @BeforeEach
     public void setup() {
 
         a = new LabelDTO(1L,"a", "red");

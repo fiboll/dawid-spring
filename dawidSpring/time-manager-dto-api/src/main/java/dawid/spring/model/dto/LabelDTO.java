@@ -1,8 +1,7 @@
 package dawid.spring.model.dto;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Comparator;
+import static java.util.Comparator.*;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class LabelDTO implements Comparable<LabelDTO>{
     private Long id;
@@ -21,9 +20,9 @@ public class LabelDTO implements Comparable<LabelDTO>{
 
     @Override
     public int compareTo(LabelDTO other) {
-        return Comparator.comparing((LabelDTO label) -> StringUtils.isNumeric(label.description))
+        return comparing((LabelDTO label) -> label != null &&  label.description != null && isNumeric(label.description))
                 .reversed()
-                .thenComparing(LabelDTO::getDescription)
+                .thenComparing(LabelDTO::getDescription, nullsLast(naturalOrder()))
                 .compare(this, other);
     }
 

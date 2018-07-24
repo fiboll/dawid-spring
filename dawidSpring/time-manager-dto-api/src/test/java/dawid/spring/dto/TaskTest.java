@@ -2,11 +2,12 @@ package dawid.spring.dto;
 
 
 import dawid.spring.model.dto.TaskDTO;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TaskTest {
 
@@ -29,6 +30,5 @@ public class TaskTest {
         assertEquals(new Date(testDateLong), task.getDueDate());
         task.getDueDate().setTime(5000000);
         assertEquals(new Date(testDateLong), task.getDueDate());
-
     }
 }

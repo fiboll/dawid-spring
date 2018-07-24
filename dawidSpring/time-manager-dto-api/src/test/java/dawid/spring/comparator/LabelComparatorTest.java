@@ -1,8 +1,11 @@
 package dawid.spring.comparator;
 
 import dawid.spring.model.dto.LabelDTO;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Comparator;
 import java.util.List;
@@ -10,23 +13,25 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by private on 23.01.18.
  */
 public  class LabelComparatorTest {
 
-    private LabelDTO a;
-    private LabelDTO b;
+    private static LabelDTO a;
+    private static LabelDTO b;
 
-    private LabelDTO n1;
-    private LabelDTO n2;
+    private static LabelDTO n1;
+    private static LabelDTO n2;
 
-    private List<LabelDTO> labels;
+    private static List<LabelDTO> labels;
 
-    @Before
-    public void prepareTest() {
+    @BeforeAll
+    public static void prepareTest() {
         a = new LabelDTO(1L, "a", "");
         b = new LabelDTO(2L, "b", "");
         n1 = new LabelDTO(3L,"1", "");
@@ -44,15 +49,11 @@ public  class LabelComparatorTest {
         assertThat(labels, is(sortedLabels));
     }
 
-    @Test
-    public void testEquals() {
-        assertEquals(0, a.compareTo(a));
-        assertEquals(0, b.compareTo(b));
-        assertEquals(0, n1.compareTo(n1));
-        assertEquals(0, n2.compareTo(n2));
+    @ParameterizedTest(name = "run #{index} with [{arguments}]")
+    @MethodSource("labelArguments")
+    public void testEquals(LabelDTO labelDTO, LabelDTO labelDTO2) {
+        assertEquals(0, labelDTO.compareTo(labelDTO2));
     }
-
-
 
     @Test
     public void testLessThan() {
@@ -72,5 +73,12 @@ public  class LabelComparatorTest {
         assertTrue(a.compareTo(n2) > 0);
         assertTrue(b.compareTo(n2) > 0);
         assertTrue(b.compareTo(n1) > 0);
+    }
+
+    private static Stream<Arguments> labelArguments() {
+        return Stream.of(
+                Arguments.of(new LabelDTO(null, "a",  null), new LabelDTO(null, "a",  null)),
+                Arguments.of(new LabelDTO(null, null,  null), new LabelDTO(null, null,  null))
+        );
     }
 }
