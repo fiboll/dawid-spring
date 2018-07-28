@@ -1,6 +1,8 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.model.adnotation.PasswordMatches;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
@@ -108,6 +110,42 @@ public class UserDTO {
         public UserDTO build() {
             return new UserDTO(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof UserDTO)) return false;
+
+        UserDTO userDTO = (UserDTO) o;
+
+        return new EqualsBuilder()
+                .append(id, userDTO.id)
+                .append(firstName, userDTO.firstName)
+                .append(secondName, userDTO.secondName)
+                .append(nickname, userDTO.nickname)
+                .append(tasks, userDTO.tasks)
+                .append(password, userDTO.password)
+                .append(matchingPassword, userDTO.matchingPassword)
+                .append(email, userDTO.email)
+                .append(version, userDTO.version)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .append(firstName)
+                .append(secondName)
+                .append(nickname)
+                .append(tasks)
+                .append(password)
+                .append(matchingPassword)
+                .append(email)
+                .append(version)
+                .toHashCode();
     }
 
     public Long getId() {

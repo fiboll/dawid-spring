@@ -1,5 +1,8 @@
 package dawid.spring.model.dto;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import static java.util.Comparator.*;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
@@ -24,6 +27,28 @@ public class LabelDTO implements Comparable<LabelDTO>{
                 .reversed()
                 .thenComparing(LabelDTO::getDescription, nullsLast(naturalOrder()))
                 .compare(this, other);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(id)
+                .append(colour)
+                .append(description)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof LabelDTO)) {
+            return false;
+        }
+        LabelDTO that = (LabelDTO) obj;
+        return new EqualsBuilder()
+                .append(this.id, that.id)
+                .append(colour, that.colour)
+                .append(description, that.description)
+                .isEquals();
     }
 
     @Override public String toString() {

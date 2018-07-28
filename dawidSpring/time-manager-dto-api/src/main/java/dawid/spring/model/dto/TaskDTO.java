@@ -2,6 +2,8 @@ package dawid.spring.model.dto;
 
 import dawid.spring.comparator.TaskComparator;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -63,7 +65,39 @@ public class TaskDTO implements Comparable<TaskDTO> {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
+        if (!(o instanceof TaskDTO)) return false;
+
+        TaskDTO taskDTO = (TaskDTO) o;
+
+        return new EqualsBuilder()
+                .append(isDone, taskDTO.isDone)
+                .append(id, taskDTO.id)
+                .append(name, taskDTO.name)
+                .append(desc, taskDTO.desc)
+                .append(dueDate, taskDTO.dueDate)
+                .append(version, taskDTO.version)
+                .append(userName, taskDTO.userName)
+                .append(labels, taskDTO.labels)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder()
+                .append(id)
+                .append(name)
+                .append(desc)
+                .append(dueDate)
+                .append(version)
+                .append(isDone)
+                .append(userName)
+                .append(labels)
+                .toHashCode();
+    }
 
     public static class TaskBuilder {
         private Long id;
