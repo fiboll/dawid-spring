@@ -5,7 +5,7 @@ import dawid.spring.exceptions.DomainException;
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.manager.UserManagerImpl;
-import dawid.spring.manager.UserTable;
+import dawid.spring.manager.UserTableImpl;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
@@ -54,7 +54,7 @@ public class UserTableTest {
 
     @InjectMocks
     @Spy
-    private IUserTable userTable = new UserTable();
+    private IUserTable userTable = new UserTableImpl();
 
     @InjectMocks
     @Spy
