@@ -156,7 +156,7 @@ public class UserTableTest {
         var taskDTO = new TaskDTO.TaskBuilder()
                 .name("addedTask")
                 .isDone(false)
-                .addLabel(new LabelDTO(1L, "a", ""))
+                //.addLabel(new LabelDTO(1L, "a", ""))
                 .build();
 
         user.get().addTask(taskDTO);
@@ -173,7 +173,7 @@ public class UserTableTest {
         var addedTask = new TaskDTO.TaskBuilder()
                 .name("addedTask")
                 .isDone(false)
-                .addLabel(new LabelDTO(2L, "b", ""))
+                //.addLabel(new LabelDTO(2L, "b", ""))
                 .build();
 
         user.get().addTask(addedTask);

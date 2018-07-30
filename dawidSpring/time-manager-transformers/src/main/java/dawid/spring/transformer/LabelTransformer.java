@@ -14,7 +14,7 @@ public class LabelTransformer implements ILabelTransformer {
 
     @Override
     public LabelDTO entityToDTO(Label label) {
-        return new LabelDTO(label.getId(), label.getDescription(), label.getColour());
+        return null;//new LabelDTO(label.getId(), label.getDescription(), label.getColour());
     }
 
     @Override

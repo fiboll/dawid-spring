@@ -41,7 +41,7 @@ public class UserTransformer implements IUserTransformer {
         var tasks = user.getTasks().stream()
                 .map(taskTransformer::entityToDTO)
                 .collect(toSet());
-        tasks.forEach(taskDTO -> taskDTO.setUserName(user.getNickname()));
+        //tasks.forEach(taskDTO -> taskDTO.setUserName(user.getNickname()));
 
         builder.tasks(tasks);
 

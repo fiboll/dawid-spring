@@ -6,226 +6,37 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.immutables.value.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-public class TaskDTO implements Comparable<TaskDTO> {
-
-    private Long id;
+@Value.Immutable
+public abstract class TaskDTO implements Comparable<TaskDTO> {
+    public abstract Long getId();
 
     @Size(min = 4)
-    private String name;
+    public abstract String getName();
 
     @Size(min = 4)
-    private String desc;
+    public abstract String getDesc();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dueDate;
-    private Long version;
-    private boolean isDone;
-    private String userName;
+    public abstract Date getDueDate();
+    public abstract Long getVersion();
+    public abstract boolean isDone();
+    public abstract String getUserName();
 
     @NotEmpty
-    private Set<LabelDTO> labels = new TreeSet<>();
-
-    private static final transient TaskComparator defaultComparator = new TaskComparator();
+    public abstract Set<LabelDTO> getLabels();
 
     public void doneTask() {
-        setDone(true);
+        //setDone(true);
     }
-
-    private TaskDTO(TaskBuilder taskBuilder) {
-        id = taskBuilder.id;
-        name = taskBuilder.name;
-        desc = taskBuilder.desc;
-        dueDate = taskBuilder.dueDate;
-        isDone = taskBuilder.isDone;
-
-        if (CollectionUtils.isNotEmpty(taskBuilder.labels)) {
-            labels.addAll(taskBuilder.labels);
-        }
-        userName = taskBuilder.username;
-        version = taskBuilder.version;
-    }
-
-    public TaskDTO() {}
 
     @Override
     public int compareTo(TaskDTO other) {
-        return defaultComparator.compare(this, other);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (!(o instanceof TaskDTO)) return false;
-
-        TaskDTO taskDTO = (TaskDTO) o;
-
-        return new EqualsBuilder()
-                .append(isDone, taskDTO.isDone)
-                .append(id, taskDTO.id)
-                .append(name, taskDTO.name)
-                .append(desc, taskDTO.desc)
-                .append(dueDate, taskDTO.dueDate)
-                .append(version, taskDTO.version)
-                .append(userName, taskDTO.userName)
-                .append(labels, taskDTO.labels)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder()
-                .append(id)
-                .append(name)
-                .append(desc)
-                .append(dueDate)
-                .append(version)
-                .append(isDone)
-                .append(userName)
-                .append(labels)
-                .toHashCode();
-    }
-
-    public static class TaskBuilder {
-        private Long id;
-        private String name;
-        private String desc;
-        private Date dueDate;
-        private boolean isDone;
-        private final Set<LabelDTO> labels = new HashSet<>();
-        private String username;
-        private Long version;
-
-        public TaskDTO build() {
-            return new TaskDTO(this);
-        }
-
-        public TaskBuilder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public TaskBuilder name(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public TaskBuilder desc(String desc) {
-            this.desc = desc;
-            return this;
-        }
-
-        public TaskBuilder dueDate(Date dueDate) {
-            this.dueDate = dueDate;
-            return this;
-        }
-
-        public TaskBuilder isDone(boolean isDone) {
-            this.isDone = isDone;
-            return this;
-        }
-
-        public TaskBuilder addLabel(LabelDTO label) {
-            this.labels.add(label);
-            return this;
-        }
-
-        public TaskBuilder labels(Set<LabelDTO> labels) {
-            if (CollectionUtils.isNotEmpty(labels)) {
-                this.labels.addAll(labels);
-            }
-            return this;
-        }
-
-        public TaskBuilder username(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public TaskBuilder version(Long version) {
-            this.version = version;
-            return this;
-        }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Date getDueDate() {
-        if (dueDate == null) {
-            return null;
-        }
-
-        return (Date) dueDate.clone();
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Set<LabelDTO> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(Set<LabelDTO> labels) {
-        this.labels = labels;
+        return new TaskComparator().compare(this, other);
     }
 }

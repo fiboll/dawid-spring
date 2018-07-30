@@ -1,5 +1,6 @@
 package dawid.spring.comparator;
 
+import dawid.spring.model.dto.ImmutableLabelDTO;
 import dawid.spring.model.dto.LabelDTO;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,11 +33,22 @@ public  class LabelComparatorTest {
 
     @BeforeAll
     public static void prepareTest() {
-        a = new LabelDTO(1L, "a", "");
-        b = new LabelDTO(2L, "b", "");
-        n1 = new LabelDTO(3L,"1", "");
-        n2 = new LabelDTO(4L, "2", "");
-
+        a = ImmutableLabelDTO.builder()
+                             .id(1L)
+                             .description("a")
+                             .build();
+        b = ImmutableLabelDTO.builder()
+                             .id(2L)
+                             .description("b")
+                             .build();
+        n1 = ImmutableLabelDTO.builder()
+                             .id(3L)
+                             .description("1")
+                             .build();
+        n2 = ImmutableLabelDTO.builder()
+                              .id(4L)
+                              .description("2")
+                              .build();
         labels = Stream.of(n2, a, b, n1).collect(Collectors.toList());
     }
 
@@ -77,8 +89,8 @@ public  class LabelComparatorTest {
 
     private static Stream<Arguments> labelArguments() {
         return Stream.of(
-                Arguments.of(new LabelDTO(null, "a",  null), new LabelDTO(null, "a",  null)),
-                Arguments.of(new LabelDTO(null, null,  null), new LabelDTO(null, null,  null))
+//                Arguments.of(new LabelDTO(null, "a",  null), new LabelDTO(null, "a",  null)),
+//                Arguments.of(new LabelDTO(null, null,  null), new LabelDTO(null, null,  null))
         );
     }
 }

@@ -23,7 +23,7 @@ public class TableManagerImpl implements TableManager {
             logger.debug(String.format("Task: %s is marked as done",  task.getId()));
         }
 
-        task.setDone(true);
+       // task.setDone(true);
     }
 
     @Override

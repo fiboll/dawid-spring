@@ -43,7 +43,7 @@ public class UserManagerImpl implements UserManager {
     @Override
     public void addTaskToUSer(UserDTO user, TaskDTO task) {
         user.getTasks().add(task);
-        task.setUserName(user.getNickname());
+        //task.setUserName(user.getNickname());
         userUpdate(user);
     }
 
