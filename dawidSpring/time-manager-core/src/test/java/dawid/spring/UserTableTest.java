@@ -6,7 +6,8 @@ import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.manager.UserManagerImpl;
 import dawid.spring.manager.UserTableImpl;
-import dawid.spring.model.dto.LabelDTO;
+import dawid.spring.model.dto.ImmutableLabelDTO;
+import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Label;
@@ -95,7 +96,7 @@ public class UserTableTest {
         user.addTask(task6);
         user.addTask(task7);
 
-        Mockito.when(userDAO.findByNick(anyString())).thenReturn(Optional.ofNullable(user));
+        Mockito.when(userDAO.findByNick(anyString())).thenReturn(Optional.of(user));
         Mockito.when(labelDao.getAllLabels()).thenReturn(Arrays.asList(a, b, c, d, e));
     }
 
@@ -153,11 +154,11 @@ public class UserTableTest {
 
         assertTrue(user.isPresent());
 
-        var taskDTO = new TaskDTO.TaskBuilder()
-                .name("addedTask")
-                .isDone(false)
-                //.addLabel(new LabelDTO(1L, "a", ""))
-                .build();
+        var taskDTO = ImmutableTaskDTO.builder()
+                                      .name("addedTask")
+                                      .isDone(false)
+                                      //.addLabel(new LabelDTO(1L, "a", ""))
+                                      .build();
 
         user.get().addTask(taskDTO);
 
@@ -170,11 +171,14 @@ public class UserTableTest {
         var user = findUser();
         assertTrue(user.isPresent());
 
-        var addedTask = new TaskDTO.TaskBuilder()
-                .name("addedTask")
-                .isDone(false)
-                //.addLabel(new LabelDTO(2L, "b", ""))
-                .build();
+        var addedTask = ImmutableTaskDTO.builder()
+                                        .name("addedTask")
+                                        .isDone(false)
+                                        .addLabels(ImmutableLabelDTO.builder()
+                                                                    .id(2L)
+                                                                    .description("b")
+                                                                    .build())
+                                        .build();
 
         user.get().addTask(addedTask);
         assertEquals(3, userTable.getNextToDoTasks(user.get()).size());

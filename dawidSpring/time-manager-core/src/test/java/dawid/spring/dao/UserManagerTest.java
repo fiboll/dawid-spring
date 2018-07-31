@@ -1,6 +1,7 @@
 package dawid.spring.dao;
 
 import dawid.spring.manager.UserManager;
+import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import org.junit.Test;
@@ -54,7 +55,7 @@ public class UserManagerTest {
     public void testAddTaskToUSer() {
         Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
         assertNotNull(foundedUser);
-        TaskDTO task = new TaskDTO.TaskBuilder().name("Test Task")
+        TaskDTO task = ImmutableTaskDTO.builder().name("Test Task")
                                              .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
                                              .desc("Test desc")
                                              .build();
