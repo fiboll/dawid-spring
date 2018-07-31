@@ -89,8 +89,26 @@ public  class LabelComparatorTest {
 
     private static Stream<Arguments> labelArguments() {
         return Stream.of(
-//                Arguments.of(new LabelDTO(null, "a",  null), new LabelDTO(null, "a",  null)),
-//                Arguments.of(new LabelDTO(null, null,  null), new LabelDTO(null, null,  null))
+                Arguments.of(
+                        ImmutableLabelDTO.builder()
+                                .description("a")
+                                         .id(1L)
+                                         .build(),
+                        ImmutableLabelDTO.builder()
+                                         .description("a")
+                                         .id(1L)
+                                         .build()),
+                Arguments.of(
+                        ImmutableLabelDTO.builder()
+                                         .description("a")
+                                         .id(1L)
+                                         .colour("red")
+                                         .build(),
+                        ImmutableLabelDTO.builder()
+                                         .description("a")
+                                         .id(1L)
+                                         .colour("green")
+                                         .build())
         );
     }
 }

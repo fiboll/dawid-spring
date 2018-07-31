@@ -1,5 +1,6 @@
 package dawid.spring.transformer;
 
+import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Task;
@@ -16,17 +17,14 @@ public class TaskTransformer implements ITaskTransformer {
 
     public TaskDTO entityToDTO(Task task) {
 
-        TaskDTO.TaskBuilder builder = new TaskDTO.TaskBuilder();
+        ImmutableTaskDTO.Builder builder = ImmutableTaskDTO.builder();
 
-        if (task == null) {
-            return builder.build();
-        }
 
         builder.desc(task.getDesc());
         builder.isDone(task.isDone());
         builder.dueDate(task.getDueDate());
         builder.name(task.getName());
-        builder.username(task.getUser().getNickname());
+        builder.userName(task.getUser().getNickname());
         builder.version(task.getVersion());
         builder.labels(task.getLabels().stream().map(labelTransformer::entityToDTO).collect(Collectors.toSet()));
         builder.id(task.getId());

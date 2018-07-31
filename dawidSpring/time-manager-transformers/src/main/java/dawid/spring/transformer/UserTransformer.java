@@ -1,5 +1,7 @@
 package dawid.spring.transformer;
 
+import dawid.spring.model.dto.ImmutableTaskDTO;
+import dawid.spring.model.dto.ImmutableUserDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
@@ -23,11 +25,7 @@ public class UserTransformer implements IUserTransformer {
 
     @Override
     public UserDTO entityToDTO(User user) {
-        var builder = new UserDTO.UserBuilder();
-
-        if (user == null) {
-            return builder.build();
-        }
+        var builder = ImmutableUserDTO.builder();
 
         builder.firstName(user.getFirstName());
         builder.id(user.getId());
@@ -39,13 +37,13 @@ public class UserTransformer implements IUserTransformer {
         builder.version(user.getVersion());
 
         var tasks = user.getTasks().stream()
-                .map(taskTransformer::entityToDTO)
-                .collect(toSet());
-        //tasks.forEach(taskDTO -> taskDTO.setUserName(user.getNickname()));
+                        .map(taskTransformer::entityToDTO)
+                        .map(taskDTO -> ImmutableTaskDTO.copyOf(taskDTO).withUserName(user.getNickname()))
+                        .collect(toSet());
 
-        builder.tasks(tasks);
+        return builder.tasks(tasks)
+               .build();
 
-        return builder.build();
     }
 
     @Override

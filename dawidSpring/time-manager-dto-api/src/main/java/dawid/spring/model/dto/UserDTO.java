@@ -1,17 +1,16 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.model.adnotation.PasswordMatches;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.immutables.value.Value;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by private on 20.01.18.
  */
 @PasswordMatches
+@Value.Immutable
 public abstract class UserDTO {
 
     public abstract Long getId();
