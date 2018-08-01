@@ -12,15 +12,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:context_test.xml")
@@ -56,14 +55,17 @@ public class UserManagerTest {
         Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
         assertNotNull(foundedUser);
         TaskDTO task = ImmutableTaskDTO.builder().name("Test Task")
-                                             .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
-                                             .desc("Test desc")
-                                             .build();
+                                       .id(1L)
+                                       .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
+                                       .desc("Test desc")
+                                       .isDone(false)
+                                       .version(1L)
+                                       .userName("fiboll")
+                                       .build();
 
         userManager.addTaskToUSer(foundedUser.get(), task);
 
         foundedUser = userManager.findUserByNick("fiboll");
         assertNotNull(foundedUser);
-
     }
 }

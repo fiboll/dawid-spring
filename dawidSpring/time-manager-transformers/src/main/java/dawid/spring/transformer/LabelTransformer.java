@@ -1,5 +1,7 @@
 package dawid.spring.transformer;
 
+import dawid.spring.model.dto.ImmutableLabelDTO;
+import dawid.spring.model.dto.ImmutableUserDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.entity.Label;
 import dawid.spring.provider.LabelDao;
@@ -14,7 +16,11 @@ public class LabelTransformer implements ILabelTransformer {
 
     @Override
     public LabelDTO entityToDTO(Label label) {
-        return null;//new LabelDTO(label.getId(), label.getDescription(), label.getColour());
+        return ImmutableLabelDTO.builder()
+                .colour(label.getColour())
+                .description(label.getDescription())
+                .id(label.getId())
+                .build();
     }
 
     @Override

@@ -30,9 +30,4 @@ public abstract class UserDTO {
     public abstract String getEmail();
 
     public abstract Long getVersion();
-
-    public void addTask(TaskDTO task) {
-        //tasks.add(task);
-        //task.setUserName(this.getNickname());
-    }
 }

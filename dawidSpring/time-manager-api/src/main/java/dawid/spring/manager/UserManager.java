@@ -16,9 +16,9 @@ public interface UserManager {
 
     Optional<UserDTO> findUserByNick(String nick);
 
-    void addTaskToUSer(UserDTO user, TaskDTO task);
+    UserDTO addTaskToUSer(UserDTO user, TaskDTO task);
 
-    void userUpdate(UserDTO userDTO);
+    UserDTO userUpdate(UserDTO userDTO);
 
     UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException;
 }
