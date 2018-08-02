@@ -2,10 +2,7 @@ package dawid.spring;
 
 import dawid.spring.config.TableConfig;
 import dawid.spring.exceptions.DomainException;
-import dawid.spring.manager.IUserTable;
-import dawid.spring.manager.UserManager;
-import dawid.spring.manager.UserManagerImpl;
-import dawid.spring.manager.UserTableImpl;
+import dawid.spring.manager.*;
 import dawid.spring.model.dto.*;
 import dawid.spring.model.entity.Label;
 import dawid.spring.model.entity.Task;
@@ -51,7 +48,7 @@ public class UserTableTest {
 
     @InjectMocks
     @Spy
-    private IUserTable userTable = new UserTableImpl();
+    private IUserTable userTable = new UserTable();
 
     @InjectMocks
     @Spy
@@ -157,11 +154,7 @@ public class UserTableTest {
 
         assertTrue(user.isPresent());
 
-        var taskDTO = ImmutableTaskDTO.builder()
-                                      .name("addedTask")
-                                      .isDone(false)
-                                      //.addLabel(new LabelDTO(1L, "a", ""))
-                                      .build();
+        var taskDTO = addTask();
         var updatedUser = ImmutableUserDTO.builder()
                                           .from(user.get())
                                           .addTasks(taskDTO)
@@ -176,14 +169,7 @@ public class UserTableTest {
         var user = findUser();
         assertTrue(user.isPresent());
 
-        var addedTask = ImmutableTaskDTO.builder()
-                                        .name("addedTask")
-                                        .isDone(false)
-                                        .addLabels(ImmutableLabelDTO.builder()
-                                                                    .id(2L)
-                                                                    .description("b")
-                                                                    .build())
-                                        .build();
+        var addedTask = addTask();
 
         final ImmutableUserDTO addedUser = ImmutableUserDTO.builder()
                                                            .from(user.get())
@@ -241,5 +227,21 @@ public class UserTableTest {
 
     private Optional<UserDTO> findUser() {
         return userManager.findUserByNick("Dawid");
+    }
+
+    private ImmutableTaskDTO addTask() {
+        return ImmutableTaskDTO.builder()
+                               .name("addedTask")
+                               .isDone(false)
+                               .id(1L)
+                               .version(1L)
+                               .dueDate(new Date())
+                               .desc("desc")
+                               .userName("fiboll")
+                               .addLabels(ImmutableLabelDTO.builder()
+                                                           .id(2L)
+                                                           .description("b")
+                                                           .build())
+                               .build();
     }
 }

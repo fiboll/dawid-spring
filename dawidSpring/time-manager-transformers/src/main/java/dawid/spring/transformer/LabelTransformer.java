@@ -5,6 +5,7 @@ import dawid.spring.model.dto.ImmutableUserDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.entity.Label;
 import dawid.spring.provider.LabelDao;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +17,13 @@ public class LabelTransformer implements ILabelTransformer {
 
     @Override
     public LabelDTO entityToDTO(Label label) {
-        return ImmutableLabelDTO.builder()
-                .colour(label.getColour())
-                .description(label.getDescription())
-                .id(label.getId())
-                .build();
+        final ImmutableLabelDTO.Builder builder = ImmutableLabelDTO.builder()
+                                                              .description(label.getDescription())
+                                                              .id(label.getId());
+        if (StringUtils.isNoneEmpty(label.getColour())) {
+            builder.colour(label.getColour());
+        }
+        return builder.build();
     }
 
     @Override
