@@ -12,18 +12,32 @@ import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mockito.*;
 
 import java.util.*;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by private on 23.12.17.
  */
+@RunWith(value = Parameterized.class)
 public class UserTableTest {
+
+    @Parameterized.Parameters
+    public static Collection tableImplementations() {
+       return Set.of(new UserTableImpl(), new UserTable());
+    }
+
+    public UserTableTest(IUserTable userTable) {
+        this.userTable = userTable;
+    }
 
     @Mock
     private UserDAO userDAO;
@@ -48,8 +62,7 @@ public class UserTableTest {
 
     @InjectMocks
     @Spy
-    private IUserTable userTable = new UserTable();
-
+    private IUserTable userTable;
     @InjectMocks
     @Spy
     private ILabelTransformer labelTransformer = new LabelTransformer();
@@ -57,6 +70,7 @@ public class UserTableTest {
     @Before
     public void prepareUser() {
         MockitoAnnotations.initMocks(this);
+
         var user = new User();
         user.setEmail("tst@op.pl");
         user.setNickname("Dawid");
@@ -66,38 +80,23 @@ public class UserTableTest {
         user.setVersion(1L);
         user.setId(1L);
 
-        Task task = prepareTask("test", false);
-        Task task1 = prepareTask("test1", false);
-        Task task2 = prepareTask("test2", true);
-        Task task3 = prepareTask("test3", true);
-        Task task4 = prepareTask("test4", false);
-        Task task5 = prepareTask("test5", false);
-        Task task6 = prepareTask("test6", false);
-        Task task7 = prepareTask("test7", false);
-
         Label a = prepareLabel(1L, "a");
         Label b = prepareLabel(2L, "b");
         Label c = prepareLabel(3L, "c");
         Label d = prepareLabel(4L, "d");
         Label e = prepareLabel(5L, "e");
 
-        task.addLabel(c);
-        task.addLabel(e);
-        task1.addLabel(a);
-        task2.addLabel(b);
-        task3.addLabel(e);
+        user.addTask(prepareTask("test", false, c,e));
+        user.addTask(prepareTask("test1", false, a));
+        user.addTask(prepareTask("test2", true, b));
+        user.addTask(prepareTask("test3", true, e));
+        user.addTask(prepareTask("test4", false));
+        user.addTask(prepareTask("test5", false));
+        user.addTask(prepareTask("test6", false));
+        user.addTask(prepareTask("test7", false));
 
-        user.addTask(task);
-        user.addTask(task1);
-        user.addTask(task2);
-        user.addTask(task3);
-        user.addTask(task4);
-        user.addTask(task5);
-        user.addTask(task6);
-        user.addTask(task7);
-
-        Mockito.when(userDAO.findByNick(anyString())).thenReturn(Optional.of(user));
-        Mockito.when(labelDao.getAllLabels()).thenReturn(Arrays.asList(a, b, c, d, e));
+        when(userDAO.findByNick(anyString())).thenReturn(Optional.of(user));
+        when(labelDao.getAllLabels()).thenReturn(asList(a, b, c, d, e));
     }
 
     @Test
@@ -105,24 +104,6 @@ public class UserTableTest {
         var user = findUser();
         assertTrue(user.isPresent());
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
-    }
-
-    @Test
-    public void shouldReturnValidNumberOfDoneTaskAfterDoneOneTasks() {
-        var user = findUser();
-        assertTrue(user.isPresent());
-        assertEquals(2, userTable.getDoneTasks(user.get()).size());
-
-        doneOneTask(user.get());
-
-        assertEquals(3, userTable.getDoneTasks(user.get()).size());
-    }
-
-    private void doneOneTask(UserDTO user) {
-        user.getTasks().stream()
-                .filter(task -> !task.isDone())
-                .findAny()
-                .ifPresent(TaskDTO::doneTask);
     }
 
     @Test
@@ -146,37 +127,6 @@ public class UserTableTest {
         var user = findUser();
         assertTrue(user.isPresent());
         assertEquals("test", userTable.getNextToDoTasks(user.get()).get(0).getName());
-    }
-
-    @Test
-    public void shouldReturnValidIsDoingAfterAddTask() {
-        var user = findUser();
-
-        assertTrue(user.isPresent());
-
-        var taskDTO = addTask();
-        var updatedUser = ImmutableUserDTO.builder()
-                                          .from(user.get())
-                                          .addTasks(taskDTO)
-                                          .build();
-
-        assertEquals(1, userTable.getDoingTasks(updatedUser).size());
-        assertEquals("addedTask", userTable.getDoingTasks(updatedUser).get(0).getName());
-    }
-
-    @Test
-    public void shouldReturnValidGetNextToDoAfterAddTask() {
-        var user = findUser();
-        assertTrue(user.isPresent());
-
-        var addedTask = addTask();
-
-        final ImmutableUserDTO addedUser = ImmutableUserDTO.builder()
-                                                           .from(user.get())
-                                                           .addTasks(addedTask)
-                                                           .build();
-        assertEquals(3, userTable.getNextToDoTasks(addedUser).size());
-        assertEquals("addedTask", userTable.getNextToDoTasks(addedUser).get(0).getName());
     }
 
     @Test
@@ -213,12 +163,12 @@ public class UserTableTest {
         return label;
     }
 
-    private static Task prepareTask(String test, boolean isDone) {
+    private static Task prepareTask(String test, boolean isDone, Label... labels) {
         var task = new Task();
         task.setName(test);
         task.setDone(isDone);
         task.setDueDate(new Date());
-        task.setLabels(new HashSet<>(Set.of(prepareLabel(1L, "a"))));
+        task.setLabels(new HashSet<>(Set.of(labels)));
         task.setDesc("desc");
         task.setId(1L);
         task.setVersion(1L);
@@ -227,21 +177,5 @@ public class UserTableTest {
 
     private Optional<UserDTO> findUser() {
         return userManager.findUserByNick("Dawid");
-    }
-
-    private ImmutableTaskDTO addTask() {
-        return ImmutableTaskDTO.builder()
-                               .name("addedTask")
-                               .isDone(false)
-                               .id(1L)
-                               .version(1L)
-                               .dueDate(new Date())
-                               .desc("desc")
-                               .userName("fiboll")
-                               .addLabels(ImmutableLabelDTO.builder()
-                                                           .id(2L)
-                                                           .description("b")
-                                                           .build())
-                               .build();
     }
 }
