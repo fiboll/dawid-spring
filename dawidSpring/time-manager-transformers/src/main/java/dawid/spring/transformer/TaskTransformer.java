@@ -21,7 +21,7 @@ public class TaskTransformer implements ITaskTransformer {
 
 
         builder.desc(task.getDesc());
-        builder.isDone(task.isDone());
+        builder.done(task.isDone());
         builder.dueDate(task.getDueDate());
         builder.name(task.getName());
         builder.userName(task.getUser().getNickname());

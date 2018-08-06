@@ -3,6 +3,7 @@
         add Task
     </button>
 
+
     <!-- Modal -->
     <div class="row">
         <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLAbel">
@@ -15,10 +16,16 @@
                     <div class="modal-body">
                         <form action="#" th:action="@{/addTask}" th:object="${newTask}" method="post">
 
+                            <span th:text="${user}" />
+                            ---------------------------
+                            <span th:text="${newTask}" />
+
                             <div class="form-group">
                                 <input type=hidden th:name="userNick" th:value="${user.nickname}"/>
-                                <input type=hidden th:name="id" th:value="${user.id}"/>
-                                <input type=hidden th:name="version" th:value="${user.version}"/>
+                                <input type=hidden th:field="*{id}" th:value="${newTask.id}"/>
+                                <input type=hidden th:field="*{version}" th:value="${newTask.version}"/>
+                                <input type=hidden th:field="*{userName}" th:value="${user.nickname}"/>
+
                                 <label th:text="name" class="control-label"/>
                                 <input type="text" th:field="*{name}" class="form-control"/>
 

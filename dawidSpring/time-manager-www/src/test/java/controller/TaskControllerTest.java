@@ -171,9 +171,10 @@ public class TaskControllerTest {
         final ImmutableTaskDTO taskDTO = ImmutableTaskDTO.builder().desc("desc")
                 .dueDate(new Date())
                 .id(1L)
-                .isDone(false)
+                .done(false)
                 .name("name")
                 .userName("fiboll")
+                .desc("desc")
                 .version(1L)
                 .build();
         return ModifiableTaskDTO.create().from(taskDTO);

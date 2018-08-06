@@ -102,7 +102,7 @@ public class UserController {
     private ModifiableTaskDTO prepareNewTask(String userName) {
         var task = ImmutableTaskDTO.builder().userName(userName)
                 .name("")
-                .isDone(false)
+                .done(false)
                 .dueDate(new Date())
                 .desc("")
                 .version(1L)

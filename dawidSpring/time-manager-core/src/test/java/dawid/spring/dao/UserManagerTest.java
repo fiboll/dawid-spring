@@ -58,7 +58,7 @@ public class UserManagerTest {
                                        .id(1L)
                                        .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
                                        .desc("Test desc")
-                                       .isDone(false)
+                                       .done(false)
                                        .version(1L)
                                        .userName("fiboll")
                                        .build();

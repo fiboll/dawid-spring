@@ -15,6 +15,7 @@ import java.util.*;
 
 @Value.Immutable
 @Value.Modifiable
+@Value.Style(get = {"is*", "get*"})
 public abstract class TaskDTO implements Comparable<TaskDTO> {
     public abstract Long getId();
 
