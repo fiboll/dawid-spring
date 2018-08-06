@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 @Value.Immutable
+@Value.Modifiable
 public abstract class TaskDTO implements Comparable<TaskDTO> {
     public abstract Long getId();
 

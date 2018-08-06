@@ -1,9 +1,12 @@
 package dawid.spring.controller;
 
 import dawid.spring.manager.TaskManager;
+import dawid.spring.model.dto.LabelDTO;
+import dawid.spring.model.dto.ModifiableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.entity.Label;
 import dawid.spring.provider.LabelDao;
+import dawid.spring.transformer.LabelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by private on 13.01.18.
@@ -26,32 +30,38 @@ public class TaskController {
     private TaskManager taskManager;
 
     @Autowired
+    private LabelTransformer labelTransformer;
+
+    @Autowired
     private LabelDao labelDao;
 
     @ModelAttribute("allLabels")
-    public List<Label> getAllLabels() {
-        return labelDao.getAllLabels();
+    public List<LabelDTO> getAllLabels() {         //TODO extract
+        return labelDao.getAllLabels()
+                .stream()
+                .map(labelTransformer::entityToDTO)
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/editTask", method = RequestMethod.GET)
     public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
-        model.addAttribute("task", task);
+        model.addAttribute("task", task != null ? ModifiableTaskDTO.create().from(task) : task);
         return "editForm";
     }
 
     @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public String editTask(@Valid @ModelAttribute(value = "task") TaskDTO taskDTO,
+    public String editTask(@Valid @ModelAttribute(value = "task") ModifiableTaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("task", taskDTO);
             return "editForm";
         }
 
-        taskDTO = taskManager.updateTask(taskDTO);
-        return "redirect:user?nick=" + taskDTO.getUserName();
+        final TaskDTO updatedTask = taskManager.updateTask(taskDTO);
+        return "redirect:user?nick=" + updatedTask.getUserName();
     }
 
     @RequestMapping(value = "/deleteTask", method = RequestMethod.GET)

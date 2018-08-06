@@ -17,6 +17,8 @@
 
                             <div class="form-group">
                                 <input type=hidden th:name="userNick" th:value="${user.nickname}"/>
+                                <input type=hidden th:name="id" th:value="${user.id}"/>
+                                <input type=hidden th:name="version" th:value="${user.version}"/>
                                 <label th:text="name" class="control-label"/>
                                 <input type="text" th:field="*{name}" class="form-control"/>
 
@@ -37,15 +39,10 @@
                                 <label th:text="labelki" class="control-label"/>
                                 <div>
                                                 <span th:each="label, labelStat : ${#lists.sort(allLabels)}">
-
                                                     <input type="checkbox" th:field="*{labels}" th:value="${label}"/>
-
-
-                                                    <label th:for="${#ids.prev('labels')}"
-                                                           th:text="${label.description}"/>
-
+                                                        <label th:for="${#ids.prev('labels')}"
+                                                               th:text="${label.description}"/>
                                                     <br th:if="${labelStat.count % 5 == 0}"/>
-
                                                 </span>
                                 </div>
 

@@ -11,6 +11,7 @@ import java.util.Set;
  */
 @PasswordMatches
 @Value.Immutable
+@Value.Modifiable
 public abstract class UserDTO {
 
     public abstract Long getId();

@@ -3,6 +3,8 @@ package controller;
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
+import dawid.spring.model.dto.ImmutableTaskDTO;
+import dawid.spring.model.dto.ModifiableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import org.junit.Before;
@@ -22,6 +24,7 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.Assert.assertTrue;
@@ -70,19 +73,21 @@ public class TaskControllerTest {
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/editTask")
                 .param("id", String.valueOf(task.get().getId()))
-                .param("desc", "edit test task");
+                .param("desc", "edit test task")
+                .param("name", "test")
+                .param("version", "1")
+                .param("isDone", "false")
+                .param("userName", "Dawid")
+                .param("dueDate", "2018-12-12");
         mockMvc.perform(builder)
-                .andDo(MockMvcResultHandlers.print());
+                .andDo(MockMvcResultHandlers.print()); //TODO ensure edit
     }
 
     @Test
     public void addTaskToNoneExistUser() throws Exception {
-
         RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
-                .param("name", "test")
-                .param("desc", "testDesc")
-                .param("userNick", "fiboll23");
-
+                .param("userNick", "fiboll23")
+                .flashAttr("task", ModifiableTaskDTO.create().from(prepareTask()));
 
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
@@ -91,16 +96,15 @@ public class TaskControllerTest {
 
     @Test
     public void addTaskUser() throws Exception {
-
         RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
-                .param("name", "test")
-                .param("desc", "testDesc")
-                .param("userNick", "fiboll");
+                .param("userNick", "fiboll")
+                .flashAttr("task", prepareTask());
+
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
                 .andExpect(MockMvcResultMatchers.model().attribute("nick", "fiboll"))
-                .andExpect(MockMvcResultMatchers.view().name("redirect:user"));
+                .andExpect(MockMvcResultMatchers.view().name("redirect:user")); //TODO ensure add
     }
 
     @Test
@@ -108,7 +112,7 @@ public class TaskControllerTest {
 
         RequestBuilder builder = MockMvcRequestBuilders.post("/addTask")
                 .param("name", "test")
-                .param("desc", "testDesc");
+                .flashAttr("task", prepareTask());
 
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
@@ -125,7 +129,7 @@ public class TaskControllerTest {
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.view().name("editForm"))
-//                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
+                //                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
                 .andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("task"));
 
     }
@@ -152,7 +156,7 @@ public class TaskControllerTest {
         user = userManager.findUserByNick("fiboll");
         assertTrue(user.isPresent());
 
-        Optional<TaskDTO> notExistTask= user.get().getTasks().stream()
+        Optional<TaskDTO> notExistTask = user.get().getTasks().stream()
                 .filter((t) -> t.getId().equals(deletedId))
                 .findAny();
 
@@ -161,6 +165,18 @@ public class TaskControllerTest {
         Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
         assertTrue(!deletedTask.isPresent());
 
+    }
+
+    private TaskDTO prepareTask() {
+        final ImmutableTaskDTO taskDTO = ImmutableTaskDTO.builder().desc("desc")
+                .dueDate(new Date())
+                .id(1L)
+                .isDone(false)
+                .name("name")
+                .userName("fiboll")
+                .version(1L)
+                .build();
+        return ModifiableTaskDTO.create().from(taskDTO);
     }
 
 }

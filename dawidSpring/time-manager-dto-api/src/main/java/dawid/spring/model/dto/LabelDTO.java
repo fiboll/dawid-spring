@@ -6,6 +6,7 @@ import static java.util.Comparator.*;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 @Value.Immutable
+@Value.Modifiable
 public abstract class LabelDTO implements Comparable<LabelDTO> {
 
     public abstract Long getId();

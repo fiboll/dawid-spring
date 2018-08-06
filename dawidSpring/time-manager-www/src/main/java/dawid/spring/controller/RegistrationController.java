@@ -3,6 +3,7 @@ package dawid.spring.controller;
 import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.ImmutableUserDTO;
+import dawid.spring.model.dto.ModifiableUserDTO;
 import dawid.spring.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request, Model model) {
-        UserDTO userDto = ImmutableUserDTO.builder().build();
-        model.addAttribute("user", userDto);
+        model.addAttribute("user", ModifiableUserDTO.create());
         return "registration";
     }
 
