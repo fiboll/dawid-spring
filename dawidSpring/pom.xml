@@ -23,7 +23,7 @@
         <hibernate.version>5.3.3.Final</hibernate.version>
         <hibernate.validator.version>5.3.3.Final</hibernate.validator.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
-        <mysql.connector.version>5.1.31</mysql.connector.version>
+        <mysql.connector.version>5.${hamcrest-core.version}1</mysql.connector.version>
         <junit.version>4.12</junit.version>
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <mockito.version>1.10.19</mockito.version>
@@ -34,14 +34,43 @@
         <org.appache.commons.collection.version>3.2.1</org.appache.commons.collection.version>
         <maven.compiler.source>10</maven.compiler.source>
         <maven.compiler.target>10</maven.compiler.target>
+        <hamcrest-core.version>1.3</hamcrest-core.version>
+        <immutable.value.version>2.6.3</immutable.value.version>
+        <hibernate-validator.version>5.2.5.Final</hibernate-validator.version>
+        <h2.version>1.4.192</h2.version>
+        <javax.el.version>2.2.4</javax.el.version>
+        <jaxb-api.version>2.3.0</jaxb-api.version>
     </properties>
-
-
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>dawid.spring</groupId>
                 <artifactId>time-manager-dto-api</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-api</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-dto-api</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-dao-api</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-transformers-api</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-transformers</artifactId>
                 <version>${time-manager-version}</version>
             </dependency>
             <dependency>
@@ -92,16 +121,78 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
-                <version>1.3</version>
+                <version>${hamcrest-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.immutables</groupId>
                 <artifactId>value</artifactId>
-                <version>2.6.3</version>
+                <version>${immutable.value.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${javax.el.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
