@@ -9,12 +9,12 @@
         <module>time-manager-dto-api</module>
         <module>time-manager-api</module>
         <module>time-manager-dao-api</module>
+        <module>time-manager-dao-impl</module>
         <module>time-manager-transformers-api</module>
         <module>time-manager-transformers</module>
         <module>time-manager-core</module>
         <module>timer-manager-rest</module>
         <module>time-manager-www</module>
-        <module>time-manager-dao-impl</module>
     </modules>
     <name>dawidSpring</name>
     <url>http://maven.apache.org</url>

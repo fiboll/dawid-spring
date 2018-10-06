@@ -1,11 +1,13 @@
-package dawid.spring.provider;
+package provider;
 
 import dawid.spring.model.entity.Task;
+import dawid.spring.provider.TaskDao;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
 /**
  * Created by dawid on 14.07.17.
  */

@@ -1,6 +1,7 @@
-package dawid.spring.provider;
+package provider;
 
 import dawid.spring.model.entity.Label;
+import dawid.spring.provider.LabelDao;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

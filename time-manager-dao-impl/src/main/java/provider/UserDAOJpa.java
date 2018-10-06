@@ -1,6 +1,7 @@
-package dawid.spring.provider;
+package provider;
 
 import dawid.spring.model.entity.User;
+import dawid.spring.provider.UserDAO;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
