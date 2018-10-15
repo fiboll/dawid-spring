@@ -56,11 +56,6 @@
             </dependency>
             <dependency>
                 <groupId>dawid.spring</groupId>
-                <artifactId>time-manager-dto-api</artifactId>
-                <version>${time-manager-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dawid.spring</groupId>
                 <artifactId>time-manager-dao-api</artifactId>
                 <version>${time-manager-version}</version>
             </dependency>
