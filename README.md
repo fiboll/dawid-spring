@@ -6,7 +6,7 @@ mvn jetty:run --projects time-manager-www
 
 #TODO
 * fix dependiences
-* extract dao modul
+* extract dao modul - done
 * create SpringData implementation of dao
-* fix froent layer (data format)
+* fix front layer (data format)
 * introduce heroku

@@ -10,13 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>time-manager-transformers</artifactId>
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>dawid.spring</groupId>-->
-            <!--<artifactId>time-manager-transformers-api</artifactId>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
+    <dependencies>
+        <dependency>
+            <groupId>dawid.spring</groupId>
+            <artifactId>time-manager-transformers-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

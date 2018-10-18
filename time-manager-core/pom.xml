@@ -29,6 +29,12 @@
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
+            <artifactId>time-manager-dao-impl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dawid.spring</groupId>
             <artifactId>time-manager-transformers-api</artifactId>
             <scope>compile</scope>
         </dependency>

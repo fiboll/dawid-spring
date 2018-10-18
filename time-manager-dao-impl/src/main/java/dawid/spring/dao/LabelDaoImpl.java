@@ -1,4 +1,4 @@
-package provider;
+package dawid.spring.dao;
 
 import dawid.spring.model.entity.Label;
 import dawid.spring.provider.LabelDao;
