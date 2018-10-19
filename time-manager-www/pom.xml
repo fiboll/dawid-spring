@@ -5,7 +5,7 @@
     <parent>
         <artifactId>dawidSpring</artifactId>
         <groupId>dawid.spring</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
@@ -15,26 +15,22 @@
         <dependency>
             <groupId>dawid.spring</groupId>
             <artifactId>time-manager-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
             <artifactId>time-manager-transformers</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
             <artifactId>time-manager-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- test -->
         <dependency>
             <groupId>dawid.spring</groupId>
             <artifactId>time-manager-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
