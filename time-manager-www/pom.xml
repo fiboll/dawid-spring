@@ -118,7 +118,7 @@
                 <configuration>
                     <httpConnector>
                         <!--host>localhost</host-->
-                        <port>8282</port>
+
                     </httpConnector>
                 </configuration>
             </plugin>
