@@ -1,1 +1,1 @@
-mvn jetty:run --projects time-manager-www
+web: mvn jetty:run --projects time-manager-www
