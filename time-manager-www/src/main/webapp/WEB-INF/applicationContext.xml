@@ -60,6 +60,9 @@
         <property name="formatters">
             <set>
                 <ref bean="labelFormatter" />
+                <bean class="org.springframework.format.datetime.DateFormatter">
+                    <property name="pattern" value="dd/MM/yyyy"/>
+                </bean>
             </set>
         </property>
 
