@@ -25,4 +25,9 @@ public abstract class LabelDTO implements Comparable<LabelDTO> {
                 .thenComparing(LabelDTO::getDescription, nullsLast(naturalOrder()))
                 .compare(this, other);
     }
+
+    @Override
+    public String toString() {
+        return getDescription();
+    }
 }

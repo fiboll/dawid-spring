@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.emptySet;
+
 /**
  * Created by dawid on 09.06.17.
  */
@@ -107,7 +109,7 @@ public class UserController {
                 .desc("")
                 .version(1L)
                 .id(1L)
-                .labels(Collections.emptySet())
+                .labels(emptySet())
                 .build();
 
         return ModifiableTaskDTO.create().from(task);

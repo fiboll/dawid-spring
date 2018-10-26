@@ -55,6 +55,7 @@ public class TaskController {
     public String editTask(@Valid @ModelAttribute(value = "task") ModifiableTaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("task", taskDTO);
             return "editForm";

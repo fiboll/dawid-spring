@@ -61,7 +61,7 @@
             <set>
                 <ref bean="labelFormatter" />
                 <bean class="org.springframework.format.datetime.DateFormatter">
-                    <property name="pattern" value="dd/MM/yyyy"/>
+                    <property name="pattern" value="yyyy-MM-dd"/>
                 </bean>
             </set>
         </property>

@@ -32,7 +32,6 @@ public class Task  {
 
     @Column(name = "DUE_DATE")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

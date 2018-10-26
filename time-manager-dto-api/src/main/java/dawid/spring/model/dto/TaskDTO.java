@@ -20,7 +20,6 @@ public abstract class TaskDTO implements Comparable<TaskDTO> {
 
     @Size(min = 4)
     public abstract String getDesc();
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public abstract Date getDueDate();
     public abstract Long getVersion();
     public abstract boolean isDone();
