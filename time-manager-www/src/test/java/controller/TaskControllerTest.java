@@ -3,12 +3,10 @@ package controller;
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.TaskManager;
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.dto.ImmutableTaskDTO;
-import dawid.spring.model.dto.ModifiableTaskDTO;
-import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.dto.UserDTO;
+import dawid.spring.model.dto.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.platform.commons.logging.LoggerFactory;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -24,9 +22,11 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Date;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -37,7 +37,8 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration
         (
                 {
-                        "classpath:context_test.xml"
+                        "classpath:context_test.xml",
+                        "file:src/main/webapp/WEB-INF/applicationContext.xml",
                 }
         )
 @Rollback
@@ -61,6 +62,7 @@ public class TaskControllerTest {
     public void setup() {
         DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(wac);
         this.mockMvc = builder.build();
+        final List<String> strings = Arrays.asList(wac.getBeanDefinitionNames());
     }
 
     @Test
@@ -76,11 +78,21 @@ public class TaskControllerTest {
                 .param("desc", "edit test task")
                 .param("name", "test")
                 .param("version", "1")
-                .param("isDone", "false")
+                .param("done", "false")
                 .param("userName", "Dawid")
+                .param("labels", "A1")
                 .param("dueDate", "2018-12-12");
         mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print()); //TODO ensure edit
+
+        task = userTable.getNextToDoTasks(userManager.findUserByNick("fiboll").get()).stream().findAny();
+        assertTrue(task.isPresent());
+        assertEquals("edit test task", task.get().getDesc());
+        assertEquals("test", task.get().getName());
+        assertEquals(1L, task.get().getVersion().longValue());
+        assertTrue(!task.get().isDone());
+        assertEquals(Set.of("A1"), task.get().getLabels().stream().map(LabelDTO::getDescription).collect(Collectors.toSet()));
+        assertEquals(new SimpleDateFormat(  "dd/MM/yyyy").parse("12/12/2018"), task.get().getDueDate());
     }
 
     @Test

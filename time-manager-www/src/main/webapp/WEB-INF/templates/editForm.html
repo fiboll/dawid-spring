@@ -6,12 +6,6 @@
 
     <div id = "editModal" class = "modal fade" role="dialog"/>
     <div class="container" layout:fragment="content">
-        ==== <br>
-        ==== <br>
-        ==== <br>
-        ==== <br>
-        <span th:text="${task.dueDate.time}" />
-        ====
         <form action="#" th:action="@{/editTask}" th:object="${task}" method="post">
 
             <div class="form-group">

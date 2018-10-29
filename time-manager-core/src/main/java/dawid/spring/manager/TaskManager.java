@@ -30,10 +30,10 @@ public class TaskManager {
 
     public TaskDTO updateTask(TaskDTO taskDTO) {
 
-        Task updated = taskDao.getTaskById(taskDTO.getId());
-        taskTransformer.updateTask(updated, taskDTO);
+        Task task = taskDao.getTaskById(taskDTO.getId());
+        taskTransformer.updateTask(task, taskDTO);
 
-        taskDao.update(updated);
+        final Task updated = taskDao.update(task);
 
         return taskTransformer.entityToDTO(updated);
     }

@@ -1,6 +1,5 @@
 package dawid.spring.formater;
 
-import dawid.spring.model.dto.ImmutableLabelDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.transformer.LabelTransformer;

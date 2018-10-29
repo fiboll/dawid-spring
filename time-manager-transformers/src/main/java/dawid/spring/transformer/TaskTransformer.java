@@ -39,6 +39,7 @@ public class TaskTransformer implements ITaskTransformer {
         task.setDone(dto.isDone());
         task.setDueDate(dto.getDueDate());
         task.setName(dto.getName());
+        task.getLabels().clear();
         for (LabelDTO labelDTO : dto.getLabels()) {
             task.addLabel(labelTransformer.dtoToEntity(labelDTO));
         }
