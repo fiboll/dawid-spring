@@ -47,7 +47,7 @@ public class TaskController {
     public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
-        model.addAttribute("task", task != null ? ModifiableTaskDTO.create().from(task) : task);
+        model.addAttribute("task", task != null ? ModifiableTaskDTO.create().from(task) : null);
         return "editForm";
     }
 

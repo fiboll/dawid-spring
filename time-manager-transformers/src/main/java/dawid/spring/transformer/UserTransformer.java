@@ -59,11 +59,6 @@ public class UserTransformer implements IUserTransformer {
         for (TaskDTO taskDTO : userDTO.getTasks()) {
 
             Optional<Task> updateTask = user.getTasks().stream().filter(t -> Objects.equals(t.getId(), taskDTO.getId())).findAny();
-
-            if (!updateTask.isPresent() && taskDTO.getId() != null) {
-                throw new IllegalStateException("there is not task with id " + taskDTO.getId());
-            }
-
             Task updatedTask = taskTransformer.updateTask(updateTask.orElse(new Task()), taskDTO);
             user.addTask(updatedTask);
         }

@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -62,7 +63,6 @@ public class TaskControllerTest {
     public void setup() {
         DefaultMockMvcBuilder builder = MockMvcBuilders.webAppContextSetup(wac);
         this.mockMvc = builder.build();
-        final List<String> strings = Arrays.asList(wac.getBeanDefinitionNames());
     }
 
     @Test
@@ -77,7 +77,6 @@ public class TaskControllerTest {
                 .param("id", String.valueOf(task.get().getId()))
                 .param("desc", "edit test task")
                 .param("name", "test")
-                .param("version", "1")
                 .param("done", "false")
                 .param("userName", "Dawid")
                 .param("labels", "A1")
@@ -89,7 +88,6 @@ public class TaskControllerTest {
         assertTrue(task.isPresent());
         assertEquals("edit test task", task.get().getDesc());
         assertEquals("test", task.get().getName());
-        assertEquals(1L, task.get().getVersion().longValue());
         assertTrue(!task.get().isDone());
         assertEquals(Set.of("A1"), task.get().getLabels().stream().map(LabelDTO::getDescription).collect(Collectors.toSet()));
         assertEquals(new SimpleDateFormat(  "dd/MM/yyyy").parse("12/12/2018"), task.get().getDueDate());
@@ -116,7 +114,24 @@ public class TaskControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
                 .andExpect(MockMvcResultMatchers.model().attribute("nick", "fiboll"))
-                .andExpect(MockMvcResultMatchers.view().name("redirect:user")); //TODO ensure add
+                .andExpect(MockMvcResultMatchers.view().name("redirect:user"));
+
+        Optional<UserDTO> user = userManager.findUserByNick("fiboll");
+        assertTrue(user.isPresent());
+
+        final Optional<TaskDTO> addedTask = user.get().getTasks().stream()
+                .filter(taskDTO -> taskDTO.getName().equals("new task"))
+                .findFirst();
+
+        assertTrue(addedTask.isPresent());
+
+        assertEquals("desc", addedTask.get().getDesc());
+        assertEquals("new task", addedTask.get().getName());
+        assertEquals(0L, addedTask.get().getVersion().longValue());
+        assertTrue(!addedTask.get().isDone());
+        assertTrue(addedTask.get().getLabels().isEmpty());
+        assertEquals(new SimpleDateFormat(  "dd/MM/yyyy").parse("12/12/2018"), addedTask.get().getDueDate());
+
     }
 
     @Test
@@ -132,17 +147,17 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void testGetEditTaskNotExist() throws Exception {
+    public void testGetEditTaskNotExist() throws Exception { //TODO error message
 
-        RequestBuilder builder = MockMvcRequestBuilders.get("/editTask")
-                .param("taskId", String.valueOf(100L))
-                .param("userNick", "fiboll");
-
-        mockMvc.perform(builder)
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.view().name("editForm"))
-                //                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
-                .andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("task"));
+//        RequestBuilder builder = MockMvcRequestBuilders.get("/editTask")
+//                .param("taskId", String.valueOf(100L))
+//                .param("userNick", "fiboll");
+//
+//        mockMvc.perform(builder)
+//                .andDo(MockMvcResultHandlers.print())
+//                .andExpect(MockMvcResultMatchers.view().name("editForm"));
+//                .andExpect(MockMvcResultMatchers.model().attributeExists("nick"))
+//                .andExpect(MockMvcResultMatchers.model().attributeDoesNotExist("task"));
 
     }
 
@@ -179,12 +194,12 @@ public class TaskControllerTest {
 
     }
 
-    private TaskDTO prepareTask() {
+    private TaskDTO prepareTask() throws ParseException {
         final ImmutableTaskDTO taskDTO = ImmutableTaskDTO.builder().desc("desc")
-                .dueDate(new Date())
-                .id(1L)
+                .dueDate(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/2018"))
+                .id(0L)
                 .done(false)
-                .name("name")
+                .name("new task")
                 .userName("fiboll")
                 .desc("desc")
                 .version(1L)
