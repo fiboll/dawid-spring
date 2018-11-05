@@ -43,7 +43,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserDTO addTaskToUSer(UserDTO user, TaskDTO task) {
-        //task.setUserName(user.getNickname());
+//        task.setUserName(user.getNickname());
         final ImmutableUserDTO userToUpdate = ImmutableUserDTO.builder().from(user).addTasks(task).build();
         return userUpdate(userToUpdate);
     }
@@ -53,7 +53,7 @@ public class UserManagerImpl implements UserManager {
         User user = userDAO.findByNick(userDTO.getNickname()).orElse(new User());
         userTransformer.update(user, userDTO);
         User update = userDAO.update(user);
-        return userTransformer.entityToDTO(user);
+        return userTransformer.entityToDTO(update);
     }
 
     @Override

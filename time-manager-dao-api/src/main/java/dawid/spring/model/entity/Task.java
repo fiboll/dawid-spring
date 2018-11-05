@@ -53,6 +53,13 @@ public class Task  {
     )
     private Set<Label> labels = new HashSet<>();
 
+    @PreRemove
+    private void preRemove(){
+        if (user.getTasks().contains(this)) {
+            user.getTasks().remove(this);
+        }
+    }
+
     public Long getVersion() {
         return version;
     }

@@ -2,6 +2,7 @@ package dawid.spring.dao;
 
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
+import dawid.spring.provider.TaskDao;
 import dawid.spring.provider.UserDAO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -27,6 +31,9 @@ public class UserDAOTest {
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private TaskDao taskDao;
 
     @Test
     public void testFindUserByNick() {
@@ -57,8 +64,18 @@ public class UserDAOTest {
 
     @Test
     public void testDeleteUser() {
+        List<Long> tasks = findKnownUserWithId(1L).getTasks().stream().map(Task::getId).collect(Collectors.toList());
         userDAO.removeUser(findKnownUserWithId(1L));
+        for (Long taskId: tasks) {
+            assertEquals(null,taskDao.getTaskById(taskId));
+        }
+
+        tasks = findKnownUserWithId(2L).getTasks().stream().map(Task::getId).collect(Collectors.toList());
         userDAO.removeUser(findKnownUserWithId(2L));
+
+        for (Long taskId: tasks) {
+            assertEquals(null,taskDao.getTaskById(taskId));
+        }
         assertTrue(userDAO.findAll().isEmpty());
     }
 

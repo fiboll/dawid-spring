@@ -10,6 +10,7 @@
         <module>time-manager-api</module>
         <module>time-manager-dao-api</module>
         <module>time-manager-dao-impl</module>
+        <module>time-manager-dao-springData</module>
         <module>time-manager-transformers-api</module>
         <module>time-manager-transformers</module>
         <module>time-manager-core</module>
@@ -21,6 +22,7 @@
     <properties>
         <time-manager-version>1.0</time-manager-version>
         <spring.version>5.0.7.RELEASE</spring.version>
+        <spring.data.version>2.1.2.RELEASE</spring.data.version>
         <hibernate.version>5.3.3.Final</hibernate.version>
         <hibernate.validator.version>5.3.3.Final</hibernate.validator.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
@@ -109,6 +111,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${spring.data.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>

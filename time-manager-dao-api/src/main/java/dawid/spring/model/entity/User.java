@@ -75,6 +75,11 @@ public class User {
         task.setUser(this);
     }
 
+    @PreRemove
+    public void preRemove() {
+        tasks.clear();
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);

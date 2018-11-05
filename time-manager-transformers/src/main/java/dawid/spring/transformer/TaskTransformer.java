@@ -19,7 +19,6 @@ public class TaskTransformer implements ITaskTransformer {
 
         ImmutableTaskDTO.Builder builder = ImmutableTaskDTO.builder();
 
-
         builder.desc(task.getDesc());
         builder.done(task.isDone());
         builder.dueDate(task.getDueDate());

@@ -171,14 +171,16 @@ public class TaskControllerTest {
 
         Long deletedId = task.get().getId();
 
-        System.out.println("deletedId " + deletedId);
-
         RequestBuilder builder = MockMvcRequestBuilders.get("/deleteTask")
                 .param("taskId", String.valueOf(task.get().getId()))
                 .param("userName", "fiboll");
 
         mockMvc.perform(builder)
                 .andExpect(MockMvcResultMatchers.view().name("redirect:user?nick=fiboll"));
+
+
+        Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
+        assertTrue(!deletedTask.isPresent());
 
         user = userManager.findUserByNick("fiboll");
         assertTrue(user.isPresent());
@@ -188,10 +190,6 @@ public class TaskControllerTest {
                 .findAny();
 
         assertTrue(!notExistTask.isPresent());
-
-        Optional<TaskDTO> deletedTask = Optional.ofNullable(taskManager.getTask(deletedId));
-        assertTrue(!deletedTask.isPresent());
-
     }
 
     private TaskDTO prepareTask() throws ParseException {

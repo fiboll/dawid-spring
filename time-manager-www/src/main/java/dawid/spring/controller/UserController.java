@@ -91,7 +91,9 @@ public class UserController {
         Optional<UserDTO> user = userManager.findUserByNick(userNick);
 
         if (user.isPresent()) {
-            userManager.addTaskToUSer(user.get(), ImmutableTaskDTO.copyOf(task));
+            final ImmutableTaskDTO addedTask = ImmutableTaskDTO.copyOf(task)
+                                                    .withUserName(user.get().getNickname());
+            userManager.addTaskToUSer(user.get(), addedTask);
 
             model.addAttribute("nick", user.get().getNickname());
             model.addAttribute("newTask", prepareNewTask(userNick));

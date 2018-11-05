@@ -8,11 +8,13 @@ import dawid.spring.provider.TaskDao;
 import dawid.spring.transformer.ITaskTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.util.List;
 
 @Component
+@Transactional
 public class TaskManager {
 
     @Autowired
@@ -49,7 +51,11 @@ public class TaskManager {
 
     private TaskDTO findTaskById(Long taskId) {
         try {
-            return taskTransformer.entityToDTO(taskDao.getTaskById(taskId));
+            final Task task = taskDao.getTaskById(taskId);
+            if (task == null) {
+                return null;
+            }
+            return taskTransformer.entityToDTO(task);
         } catch (NoResultException exception) {
             return null;
         }

@@ -8,7 +8,7 @@ public interface TaskDao {
 
     Task getTaskById(Long id);
 
-    void addTask(Task user);
+    void addTask(Task task);
 
     Task update(Task task);
 
