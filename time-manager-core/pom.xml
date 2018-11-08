@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
-            <artifactId>time-manager-dao-impl</artifactId>
+            <artifactId>time-manager-dao-springData</artifactId>
             <version>1.0</version>
             <scope>runtime</scope>
         </dependency>
