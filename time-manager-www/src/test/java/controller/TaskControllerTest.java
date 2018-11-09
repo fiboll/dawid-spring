@@ -82,7 +82,7 @@ public class TaskControllerTest {
                 .param("labels", "A1")
                 .param("dueDate", "2018-12-12");
         mockMvc.perform(builder)
-                .andDo(MockMvcResultHandlers.print()); //TODO ensure edit
+                .andDo(MockMvcResultHandlers.print());
 
         task = userTable.getNextToDoTasks(userManager.findUserByNick("fiboll").get()).stream().findAny();
         assertTrue(task.isPresent());

@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @Controller
 public class RegistrationController {
@@ -26,8 +27,21 @@ public class RegistrationController {
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
     public String showRegistrationForm(WebRequest request, Model model) {
-        model.addAttribute("user", ModifiableUserDTO.create());
+        model.addAttribute("user", prepareEmptyUser());
         return "registration";
+    }
+
+    private ModifiableUserDTO prepareEmptyUser() {
+        return ModifiableUserDTO.create()
+                .setEmail("")
+                .setFirstName("")
+                .setId(1L)
+                .setVersion(1L)
+                .setTasks(Collections.emptyList())
+                .setNickname("")
+                .setSecondName("")
+                .setPassword("")
+                .setMatchingPassword("");
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
