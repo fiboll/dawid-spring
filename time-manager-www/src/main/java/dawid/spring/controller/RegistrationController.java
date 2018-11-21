@@ -2,9 +2,7 @@ package dawid.spring.controller;
 
 import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.dto.ImmutableUserDTO;
-import dawid.spring.model.dto.ModifiableUserDTO;
-import dawid.spring.model.dto.UserDTO;
+import dawid.spring.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.Date;
+
+import static java.util.Collections.emptySet;
 
 @Controller
 public class RegistrationController {
@@ -46,22 +47,22 @@ public class RegistrationController {
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     public ModelAndView registerUserAccount
-            (@ModelAttribute("user") @Valid UserDTO accountDto,
-             BindingResult result, WebRequest request, Errors errors) {
-
+            (@Valid @ModelAttribute("user") ModifiableUserDTO user,
+             BindingResult result, Model model) {
 
         if (!result.hasErrors()) {
-            UserDTO registered = createUserAccount(accountDto, result);
+            UserDTO registered = createUserAccount(user, result);
             if (registered == null) {
                 result.rejectValue("email", "message.regError");
             }
         }
 
         if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
+            return new ModelAndView("registration", "user", user);
         }
         else {
-            return new ModelAndView("successRegister", "user", accountDto);
+            model.addAttribute("newTask", prepareNewTask(user.getNickname()));
+            return new ModelAndView("userDetails", "user", user);
         }
     }
 
@@ -71,5 +72,20 @@ public class RegistrationController {
         } catch (EmailExistsException e) {
             return null;
         }
+    }
+
+    //TODO extract
+    private ModifiableTaskDTO prepareNewTask(String userName) {
+        var task = ImmutableTaskDTO.builder().userName(userName)
+                .name("")
+                .done(false)
+                .dueDate(new Date())
+                .desc("")
+                .version(1L)
+                .id(1L)
+                .labels(emptySet())
+                .build();
+
+        return ModifiableTaskDTO.create().from(task);
     }
 }

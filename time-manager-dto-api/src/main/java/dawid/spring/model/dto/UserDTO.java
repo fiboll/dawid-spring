@@ -18,15 +18,12 @@ public abstract class UserDTO {
     public abstract String getFirstName();
     public abstract String getSecondName();
 
-    @NotEmpty
     public abstract String getNickname();
     public abstract Set<TaskDTO> getTasks();
 
-    @NotEmpty
     public abstract String getPassword();
     public abstract String getMatchingPassword();
 
-    @NotEmpty
     @org.hibernate.validator.constraints.Email
     public abstract String getEmail();
 

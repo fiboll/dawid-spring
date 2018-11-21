@@ -6,9 +6,11 @@ import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.entity.Task;
 import dawid.spring.model.entity.User;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -56,15 +58,21 @@ public class UserTransformer implements IUserTransformer {
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
 
-        for (TaskDTO taskDTO : userDTO.getTasks()) {
+        addTasks(user, userDTO);
 
+        return user;
+
+    }
+
+    private void addTasks(User user, UserDTO userDTO) {
+        if (CollectionUtils.isEmpty(userDTO.getTasks())) {
+            user.setTasks(Collections.emptySet());
+        }
+        for (TaskDTO taskDTO : userDTO.getTasks()) {
             Optional<Task> updateTask = user.getTasks().stream().filter(t -> Objects.equals(t.getId(), taskDTO.getId())).findAny();
             Task updatedTask = taskTransformer.updateTask(updateTask.orElse(new Task()), taskDTO);
             user.addTask(updatedTask);
         }
-
-        return user;
-
     }
 
     @Override

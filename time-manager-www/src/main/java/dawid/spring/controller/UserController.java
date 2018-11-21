@@ -103,6 +103,7 @@ public class UserController {
         return "redirect:noUser";
     }
 
+    //TODO extract
     private ModifiableTaskDTO prepareNewTask(String userName) {
         var task = ImmutableTaskDTO.builder().userName(userName)
                 .name("")
