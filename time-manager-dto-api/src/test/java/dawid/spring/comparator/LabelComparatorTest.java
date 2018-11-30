@@ -23,71 +23,62 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public  class LabelComparatorTest {
 
-    private static LabelDTO a;
-    private static LabelDTO b;
+    private static LabelDTO alphabeticalFist;
+    private static LabelDTO alphabeticalSecond;
 
-    private static LabelDTO n1;
-    private static LabelDTO n2;
-
-    private static List<LabelDTO> labels;
+    private static LabelDTO numericFirst;
+    private static LabelDTO numericSecond;
 
     @BeforeAll
     public static void prepareTest() {
-        a = ImmutableLabelDTO.builder()
+        alphabeticalFist = ImmutableLabelDTO.builder()
                              .id(1L)
                              .description("a")
                              .build();
-        b = ImmutableLabelDTO.builder()
+        alphabeticalSecond = ImmutableLabelDTO.builder()
                              .id(2L)
                              .description("b")
                              .build();
-        n1 = ImmutableLabelDTO.builder()
+        numericFirst = ImmutableLabelDTO.builder()
                              .id(3L)
                              .description("1")
                              .build();
-        n2 = ImmutableLabelDTO.builder()
+        numericSecond = ImmutableLabelDTO.builder()
                               .id(4L)
                               .description("2")
                               .build();
-        labels = Stream.of(n2, a, b, n1).collect(Collectors.toList());
     }
 
     @Test
     public void testListOrder() {
+        List<LabelDTO> labels = Stream.of(numericSecond, alphabeticalFist, alphabeticalSecond, numericFirst)
+                .collect(Collectors.toList());
+
         labels.sort(Comparator.naturalOrder());
-        List<LabelDTO> sortedLabels = Stream.of(n1,n2,a,b).
-                collect(Collectors.toList());
+        List<LabelDTO> sortedLabels = List.of(numericFirst, numericSecond, alphabeticalFist, alphabeticalSecond);
 
         assertThat(labels, is(sortedLabels));
     }
 
-    @ParameterizedTest(name = "run #{index} with [{arguments}]")
-    @MethodSource("labelArguments")
+    @ParameterizedTest(name = "should be equals[{arguments}]")
+    @MethodSource("equalArguments")
     public void testEquals(LabelDTO labelDTO, LabelDTO labelDTO2) {
         assertEquals(0, labelDTO.compareTo(labelDTO2));
     }
 
-    @Test
-    public void testLessThan() {
-        assertTrue(n1.compareTo(n2) < 0);
-        assertTrue(a.compareTo(b) < 0);
-        assertTrue(n1.compareTo(a) < 0);
-        assertTrue(n1.compareTo(b) < 0);
-        assertTrue(n2.compareTo(a) < 0);
-        assertTrue(n2.compareTo(b) < 0);
+    @ParameterizedTest(name = "Should {0} be more important than {1}")
+    @MethodSource("lessMoreArguments")
+    public void testLessThanA(LabelDTO labelDTO, LabelDTO labelDTO2) {
+        assertTrue(labelDTO.compareTo(labelDTO2) < 0);
     }
 
-    @Test
-    public void testThan() {
-        assertTrue(n2.compareTo(n1) > 0);
-        assertTrue(b.compareTo(a) > 0);
-        assertTrue(a.compareTo(n1) > 0);
-        assertTrue(a.compareTo(n2) > 0);
-        assertTrue(b.compareTo(n2) > 0);
-        assertTrue(b.compareTo(n1) > 0);
+    @ParameterizedTest(name = "Should {0} be more important than {1}")
+    @MethodSource("lessMoreArguments")
+    public void testMoreThan(LabelDTO labelDTO, LabelDTO labelDTO2) {
+        assertTrue(labelDTO2.compareTo(labelDTO) > 0);
     }
 
-    private static Stream<Arguments> labelArguments() {
+    private static Stream<Arguments> equalArguments() {
         return Stream.of(
                 Arguments.of(
                         ImmutableLabelDTO.builder()
@@ -100,15 +91,27 @@ public  class LabelComparatorTest {
                                          .build()),
                 Arguments.of(
                         ImmutableLabelDTO.builder()
-                                         .description("a")
+                                         .description("1")
                                          .id(1L)
                                          .colour("red")
                                          .build(),
                         ImmutableLabelDTO.builder()
-                                         .description("a")
+                                         .description("1")
                                          .id(1L)
                                          .colour("green")
                                          .build())
         );
     }
+
+    private static Stream<Arguments> lessMoreArguments() {
+        return Stream.of(
+                Arguments.of(numericFirst, numericSecond),
+                Arguments.of(alphabeticalFist, alphabeticalSecond),
+                Arguments.of(numericFirst, alphabeticalFist),
+                Arguments.of(numericFirst, alphabeticalSecond),
+                Arguments.of(numericSecond, alphabeticalFist),
+                Arguments.of(numericSecond, alphabeticalSecond)
+        );
+    }
+
 }
