@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
+        <module>time-manager-model</module>
         <module>time-manager-dto-api</module>
         <module>time-manager-api</module>
         <module>time-manager-dao-api</module>
@@ -46,6 +47,11 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>dawid.spring</groupId>
+                <artifactId>time-manager-model</artifactId>
+                <version>${time-manager-version}</version>
+            </dependency>
             <dependency>
                 <groupId>dawid.spring</groupId>
                 <artifactId>time-manager-dto-api</artifactId>

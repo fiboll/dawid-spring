@@ -1,7 +1,6 @@
 package dawid.spring.provider;
 
-
-import dawid.spring.model.entity.Label;
+import dawid.spring.model.Label;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.entity.Label;
+import dawid.spring.model.Label;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package dawid.spring.dao;
 
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.Task;
 import dawid.spring.provider.TaskDao;
 import org.springframework.stereotype.Repository;
 

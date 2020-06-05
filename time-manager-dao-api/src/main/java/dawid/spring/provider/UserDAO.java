@@ -1,6 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.entity.User;
+import dawid.spring.model.User;
 
 import javax.transaction.Transactional;
 import java.util.List;

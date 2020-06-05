@@ -1,6 +1,6 @@
 package dawid.spring.dao;
 
-import dawid.spring.model.entity.Label;
+import dawid.spring.model.Label;
 import dawid.spring.provider.LabelDao;
 import org.springframework.stereotype.Repository;
 

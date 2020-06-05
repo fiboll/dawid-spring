@@ -13,10 +13,14 @@
     <dependencies>
         <dependency>
             <groupId>dawid.spring</groupId>
+            <artifactId>time-manager-model</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dawid.spring</groupId>
             <artifactId>time-manager-api</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -45,6 +49,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
 
 </project>

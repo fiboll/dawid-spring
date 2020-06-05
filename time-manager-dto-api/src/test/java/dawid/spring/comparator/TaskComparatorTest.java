@@ -1,5 +1,7 @@
 package dawid.spring.comparator;
 
+import dawid.spring.model.dto.ImmutableLabelDTO;
+import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,56 +25,73 @@ public class TaskComparatorTest {
     private LabelDTO a,b;
 
     private List<TaskDTO> tasks;
-/*
+
     @BeforeEach
     public void setup() {
+        a = ImmutableLabelDTO.builder()
+                .id(1L)
+                .description("a")
+                .colour("red")
+                .build();
 
-        a = new LabelDTO(1L,"a", "red");
-        b = new LabelDTO(2L,"b", "yellow");
+        b = ImmutableLabelDTO.builder()
+                .id(2L)
+                .description("b")
+                .colour("yellow")
+                .build();
 
-        t1 = new TaskDTO.TaskBuilder()
+        t1 = ImmutableTaskDTO.builder()
+                .id(1L)
+                .userName("test")
+                .version(1L)
                 .name("test 1")
                 .desc("test desc")
                 .dueDate(new Date())
-                .isDone(false)
-                .addLabel(a)
+                .done(false)
+                .addLabels(a)
                 .build();
 
-        t2 = new TaskDTO.TaskBuilder()
+        t2 = ImmutableTaskDTO.builder()
+                .id(1L)
+                .userName("test")
+                .version(2L)
                 .name("test 2")
                 .desc("test 2 desc")
                 .dueDate(new Date())
-                .isDone(false)
-                .addLabel(b)
+                .done(false)
+                .addLabels(b)
                 .build();
 
-        t3 = new TaskDTO.TaskBuilder()
+
+        t3 = ImmutableTaskDTO.builder()
+                .id(1L)
+                .userName("test")
+                .version(3L)
                 .name("test 3")
                 .desc("test 3 desc")
                 .dueDate(new Date())
-                .isDone(false)
-                .addLabel(b)
-                .addLabel(a)
+                .done(false)
+                .addLabels(a, b)
                 .build();
 
         tasks = Stream.of(t1, t2, t3)
                 .collect(toList());
 
-        tDate1 = new TaskDTO.TaskBuilder()
-                    .dueDate(new Date(100L))
-                    .build();
-
-        tDate2 = new TaskDTO.TaskBuilder()
-                .dueDate(new Date(1000L))
-                .build();
-
-        tName1 = new TaskDTO.TaskBuilder()
-                .name("aaaa")
-                .build();
-
-        tName2 = new TaskDTO.TaskBuilder()
-                .name("bbbbb")
-                .build();
+//        tDate1 = new TaskDTO.TaskBuilder()
+//                    .dueDate(new Date(100L))
+//                    .build();
+//
+//        tDate2 = new TaskDTO.TaskBuilder()
+//                .dueDate(new Date(1000L))
+//                .build();
+//
+//        tName1 = new TaskDTO.TaskBuilder()
+//                .name("aaaa")
+//                .build();
+//
+//        tName2 = new TaskDTO.TaskBuilder()
+//                .name("bbbbb")
+//                .build();
     }
 
     @Test
@@ -102,5 +121,5 @@ public class TaskComparatorTest {
     public void testCompareNames() {
         assertTrue(tName2.compareTo(tName1) > 0);
     }
-*/
+
 }

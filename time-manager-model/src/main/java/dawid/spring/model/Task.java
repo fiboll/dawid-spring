@@ -1,10 +1,10 @@
-package dawid.spring.model.entity;
+package dawid.spring.model;
 
-import dawid.spring.exceptions.DomainException;
+//import dawid.spring.exceptions.DomainException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
+//import org.hibernate.annotations.Type;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -42,7 +42,7 @@ public class Task  {
     private Long version;
 
     @Column(name = "is_done")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
+    //@Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean isDone;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -97,7 +97,7 @@ public class Task  {
 
     public void setUser(User user) {
         if (!user.getTasks().contains(this)) {
-           throw new DomainException("Table columns don't contain assigned task!");
+           //throw new DomainException("Table columns don't contain assigned task!");
         }
         this.user = user;
     }

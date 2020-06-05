@@ -1,6 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.CrudRepository;

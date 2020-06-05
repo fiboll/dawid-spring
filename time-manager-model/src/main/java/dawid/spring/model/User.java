@@ -1,9 +1,10 @@
-package dawid.spring.model.entity;
+package dawid.spring.model;
 
 
+//import dawid.spring.model.Task;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.validator.constraints.NotEmpty;
+//import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,17 +49,16 @@ public class User {
     private Set<Task> tasks;
 
     @NotNull
-    @NotEmpty
+    //@NotEmpty
     private String password;
 
     @NotNull
-    @NotEmpty
-    @org.hibernate.validator.constraints.Email
+    //@NotEmpty
+    //@org.hibernate.validator.constraints.Email
     @Column(nullable = false, unique = true)
     private String email;
 
     @Version
-    @Column(name = "VERSION")
     private Long version;
 
     public User() {
@@ -70,8 +70,6 @@ public class User {
            tasks = new HashSet<>();
         }
         tasks.add(task);
-
-
         task.setUser(this);
     }
 

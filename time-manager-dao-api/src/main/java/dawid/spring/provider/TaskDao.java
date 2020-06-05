@@ -1,6 +1,6 @@
 package dawid.spring.provider;
 
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.Task;
 /**
  * Created by dawid on 14.07.17.
  */
