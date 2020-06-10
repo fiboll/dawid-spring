@@ -40,7 +40,7 @@ public class TableManagerImpl implements TableManager {
     public void removeLabel(TaskDTO task, LabelDTO label) {
         if (!task.getLabels().contains(label)) {
             throw new DomainException(String.format("Task %s doesn't contain label %s",
-                    task.getId(), label.getId()));
+                    task.getId(), label));
         }
 
         if (logger.isDebugEnabled()) {

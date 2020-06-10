@@ -1,7 +1,7 @@
 package dawid.spring.transformer;
 
 import dawid.spring.model.dto.UserDTO;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.User;
 
 /**
  * Created by private on 20.01.18.

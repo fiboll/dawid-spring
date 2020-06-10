@@ -29,13 +29,11 @@ public class TaskComparatorTest {
     @BeforeEach
     public void setup() {
         a = ImmutableLabelDTO.builder()
-                .id(1L)
                 .description("a")
                 .colour("red")
                 .build();
 
         b = ImmutableLabelDTO.builder()
-                .id(2L)
                 .description("b")
                 .colour("yellow")
                 .build();

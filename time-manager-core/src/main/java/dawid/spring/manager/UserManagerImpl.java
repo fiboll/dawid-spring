@@ -4,7 +4,7 @@ import dawid.spring.exceptions.EmailExistsException;
 import dawid.spring.model.dto.ImmutableUserDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.IUserTransformer;
 import org.springframework.beans.factory.annotation.Autowired;

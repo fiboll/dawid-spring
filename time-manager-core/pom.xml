@@ -24,12 +24,17 @@
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
+            <artifactId>time-manager-model</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>dawid.spring</groupId>
             <artifactId>time-manager-dao-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>dawid.spring</groupId>
-            <artifactId>time-manager-dao-springData</artifactId>
+            <artifactId>time-manager-dao-impl</artifactId>
             <version>1.0</version>
             <scope>runtime</scope>
         </dependency>

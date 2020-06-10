@@ -1,8 +1,8 @@
 package dawid.spring.manager;
 
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.Label;
+import dawid.spring.model.Task;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.TaskDao;
 import dawid.spring.transformer.ITaskTransformer;

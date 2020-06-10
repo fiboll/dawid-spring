@@ -32,19 +32,15 @@ public  class LabelComparatorTest {
     @BeforeAll
     public static void prepareTest() {
         alphabeticalFist = ImmutableLabelDTO.builder()
-                             .id(1L)
                              .description("a")
                              .build();
         alphabeticalSecond = ImmutableLabelDTO.builder()
-                             .id(2L)
                              .description("b")
                              .build();
         numericFirst = ImmutableLabelDTO.builder()
-                             .id(3L)
                              .description("1")
                              .build();
         numericSecond = ImmutableLabelDTO.builder()
-                              .id(4L)
                               .description("2")
                               .build();
     }
@@ -83,21 +79,17 @@ public  class LabelComparatorTest {
                 Arguments.of(
                         ImmutableLabelDTO.builder()
                                 .description("a")
-                                         .id(1L)
                                          .build(),
                         ImmutableLabelDTO.builder()
                                          .description("a")
-                                         .id(1L)
                                          .build()),
                 Arguments.of(
                         ImmutableLabelDTO.builder()
                                          .description("1")
-                                         .id(1L)
                                          .colour("red")
                                          .build(),
                         ImmutableLabelDTO.builder()
                                          .description("1")
-                                         .id(1L)
                                          .colour("green")
                                          .build())
         );

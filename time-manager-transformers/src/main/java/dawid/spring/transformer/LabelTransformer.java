@@ -3,7 +3,7 @@ package dawid.spring.transformer;
 import dawid.spring.model.dto.ImmutableLabelDTO;
 import dawid.spring.model.dto.ImmutableUserDTO;
 import dawid.spring.model.dto.LabelDTO;
-import dawid.spring.model.entity.Label;
+import dawid.spring.model.Label;
 import dawid.spring.provider.LabelDao;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ public class LabelTransformer implements ILabelTransformer {
     @Override
     public LabelDTO entityToDTO(Label label) {
         final ImmutableLabelDTO.Builder builder = ImmutableLabelDTO.builder()
-                                                              .description(label.getDescription())
-                                                              .id(label.getId());
+                                                              .description(label.getDescription());
+
         if (StringUtils.isNoneEmpty(label.getColour())) {
             builder.colour(label.getColour());
         }
@@ -28,10 +28,10 @@ public class LabelTransformer implements ILabelTransformer {
 
     @Override
     public Label dtoToEntity(LabelDTO label) {
-        return labelDao.getAllLabels().stream()
-                .filter(l -> l.getId().equals(label.getId()))
-                .findAny()
-                .orElseThrow(() -> new IllegalStateException("There is no label with desc " + label.getDescription()));
+        Label result =  new Label();
+        result.setColour(label.getColour());
+        result.setDescription(label.getDescription());
+        return result;
     }
 }
 

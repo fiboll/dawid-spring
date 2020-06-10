@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>dawid.spring</groupId>
-            <artifactId>time-manager-dao-api</artifactId>
+            <artifactId>time-manager-model</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>

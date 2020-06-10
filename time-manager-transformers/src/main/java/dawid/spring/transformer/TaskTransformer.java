@@ -3,7 +3,7 @@ package dawid.spring.transformer;
 import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Task;
+import dawid.spring.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

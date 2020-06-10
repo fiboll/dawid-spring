@@ -11,7 +11,7 @@
         <module>time-manager-api</module>
         <module>time-manager-dao-api</module>
         <module>time-manager-dao-impl</module>
-        <module>time-manager-dao-springData</module>
+<!--        <module>time-manager-dao-springData</module>-->
         <module>time-manager-transformers-api</module>
         <module>time-manager-transformers</module>
         <module>time-manager-core</module>

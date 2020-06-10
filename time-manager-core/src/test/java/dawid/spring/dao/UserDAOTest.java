@@ -1,7 +1,7 @@
 package dawid.spring.dao;
 
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.Task;
+import dawid.spring.model.User;
 import dawid.spring.provider.TaskDao;
 import dawid.spring.provider.UserDAO;
 import org.junit.Test;
@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 

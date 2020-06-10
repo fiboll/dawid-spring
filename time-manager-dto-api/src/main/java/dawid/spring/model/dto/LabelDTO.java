@@ -9,8 +9,6 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
 @Value.Modifiable
 public abstract class LabelDTO implements Comparable<LabelDTO> {
 
-    public abstract Long getId();
-
     @Value.Default
     public String getColour() {
         return "";

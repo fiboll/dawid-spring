@@ -4,9 +4,9 @@ import dawid.spring.config.TableConfig;
 import dawid.spring.exceptions.DomainException;
 import dawid.spring.manager.*;
 import dawid.spring.model.dto.*;
-import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
-import dawid.spring.model.entity.User;
+import dawid.spring.model.Label;
+import dawid.spring.model.Task;
+import dawid.spring.model.User;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.*;
@@ -80,11 +80,11 @@ public class UserTableTest {
         user.setVersion(1L);
         user.setId(1L);
 
-        Label a = prepareLabel(1L, "a");
-        Label b = prepareLabel(2L, "b");
-        Label c = prepareLabel(3L, "c");
-        Label d = prepareLabel(4L, "d");
-        Label e = prepareLabel(5L, "e");
+        Label a = prepareLabel( "a");
+        Label b = prepareLabel( "b");
+        Label c = prepareLabel( "c");
+        Label d = prepareLabel( "d");
+        Label e = prepareLabel( "e");
 
         user.addTask(prepareTask("test", false, c,e));
         user.addTask(prepareTask("test1", false, a));
@@ -156,9 +156,8 @@ public class UserTableTest {
         userTable.getDoneTasks(null);
     }
 
-    private static Label prepareLabel(Long id, String description) {
+    private static Label prepareLabel(String description) {
         var label = new Label();
-        label.setId(id);
         label.setDescription(description);
         return label;
     }
