@@ -4,7 +4,6 @@ import dawid.spring.manager.TaskManager;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.ModifiableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.entity.Label;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.transformer.LabelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;

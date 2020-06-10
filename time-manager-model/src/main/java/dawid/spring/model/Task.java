@@ -45,12 +45,8 @@ public class Task  {
     //@Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean isDone;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="TASK_LABELS",
-            joinColumns = @JoinColumn(name = "TASK_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID")
-    
-    )
+    @ElementCollection
+    @CollectionTable(name = "task_labels", joinColumns = @JoinColumn(name = "task_id"), foreignKey = @ForeignKey(name = "tasks_labels_fk"))
     private Set<Label> labels = new HashSet<>();
 
     @PreRemove

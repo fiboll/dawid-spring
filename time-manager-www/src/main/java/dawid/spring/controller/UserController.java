@@ -3,8 +3,6 @@ package dawid.spring.controller;
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.*;
-import dawid.spring.model.entity.Label;
-import dawid.spring.model.entity.Task;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.transformer.LabelTransformer;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
