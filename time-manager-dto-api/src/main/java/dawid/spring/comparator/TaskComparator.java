@@ -11,7 +11,9 @@ import static java.util.Comparator.*;
 /**
  * Created by private on 01.07.17.
  */
-public class TaskComparator implements Comparator<TaskDTO> {
+public enum  TaskComparator implements Comparator<TaskDTO> {
+
+    INSTANCE;
 
     @Override
     public int compare(TaskDTO task, TaskDTO task2) {

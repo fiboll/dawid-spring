@@ -2,7 +2,6 @@ package dawid.spring.model.dto;
 
 import dawid.spring.comparator.TaskComparator;
 import org.immutables.value.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -25,11 +24,15 @@ public abstract class TaskDTO implements Comparable<TaskDTO> {
     public abstract boolean isDone();
     public abstract String getUserName();
 
-    @org.hibernate.validator.constraints.NotEmpty
+    @NotEmpty
     public abstract Set<LabelDTO> getLabels();
+
+    public boolean isInProgress() {
+        return !isDone();
+    }
 
     @Override
     public int compareTo(TaskDTO other) {
-        return new TaskComparator().compare(this, other);
+        return TaskComparator.INSTANCE.compare(this, other);
     }
 }
