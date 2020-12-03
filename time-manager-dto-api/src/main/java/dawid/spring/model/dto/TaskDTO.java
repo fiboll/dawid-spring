@@ -1,31 +1,23 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.comparator.TaskComparator;
-import org.immutables.value.Value;
+import lombok.Builder;
+import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
-@Value.Immutable
-@Value.Modifiable
-@Value.Style(get = {"is*", "get*"})
-public abstract class TaskDTO implements Comparable<TaskDTO> {
-    public abstract Long getId();
-
-    @Size(min = 4)
-    public abstract String getName();
-
-    @Size(min = 4)
-    public abstract String getDesc();
-    public abstract Date getDueDate();
-    public abstract Long getVersion();
-    public abstract boolean isDone();
-    public abstract String getUserName();
-
-    @NotEmpty
-    public abstract Set<LabelDTO> getLabels();
+@Data
+@Builder
+public class TaskDTO implements Comparable<TaskDTO> {
+    private Long id;
+    private String name;
+    private String desc;
+    private Date dueDate;
+    private String userName;
+    private Long version;
+    private Set<LabelDTO> labels;
+    private boolean isDone;
 
     public boolean isInProgress() {
         return !isDone();

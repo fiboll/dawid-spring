@@ -1,20 +1,17 @@
 package dawid.spring.model.dto;
 
-import org.immutables.value.Value;
+import lombok.Builder;
+import lombok.Data;
 
 import static java.util.Comparator.*;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
-@Value.Immutable
-@Value.Modifiable
-public abstract class LabelDTO implements Comparable<LabelDTO> {
+@Data
+@Builder
+public class LabelDTO implements Comparable<LabelDTO> {
 
-    @Value.Default
-    public String getColour() {
-        return "";
-    }
-
-    public abstract String getDescription();
+    private String colour;
+    private String description;
 
     @Override
     public int compareTo(LabelDTO other) {
@@ -22,10 +19,5 @@ public abstract class LabelDTO implements Comparable<LabelDTO> {
                 .reversed()
                 .thenComparing(LabelDTO::getDescription, nullsLast(naturalOrder()))
                 .compare(this, other);
-    }
-
-    @Override
-    public String toString() {
-        return getDescription();
     }
 }

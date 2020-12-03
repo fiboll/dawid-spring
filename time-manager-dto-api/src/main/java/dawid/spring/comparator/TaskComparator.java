@@ -3,6 +3,7 @@ package dawid.spring.comparator;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -12,7 +13,6 @@ import static java.util.Comparator.*;
  * Created by private on 01.07.17.
  */
 public enum  TaskComparator implements Comparator<TaskDTO> {
-
     INSTANCE;
 
     @Override
@@ -25,8 +25,8 @@ public enum  TaskComparator implements Comparator<TaskDTO> {
     }
 
     private static int compareLabelsList(TaskDTO task, TaskDTO otherTask) {
-        var thisLabelsIterator = task.getLabels().iterator();
-        var otherLabelsIterator = otherTask.getLabels().iterator();
+        Iterator<LabelDTO> thisLabelsIterator = task.getLabels() != null ? task.getLabels().iterator() : Collections.emptyIterator();
+        Iterator<LabelDTO> otherLabelsIterator = otherTask.getLabels() != null ? otherTask.getLabels().iterator() : Collections.emptyIterator();
 
         while (hasMoreLabels(thisLabelsIterator, otherLabelsIterator)) {
             int result = comparing(Iterator<LabelDTO>::hasNext).reversed()

@@ -1,31 +1,31 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.model.adnotation.PasswordMatches;
-import org.immutables.value.Value;
+import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 /**
  * Created by private on 20.01.18.
  */
 @PasswordMatches
-@Value.Immutable
-@Value.Modifiable
+@Data
 public abstract class UserDTO {
+    private Long id;
 
-    public abstract Long getId();
-    public abstract String getFirstName();
-    public abstract String getSecondName();
+    private String firstName;
 
-    public abstract String getNickname();
-    public abstract Set<TaskDTO> getTasks();
+    private String secondName;
 
-    public abstract String getPassword();
-    public abstract String getMatchingPassword();
+    private String nickname;
 
-    @org.hibernate.validator.constraints.Email
-    public abstract String getEmail();
+    private Set<TaskDTO> tasks;
 
-    public abstract Long getVersion();
+    private String password;
+
+    private String matchingPassword;
+
+    private String email;
+
+    private Long version;
 }
