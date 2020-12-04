@@ -16,7 +16,6 @@ public class LabelDaoImpl implements LabelDao {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     @SuppressWarnings("unchecked")
     public List<Label> getAllLabels() {

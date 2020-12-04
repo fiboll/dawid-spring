@@ -1,6 +1,7 @@
-package dawid.spring.provider;
+package dawid.spring.provider.impl;
 
 import dawid.spring.model.Task;
+import dawid.spring.provider.TaskDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;

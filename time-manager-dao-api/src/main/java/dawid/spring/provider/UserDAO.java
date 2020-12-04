@@ -2,7 +2,6 @@ package dawid.spring.provider;
 
 import dawid.spring.model.User;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +14,6 @@ public interface UserDAO {
 
     void addUser(User user);
 
-    @Transactional
     void removeUser(User user);
 
     User update(User user);

@@ -1,6 +1,7 @@
-package dawid.spring.provider;
+package dawid.spring.provider.impl;
 
 import dawid.spring.model.User;
+import dawid.spring.provider.UserDAO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
