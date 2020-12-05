@@ -3,12 +3,14 @@ package dawid.spring.model.dto;
 import dawid.spring.comparator.TaskComparator;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.util.Date;
 import java.util.Set;
 
 @Data
 @Builder
+@With
 public class TaskDTO implements Comparable<TaskDTO> {
     private Long id;
     private String name;

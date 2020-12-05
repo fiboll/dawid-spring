@@ -10,6 +10,8 @@ import dawid.spring.model.User;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.*;
+import dawid.spring.transformer.impl.TaskTransformer;
+import dawid.spring.transformer.impl.UserTransformer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

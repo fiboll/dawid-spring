@@ -5,8 +5,9 @@ spring-for-fun
 mvn jetty:run --projects time-manager-www
 
 #TODO
+* introduce java modules
+* add transformers test
+* introduce spring boot
 * fix dependiences
-* extract dao modul - persistance.xml?
-* extract database model
-* create SpringData implementation of dao
+* introduce Docker
 * introduce heroku - database

@@ -1,6 +1,7 @@
 package dawid.spring.model.dto;
 
 import dawid.spring.model.adnotation.PasswordMatches;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Set;
@@ -10,7 +11,8 @@ import java.util.Set;
  */
 @PasswordMatches
 @Data
-public abstract class UserDTO {
+@Builder
+public class UserDTO {
     private Long id;
 
     private String firstName;
