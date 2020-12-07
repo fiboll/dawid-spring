@@ -1,7 +1,6 @@
 package dawid.spring.dao;
 
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.dto.ImmutableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import org.junit.Test;
@@ -10,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -54,11 +53,11 @@ public class UserManagerTest {
     public void testAddTaskToUSer() {
         Optional<UserDTO> foundedUser = userManager.findUserByNick("fiboll");
         assertNotNull(foundedUser);
-        TaskDTO task = ImmutableTaskDTO.builder().name("Test Task")
+        TaskDTO task = TaskDTO.builder().name("Test Task")
                                        .id(1L)
                                        .dueDate(Date.from(LocalDateTime.now().plus(2, ChronoUnit.MONTHS).atZone(ZoneId.systemDefault()).toInstant()))
                                        .desc("Test desc")
-                                       .done(false)
+                                       .isDone(false)
                                        .version(1L)
                                        .userName("fiboll")
                                        .build();

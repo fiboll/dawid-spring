@@ -1,6 +1,7 @@
-package dawid.spring.manager;
+package dawid.spring.manager.impl;
 
 import dawid.spring.exceptions.DomainException;
+import dawid.spring.manager.TableManager;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.TaskDTO;
 import org.apache.log4j.Logger;
@@ -23,7 +24,7 @@ public class TableManagerImpl implements TableManager {
             logger.debug(String.format("Task: %s is marked as done",  task.getId()));
         }
 
-       // task.setDone(true);
+        task.setDone(true);
     }
 
     @Override

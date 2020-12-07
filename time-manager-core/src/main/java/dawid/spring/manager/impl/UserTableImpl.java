@@ -1,7 +1,8 @@
-package dawid.spring.manager;
+package dawid.spring.manager.impl;
 
 import dawid.spring.config.TableConfig;
 import dawid.spring.exceptions.DomainException;
+import dawid.spring.manager.IUserTable;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;

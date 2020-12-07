@@ -1,7 +1,7 @@
-package dawid.spring.manager;
+package dawid.spring.manager.impl;
 
 import dawid.spring.exceptions.EmailExistsException;
-import dawid.spring.model.dto.ImmutableUserDTO;
+import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
 import dawid.spring.model.User;
@@ -9,8 +9,8 @@ import dawid.spring.provider.UserDAO;
 import dawid.spring.transformer.IUserTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,9 +43,9 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public UserDTO addTaskToUSer(UserDTO user, TaskDTO task) {
-//        task.setUserName(user.getNickname());
-        final ImmutableUserDTO userToUpdate = ImmutableUserDTO.builder().from(user).addTasks(task).build();
-        return userUpdate(userToUpdate);
+        task.setUserName(user.getNickname());
+        user.getTasks().add(task);
+        return userUpdate(user);
     }
 
     @Override

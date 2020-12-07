@@ -1,12 +1,11 @@
 package controller;
 
 import dawid.spring.manager.IUserTable;
-import dawid.spring.manager.TaskManager;
+import dawid.spring.manager.impl.TaskManager;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.platform.commons.logging.LoggerFactory;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;

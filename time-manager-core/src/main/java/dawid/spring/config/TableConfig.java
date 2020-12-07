@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
  * Created by private on 27.12.17.
  */
 @Component
+//TODO properties
 public class TableConfig {
 
     private int maxDoing = 1;

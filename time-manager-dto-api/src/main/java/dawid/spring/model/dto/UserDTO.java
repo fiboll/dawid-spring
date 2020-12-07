@@ -3,6 +3,7 @@ package dawid.spring.model.dto;
 import dawid.spring.model.adnotation.PasswordMatches;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @PasswordMatches
 @Data
 @Builder
+@With
 public class UserDTO {
     private Long id;
 

@@ -1,6 +1,6 @@
 package dawid.spring.controller;
 
-import dawid.spring.manager.TaskManager;
+import dawid.spring.manager.impl.TaskManager;
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.model.dto.ModifiableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
