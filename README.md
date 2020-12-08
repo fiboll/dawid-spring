@@ -5,9 +5,9 @@ spring-for-fun
 mvn jetty:run --projects time-manager-www
 
 #TODO
-* introduce java modules
+* fix dependencies
+* fix tests
 * add transformers test
 * introduce spring boot
-* fix dependiences
 * introduce Docker
 * introduce heroku - database

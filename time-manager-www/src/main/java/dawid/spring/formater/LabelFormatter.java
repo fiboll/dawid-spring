@@ -2,7 +2,7 @@ package dawid.spring.formater;
 
 import dawid.spring.model.dto.LabelDTO;
 import dawid.spring.provider.LabelDao;
-import dawid.spring.transformer.LabelTransformer;
+import dawid.spring.transformer.ILabelTransformer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
@@ -19,7 +19,7 @@ public class LabelFormatter implements Formatter<LabelDTO> {
     private LabelDao labelDao;
 
     @Autowired
-    private LabelTransformer labelTransformer;
+    private ILabelTransformer labelTransformer;
 
     @Override
     public LabelDTO parse(String text, Locale locale) {

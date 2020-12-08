@@ -2,9 +2,11 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.IUserTable;
 import dawid.spring.manager.UserManager;
-import dawid.spring.model.dto.*;
+import dawid.spring.model.dto.LabelDTO;
+import dawid.spring.model.dto.TaskDTO;
+import dawid.spring.model.dto.UserDTO;
 import dawid.spring.provider.LabelDao;
-import dawid.spring.transformer.LabelTransformer;
+import dawid.spring.transformer.ILabelTransformer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ public class UserController {
     private LabelDao labelDao;
 
     @Autowired
-    private LabelTransformer labelTransformer;
+    private ILabelTransformer labelTransformer;
 
     @ModelAttribute("allLabels")
     public List<LabelDTO> getAllLabels() {         //TODO extract
@@ -77,7 +79,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addTask", method = RequestMethod.POST)
-    public String addTaskToUser(@ModelAttribute(value = "task") ModifiableTaskDTO task,
+    public String addTaskToUser(@ModelAttribute(value = "task") TaskDTO task,
             @RequestParam(required = false) String userNick,
             Model model) {
 
@@ -88,8 +90,7 @@ public class UserController {
         Optional<UserDTO> user = userManager.findUserByNick(userNick);
 
         if (user.isPresent()) {
-            final ImmutableTaskDTO addedTask = ImmutableTaskDTO.copyOf(task)
-                                                    .withUserName(user.get().getNickname());
+            final TaskDTO addedTask = task.withUserName(user.get().getNickname());
             userManager.addTaskToUSer(user.get(), addedTask);
 
             model.addAttribute("nick", user.get().getNickname());
@@ -100,18 +101,15 @@ public class UserController {
         return "redirect:noUser";
     }
 
-    //TODO extract
-    private ModifiableTaskDTO prepareNewTask(String userName) {
-        var task = ImmutableTaskDTO.builder().userName(userName)
+    private TaskDTO prepareNewTask(String userName) {
+        return TaskDTO.builder().userName(userName)
                 .name("")
-                .done(false)
+                .isDone(false)
                 .dueDate(new Date())
                 .desc("")
                 .version(1L)
                 .id(1L)
                 .labels(emptySet())
                 .build();
-
-        return ModifiableTaskDTO.create().from(task);
     }
 }

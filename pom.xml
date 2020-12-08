@@ -15,7 +15,6 @@
         <module>time-manager-transformers-api</module>
         <module>time-manager-transformers</module>
         <module>time-manager-core</module>
-        <module>timer-manager-rest</module>
         <module>time-manager-www</module>
     </modules>
     <name>dawidSpring</name>

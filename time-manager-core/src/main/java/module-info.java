@@ -1,6 +1,7 @@
 /**
  * @author Dawid Strembicki Hycom (dawid.strembicki.hycom@hycom.pl)
- */module time.manager.core {
+ */
+module time.manager.core {
     requires spring.context;
     requires time.manager.model;
     requires time.manager.dto.api;

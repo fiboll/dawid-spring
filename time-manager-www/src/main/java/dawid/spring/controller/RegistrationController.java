@@ -31,22 +31,23 @@ public class RegistrationController {
         return "registration";
     }
 
-    private ModifiableUserDTO prepareEmptyUser() {
-        return ModifiableUserDTO.create()
-                .setEmail("")
-                .setFirstName("")
-                .setId(1L)
-                .setVersion(1L)
-                .setTasks(Collections.emptyList())
-                .setNickname("")
-                .setSecondName("")
-                .setPassword("")
-                .setMatchingPassword("");
+    private UserDTO prepareEmptyUser() {
+        return UserDTO.builder()
+                .email("")
+                .firstName("")
+                .id(1L)
+                .version(1L)
+                .tasks(Collections.emptySet())
+                .nickname("")
+                .secondName("")
+                .password("")
+                .matchingPassword("")
+                .build();
     }
 
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     public ModelAndView registerUserAccount
-            (@Valid @ModelAttribute("user") ModifiableUserDTO user,
+            (@Valid @ModelAttribute("user") UserDTO user,
              BindingResult result, Model model) {
 
         if (!result.hasErrors()) {
@@ -74,17 +75,16 @@ public class RegistrationController {
     }
 
     //TODO extract
-    private ModifiableTaskDTO prepareNewTask(String userName) {
-        var task = ImmutableTaskDTO.builder().userName(userName)
+    private TaskDTO prepareNewTask(String userName) {
+        return TaskDTO.builder()
+                .userName(userName)
                 .name("")
-                .done(false)
+                .isDone(false)
                 .dueDate(new Date())
                 .desc("")
                 .version(1L)
                 .id(1L)
                 .labels(emptySet())
                 .build();
-
-        return ModifiableTaskDTO.create().from(task);
     }
 }

@@ -2,10 +2,9 @@ package dawid.spring.controller;
 
 import dawid.spring.manager.impl.TaskManager;
 import dawid.spring.model.dto.LabelDTO;
-import dawid.spring.model.dto.ModifiableTaskDTO;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.provider.LabelDao;
-import dawid.spring.transformer.LabelTransformer;
+import dawid.spring.transformer.impl.LabelTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,12 +45,12 @@ public class TaskController {
     public String updateTask(@RequestParam(value = "taskId") Long taskId,
                              Model model) {
         TaskDTO task = taskManager.getTask(taskId);
-        model.addAttribute("task", task != null ? ModifiableTaskDTO.create().from(task) : null);
+        model.addAttribute("task", task != null ? task : null);
         return "editForm";
     }
 
     @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public String editTask(@Valid @ModelAttribute(value = "task") ModifiableTaskDTO taskDTO,
+    public String editTask(@Valid @ModelAttribute(value = "task") TaskDTO taskDTO,
                            final BindingResult bindingResult,
                            Model model) {
 
