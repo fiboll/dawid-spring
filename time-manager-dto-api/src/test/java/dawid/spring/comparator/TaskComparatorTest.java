@@ -28,7 +28,7 @@ public class TaskComparatorTest {
     private List<TaskDTO> tasks;
 
     @BeforeEach
-    void setup() {
+    public void setup() {
         a = LabelDTO.builder()
                 .description("a")
                 .colour("red")
@@ -98,7 +98,7 @@ public class TaskComparatorTest {
     }
 
     @Test
-    void testCompareList() {
+    public void testCompareList() {
         tasks.sort(Comparator.naturalOrder());
         List<TaskDTO> sorted = Stream.of(t3, t1, t2)
                                       .sorted()
@@ -108,19 +108,19 @@ public class TaskComparatorTest {
 
 
     @Test
-    void testCompareByLabel() {
+    public void testCompareByLabel() {
         assertTrue(t1.compareTo(t2) < 0);
         assertTrue(t3.compareTo(t2) < 0);
         assertTrue(t1.compareTo(t2) < 0);
     }
 
     @Test
-    void testCompareByDate() {
+    public void testCompareByDate() {
         assertTrue(tDate1.compareTo(tDate2) < 0);
     }
 
     @Test
-    void testCompareNames() {
+    public void testCompareNames() {
         assertTrue(tName2.compareTo(tName1) > 0);
     }
 

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Created by private on 23.01.18.
  */
-class LabelComparatorTest {
+public class LabelComparatorTest {
     private static LabelDTO alphabeticalFist;
     private static LabelDTO alphabeticalSecond;
 
@@ -28,7 +28,7 @@ class LabelComparatorTest {
     private static LabelDTO numericSecond;
 
     @BeforeAll
-    static void prepareTest() {
+    public static void prepareTest() {
         alphabeticalFist = LabelDTO.builder()
                              .description("a")
                              .build();
@@ -44,7 +44,7 @@ class LabelComparatorTest {
     }
 
     @Test
-    void testListOrder() {
+    public void testListOrder() {
         List<LabelDTO> labels = Arrays.asList(numericSecond, alphabeticalFist, alphabeticalSecond, numericFirst);
 
         labels.sort(Comparator.naturalOrder());
@@ -55,19 +55,19 @@ class LabelComparatorTest {
 
     @ParameterizedTest(name = "should be equals[{arguments}]")
     @MethodSource("equalArguments")
-    void testEquals(LabelDTO labelDTO, LabelDTO labelDTO2) {
+    public void testEquals(LabelDTO labelDTO, LabelDTO labelDTO2) {
         assertEquals(0, labelDTO.compareTo(labelDTO2));
     }
 
     @ParameterizedTest(name = "Should {0} be more important than {1}")
     @MethodSource("lessMoreArguments")
-    void testLessThanA(LabelDTO labelDTO, LabelDTO labelDTO2) {
+    public void testLessThanA(LabelDTO labelDTO, LabelDTO labelDTO2) {
         assertTrue(labelDTO.compareTo(labelDTO2) < 0);
     }
 
     @ParameterizedTest(name = "Should {0} be more important than {1}")
     @MethodSource("lessMoreArguments")
-    void testMoreThan(LabelDTO labelDTO, LabelDTO labelDTO2) {
+    public void testMoreThan(LabelDTO labelDTO, LabelDTO labelDTO2) {
         assertTrue(labelDTO2.compareTo(labelDTO) > 0);
     }
 

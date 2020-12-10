@@ -5,5 +5,6 @@
     requires java.validation;
     requires lombok;
 
+    opens dawid.spring.comparator;
     exports dawid.spring.model.dto;
 }
