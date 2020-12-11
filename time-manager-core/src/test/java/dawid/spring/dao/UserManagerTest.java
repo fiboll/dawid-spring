@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:context_test.xml")
+//@ContextConfiguration(locations = "classpath:context_test.xml")
 @Transactional
 @Rollback
 public class UserManagerTest {

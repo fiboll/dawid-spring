@@ -8,10 +8,9 @@
     requires spring.context;
     requires spring.beans;
 
-    requires commons.lang3;
     requires time.manager.transformers.api;
-    requires commons.collections;
-
+    requires org.apache.commons.lang3;
+    requires org.apache.commons.collections4;
 
     exports dawid.spring.transformer.impl;
 }
