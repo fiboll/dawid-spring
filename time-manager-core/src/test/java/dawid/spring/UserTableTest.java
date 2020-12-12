@@ -17,6 +17,7 @@ import dawid.spring.transformer.impl.LabelTransformer;
 import dawid.spring.transformer.impl.TaskTransformer;
 import dawid.spring.transformer.impl.UserTransformer;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -29,11 +30,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * Created by private on 23.12.17.
  */
 @RunWith(value = Parameterized.class)
+@Ignore
 public class UserTableTest {
 
     @Parameterized.Parameters
@@ -75,7 +78,7 @@ public class UserTableTest {
 
     @Before
     public void prepareUser() {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
 
         var user = new User();
         user.setEmail("tst@op.pl");

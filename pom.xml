@@ -27,13 +27,13 @@
     <url>http://maven.apache.org</url>
     <properties>
         <time-manager-version>1.0</time-manager-version>
-        <spring.version>5.3.2</spring.version>
+        <spring.version>5.2.12.RELEASE</spring.version>
         <spring.data.version>2.4.1</spring.data.version>
         <hibernate.version>5.4.25.Final</hibernate.version>
         <hibernate.validator.version>6.1.6.Final</hibernate.validator.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <mysql.connector.version>8.0.22</mysql.connector.version>
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.12</junit.version>
         <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <junit.platform.version>1.7.0</junit.platform.version>
         <mockito.version>1.10.19</mockito.version>
@@ -48,6 +48,9 @@
         <h2.version>1.4.200</h2.version>
         <javax.el.version>2.2.6</javax.el.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
+        <jaxb.core.version>3.0.0</jaxb.core.version>
+        <lombok.version>1.18.16</lombok.version>
+        <activation.version>1.1.1</activation.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencyManagement>
@@ -191,7 +194,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
+                <version>${spring.test.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -221,6 +224,26 @@
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>${activation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

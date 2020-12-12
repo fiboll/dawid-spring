@@ -3,6 +3,7 @@ package dawid.spring.dao;
 import dawid.spring.manager.UserManager;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import static org.junit.Assert.*;
 //@ContextConfiguration(locations = "classpath:context_test.xml")
 @Transactional
 @Rollback
+@Ignore
 public class UserManagerTest {
 
     @Autowired
