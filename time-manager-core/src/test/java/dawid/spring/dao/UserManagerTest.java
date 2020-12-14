@@ -1,17 +1,19 @@
 package dawid.spring.dao;
 
 import dawid.spring.manager.UserManager;
+import dawid.spring.manager.impl.UserManagerImpl;
+import dawid.spring.model.User;
 import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.model.dto.UserDTO;
-import org.junit.Ignore;
+import dawid.spring.provider.UserDAO;
+import dawid.spring.transformer.impl.UserTransformer;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -19,20 +21,34 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = "classpath:context_test.xml")
-@Transactional
-@Rollback
-@Ignore
 public class UserManagerTest {
 
-    @Autowired
-    private UserManager userManager;
+    @InjectMocks
+    private UserManager userManager = new UserManagerImpl();
+
+    @Mock
+    private UserDAO userDAO;
+
+    @Mock
+    private UserTransformer userTransformer;
+
+    @Before
+    public void setUp(){
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testFindAll() {
+        when(userDAO.findAll()).thenReturn(List.of(new User(), new User()));
+        when(userTransformer.entityToDTO(any())).thenReturn(UserDTO.builder().build());
+
+
         List<UserDTO> users =  userManager.getAllUsers();
         assertNotNull(users);
         assertEquals(2, users.size());

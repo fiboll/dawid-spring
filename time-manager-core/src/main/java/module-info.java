@@ -13,5 +13,6 @@ module time.manager.core {
     requires log4j;
     requires java.transaction;
 
+
     exports dawid.spring.manager.impl;
 }

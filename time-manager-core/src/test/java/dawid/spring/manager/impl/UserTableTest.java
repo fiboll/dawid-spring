@@ -1,29 +1,34 @@
-package dawid.spring;
+package dawid.spring.manager.impl;
 
 import dawid.spring.config.TableConfig;
 import dawid.spring.exceptions.DomainException;
-import dawid.spring.manager.*;
-import dawid.spring.manager.impl.UserManagerImpl;
-import dawid.spring.manager.impl.UserTable;
-import dawid.spring.manager.impl.UserTableImpl;
-import dawid.spring.model.dto.*;
+import dawid.spring.manager.IUserTable;
+import dawid.spring.manager.UserManager;
 import dawid.spring.model.Label;
 import dawid.spring.model.Task;
 import dawid.spring.model.User;
+import dawid.spring.model.dto.UserDTO;
 import dawid.spring.provider.LabelDao;
 import dawid.spring.provider.UserDAO;
-import dawid.spring.transformer.*;
+import dawid.spring.transformer.ILabelTransformer;
+import dawid.spring.transformer.ITaskTransformer;
+import dawid.spring.transformer.IUserTransformer;
 import dawid.spring.transformer.impl.LabelTransformer;
 import dawid.spring.transformer.impl.TaskTransformer;
 import dawid.spring.transformer.impl.UserTransformer;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
@@ -114,56 +119,56 @@ public class UserTableTest {
         assertEquals(2, userTable.getDoneTasks(user.get()).size());
     }
 
-//    @Test
-//    public void shouldReturnValidNumberOfDoingTasks() {
-//        var user = findUser();
-//        assertTrue(user.isPresent());
-//
-//        assertEquals(1, userTable.getDoingTasks(user.get()).size());
-//        assertEquals("test1", userTable.getDoingTasks(user.get()).get(0).getName());
-//    }
-//
-//    @Test
-//    public void shouldReturnValidNumberOfNextToDoTasks() {
-//        var user = findUser();
-//        assertTrue(user.isPresent());
-//        assertEquals(3, userTable.getNextToDoTasks(user.get()).size());
-//    }
-//
-//    @Test
-//    public void shouldReturnValidNextToDoTask() {
-//        var user = findUser();
-//        assertTrue(user.isPresent());
-//        assertEquals("test", userTable.getNextToDoTasks(user.get()).get(0).getName());
-//    }
-//
-//    @Test
-//    public void shouldReturnValidNumberOfGetBacklogTask() {
-//        var user = findUser();
-//        assertTrue(user.isPresent());
-//        assertEquals(2, userTable.getBacklogTasks(user.get()).size());
-//    }
-//
-//    @Test(expected = DomainException.class)
-//    public void shouldThrowDomainExceptionForGetBacklogTasksWithNullUser() {
-//        userTable.getBacklogTasks(null);
-//    }
-//
-//    @Test(expected = DomainException.class)
-//    public void shouldThrowDomainExceptionForGetNextToDosWithNullUser() {
-//        userTable.getNextToDoTasks(null);
-//    }
-//
-//    @Test(expected = DomainException.class)
-//    public void shouldThrowDomainExceptionForGetDoingWithNullUser() {
-//        userTable.getDoingTasks(null);
-//    }
-//
-//    @Test(expected = DomainException.class)
-//    public void shouldThrowDomainExceptionForGetDoneTasksWithNullUser() {
-//        userTable.getDoneTasks(null);
-//    }
-//
+    @Test
+    public void shouldReturnValidNumberOfDoingTasks() {
+        var user = findUser();
+        assertTrue(user.isPresent());
+
+        assertEquals(1, userTable.getDoingTasks(user.get()).size());
+        assertEquals("test1", userTable.getDoingTasks(user.get()).get(0).getName());
+    }
+
+    @Test
+    public void shouldReturnValidNumberOfNextToDoTasks() {
+        var user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals(3, userTable.getNextToDoTasks(user.get()).size());
+    }
+
+    @Test
+    public void shouldReturnValidNextToDoTask() {
+        var user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals("test", userTable.getNextToDoTasks(user.get()).get(0).getName());
+    }
+
+    @Test
+    public void shouldReturnValidNumberOfGetBacklogTask() {
+        var user = findUser();
+        assertTrue(user.isPresent());
+        assertEquals(2, userTable.getBacklogTasks(user.get()).size());
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetBacklogTasksWithNullUser() {
+        userTable.getBacklogTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetNextToDosWithNullUser() {
+        userTable.getNextToDoTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetDoingWithNullUser() {
+        userTable.getDoingTasks(null);
+    }
+
+    @Test(expected = DomainException.class)
+    public void shouldThrowDomainExceptionForGetDoneTasksWithNullUser() {
+        userTable.getDoneTasks(null);
+    }
+
     private static Label prepareLabel(String description) {
         var label = new Label();
         label.setDescription(description);
