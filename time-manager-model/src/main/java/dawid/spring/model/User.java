@@ -17,6 +17,7 @@ import java.util.Set;
 
 @Table(name = "users")
 @Data
+
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 

@@ -4,5 +4,6 @@
     requires time.manager.model;
     requires time.manager.dto.api;
 
+    opens dawid.spring.transformer;
     exports dawid.spring.transformer;
 }
