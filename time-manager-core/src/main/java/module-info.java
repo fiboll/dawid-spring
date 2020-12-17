@@ -11,7 +11,6 @@ module time.manager.core {
     requires spring.beans;
     requires time.manager.api;
     requires time.manager.dao.api;
-    requires time.manager.dao.impl;
     requires time.manager.transformers.api;
     requires java.persistence;
     requires log4j;

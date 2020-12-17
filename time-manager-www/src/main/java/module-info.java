@@ -15,4 +15,6 @@ module time.manager.www {
     requires time.manager.core;
     requires time.manager.transformers;
     requires spring.webmvc;
+    requires java.validation;
+    requires org.apache.commons.lang3;
 }

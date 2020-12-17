@@ -21,9 +21,6 @@ public class TaskManager {
     private TaskDao taskDao;
 
     @Autowired
-    private LabelDao labelDao;
-
-    @Autowired
     private ITaskTransformer taskTransformer;
 
     public TaskDTO getTask(Long taskId) {
@@ -43,10 +40,6 @@ public class TaskManager {
     public void deleteTask(Long id) {
         Task deleted = taskDao.getTaskById(id);
         taskDao.removeTask(deleted);
-    }
-
-    public List<Label> getAvailableLabels() {
-        return labelDao.getAllLabels();
     }
 
     private TaskDTO findTaskById(Long taskId) {

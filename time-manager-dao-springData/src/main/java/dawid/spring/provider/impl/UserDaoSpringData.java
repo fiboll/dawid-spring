@@ -4,10 +4,8 @@ import dawid.spring.model.User;
 import dawid.spring.provider.UserDAO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,14 +17,6 @@ public interface UserDaoSpringData extends CrudRepository<User, Long>, UserDAO {
     }
 
     @Override
-    @Query(name = "User.findUserByNick" )
-    Optional<User> findByNick(@Param("nick") String nick);
-
-    @Override
-    @Query(name = "User.findAllUsers")
-     List<User> findAll();
-
-    @Override
     default void removeUser(User user) {
         delete(user);
     }
@@ -35,4 +25,7 @@ public interface UserDaoSpringData extends CrudRepository<User, Long>, UserDAO {
     default void addUser(User user) {
         save(user);
     }
+
+    @Query("Select u from User u where u.nickname = ?1")
+    Optional<User> findByNick(String nick);
 }
