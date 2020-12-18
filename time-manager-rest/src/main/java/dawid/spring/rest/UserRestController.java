@@ -23,5 +23,4 @@ public class UserRestController {
     public List<UserDTO> getAllUser() {
         return userManager.getAllUsers();
     }
-
 }
