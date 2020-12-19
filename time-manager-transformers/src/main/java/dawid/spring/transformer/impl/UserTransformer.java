@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toSet;
+import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 /**
@@ -57,6 +58,8 @@ public class UserTransformer implements IUserTransformer {
         user.setSecondName(userDTO.getSecondName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
+        user.setId(userDTO.getId());
+        user.setVersion(userDTO.getVersion() != null ? userDTO.getVersion() : 0L);
 
         addTasks(user, userDTO);
 
@@ -67,8 +70,10 @@ public class UserTransformer implements IUserTransformer {
         if (isEmpty(userDTO.getTasks())) {
             user.setTasks(Collections.emptySet());
         }
-        for (TaskDTO taskDTO : userDTO.getTasks()) {
-            Optional<Task> updateTask = user.getTasks().stream().filter(t -> Objects.equals(t.getId(), taskDTO.getId())).findAny();
+        for (TaskDTO taskDTO : emptyIfNull(userDTO.getTasks())) {
+            Optional<Task> updateTask = emptyIfNull(user.getTasks()).stream()
+                                                .filter(t -> Objects.equals(t.getId(), taskDTO.getId()))
+                                                .findAny();
             Task updatedTask = taskTransformer.updateTask(updateTask.orElse(new Task()), taskDTO);
             user.addTask(updatedTask);
         }

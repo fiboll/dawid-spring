@@ -21,6 +21,7 @@ public class UserRestController {
 
     @GetMapping("/all")
     public List<UserDTO> getAllUser() {
+        System.out.println(userManager.getAllUsers());
         return userManager.getAllUsers();
     }
 }

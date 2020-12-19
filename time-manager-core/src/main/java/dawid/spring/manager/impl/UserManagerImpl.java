@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,6 +45,9 @@ public class UserManagerImpl implements UserManager {
     @Override
     public UserDTO addTaskToUSer(UserDTO user, TaskDTO task) {
         task.setUserName(user.getNickname());
+        if (user.getTasks() == null) {
+            user.setTasks(new HashSet<>());
+        }
         user.getTasks().add(task);
         return userUpdate(user);
     }
@@ -57,6 +61,7 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    @Transactional
     public UserDTO registerNewUserAccount(UserDTO accountDto) throws EmailExistsException {
         User user = userTransformer.create(accountDto);
         user = userDAO.update(user);

@@ -3,6 +3,7 @@ package dawid.spring.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +14,10 @@ import java.util.Set;
 @Entity
 @Table(name = "tasks")
 @Data
-public class Task  {
+public class Task implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String desc;
@@ -28,8 +30,7 @@ public class Task  {
     private User user;
 
     @Version
-    @Column(name = "VERSION")
-    private Long version;
+    private long version;
 
     @Column(name = "is_done")
     private boolean isDone;

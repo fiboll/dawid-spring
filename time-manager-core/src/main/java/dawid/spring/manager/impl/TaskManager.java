@@ -1,9 +1,7 @@
 package dawid.spring.manager.impl;
 
-import dawid.spring.model.dto.TaskDTO;
-import dawid.spring.model.Label;
 import dawid.spring.model.Task;
-import dawid.spring.provider.LabelDao;
+import dawid.spring.model.dto.TaskDTO;
 import dawid.spring.provider.TaskDao;
 import dawid.spring.transformer.ITaskTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Component
 @Transactional

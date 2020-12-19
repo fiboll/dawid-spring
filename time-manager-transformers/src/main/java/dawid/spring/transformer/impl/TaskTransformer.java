@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+import static org.apache.commons.collections4.CollectionUtils.emptyIfNull;
+
 @Component
 public class TaskTransformer implements ITaskTransformer {
 
@@ -40,7 +42,8 @@ public class TaskTransformer implements ITaskTransformer {
         task.setDueDate(dto.getDueDate());
         task.setName(dto.getName());
         task.getLabels().clear();
-        for (LabelDTO labelDTO : dto.getLabels()) {
+        task.setVersion(dto.getVersion() != null ? dto.getVersion() : 0L);
+        for (LabelDTO labelDTO : emptyIfNull(dto.getLabels())) {
             task.addLabel(labelTransformer.dtoToEntity(labelDTO));
         }
 

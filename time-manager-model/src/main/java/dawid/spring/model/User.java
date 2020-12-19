@@ -7,12 +7,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,9 +22,10 @@ import java.util.Set;
 @Table(name = "users")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class User implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @Column(name = "first_name")
@@ -45,7 +48,7 @@ public class User {
     private String email;
 
     @Version
-    private Long version;
+    private long version;
 
     public User() {
     }
