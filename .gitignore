@@ -87,8 +87,8 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/intellij
-
-*.idea/*
-target/*
-dawidSpring/dawidSpring.iml
-idea/
+.classpath
+.project
+.factorypath
+.settings
+.idea
