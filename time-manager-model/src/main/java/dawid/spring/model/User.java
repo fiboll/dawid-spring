@@ -24,6 +24,8 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements Serializable {
 
+    private static final long serialVersionUID = 3670411905474649253L;
+
     @Id
     @GeneratedValue
     private Long id;

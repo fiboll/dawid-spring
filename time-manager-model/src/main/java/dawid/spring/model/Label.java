@@ -1,4 +1,6 @@
 package dawid.spring.model;
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import lombok.Data;
 
@@ -7,7 +9,9 @@ import lombok.Data;
  */
 @Embeddable
 @Data
-public class Label{
+public class Label implements Serializable {
+    private static final long serialVersionUID = -5229907763136270527L;
+    
     private String colour;
     private String description;
 }

@@ -16,6 +16,8 @@ import java.util.Set;
 @Data
 public class Task implements Serializable {
 
+    private static final long serialVersionUID = -4992813847237718897L;
+    
     @Id
     @GeneratedValue
     private Long id;
